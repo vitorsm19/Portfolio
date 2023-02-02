@@ -45,10 +45,77 @@ img {
 
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: auto;
   width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0px 2rem;
+}
+
+.social,
+.email {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 1rem;
+  min-height: 85vh;
+}
+
+.social div {
+  width: 0.25rem;
+  height: 5rem;
+  background-color: rgb(244, 244, 245);
+}
+
+.social svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #4a77ff;
+}
+
+.email {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-direction: column;
+  height: 100%;
+  min-height: 85vh;
+}
+
+.email a {
+  display: block;
+  text-orientation: mixed;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+  font-weight: bold;
+  color: #4a77ff;
+}
+
+.email div {
+  width: 0.25rem;
+  height: 5rem;
+  background-color: rgb(244, 244, 245);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 85vh;
+  width: 100%;
+  gap: 1rem;
 }
 
 .hero,
