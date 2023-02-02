@@ -23,14 +23,6 @@
 }
 
 
-@media (max-width: 1000px) {
-  .header {
-    flex-direction: column;
-    gap: 40px;
-    padding: 20px;
-  }
-}
-
 
 ul {
   position: relative;
@@ -126,7 +118,7 @@ ul li:hover .nav-li-title {
   height: 1.5rem;
   height: 1.5rem;
   color: #e0e0e0;
-  
+
 }
 
 .logo {
@@ -135,4 +127,17 @@ ul li:hover .nav-li-title {
 
 .header img {
   width: 7rem;
+}
+
+
+
+@media (max-width: 1000px) {
+  .header {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .header-container {
+    height: auto;
+  }
 }
