@@ -12,10 +12,16 @@ const Hero = () => {
           <h1 className="dev">DEVELOPER</h1>
           <span className="location">
             Located in Budapest{" "}
-            <img src="/src/assets/hungary-flag.png" alt="Hungary flag" />
+            <img
+              src="https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/hungary-flag.png?raw=true"
+              alt="Hungary flag"
+            />
           </span>
         </div>
-        <img src="/src/assets/about-pic.png" alt="Picture of Vitor Mesquita" />
+        <img
+          src="https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/about-pic.png?raw=true"
+          alt="Picture of Vitor Mesquita"
+        />
       </div>
       <div className="hero-text">
         <p>Creative dev with a passion for crafting beautiful and </p>

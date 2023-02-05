@@ -12,7 +12,10 @@ const Header = () => {
   return (
     <header className="header-container">
       <div className="header">
-        <img src="/src/assets/logo.png" alt="logo" />
+        <img
+          src="https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/logo.png?raw=true"
+          alt="logo"
+        />
         <nav className="menu">
           <ul className="menu-header">
             <li>
