@@ -1,7 +1,40 @@
 .about {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  padding: 2rem 3.5rem;
+  background-color: #141414;
+  height: 400px;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px 25px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.about-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: space-around;
-  color: #fff;
+  color: #3d3d3d;
+  width: 400px;
+}
+
+.about-title h1 {
+  font-size: 6rem;
+  line-height: .85;
+}
+
+.about-text {
+  color: #a3a3a3;
+  font-size: 1.5rem;
+  max-width: 45ch;
+  word-break: break-word;
 }
