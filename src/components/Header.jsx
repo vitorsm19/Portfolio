@@ -19,6 +19,7 @@ const Header = () => {
         <nav className="menu">
           <ul className="menu-header">
             <li>
+              <a href="#"></a>
               <span className="icon">
                 <FontAwesomeIcon icon={faInfoCircle} />
               </span>

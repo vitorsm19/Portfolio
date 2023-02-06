@@ -24,20 +24,16 @@ const Hero = () => {
         />
       </div>
       <div className="hero-text">
-        <p>Creative dev with a passion for crafting beautiful and </p>
+        <p>Creative dev with a passion for building beautiful and </p>
         <Typewriter
-          words={[
-            "responsive web applications",
-            "fast web applications",
-            "accessible web applications",
-          ]}
-          loop={1}
-          cursor
-          cursorColor="#424dff"
-          typeSpeed={80}
-          deleteSpeed={50}
-          delaySpeed={1000}
+          className="typewriter"
+          words={["responsive", "interactive", "user-friendly", "intuitive"]}
+          loop={5}
+          typeSpeed={100}
+          deleteSpeed={60}
+          delaySpeed={3000}
         />
+        <p>web applications</p>
       </div>
     </section>
   );
