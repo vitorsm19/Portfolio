@@ -1,95 +1,148 @@
-.container {
-    width: 1000px;
-    position: relative;
+.projects {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    background-color: #141414;
+    padding: 2rem 3.5rem;
 }
 
-.card {
+.proj-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+    padding: 0 3rem 3rem 3rem;
+    margin: 0 auto;
+    gap: 2rem;
+}
+
+.proj-title {
+    color: #3d3d3d;
+    font-size: 4rem;
+    padding: 2rem 0 4rem 0;
+}
+
+.proj-card {
     position: relative;
+    height: 200px;
+    display: block;
 }
 
 .face {
     width: 300px;
     height: 200px;
     transition: .4s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #e5e5e5;
+    border-radius: 10px;
 }
 
-
-
-.face1 {
+.card-cover {
     position: relative;
-    background: #333;
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
     z-index: 1;
-    transform: translateY(100px);
+    cursor: pointer;
 }
 
-.card:hover .face.face1 {
+.proj-card:hover .face.card-cover {
     transform: translateY(0);
-
 }
 
-.lard:hover .face.face1 {
-    transform: translateY(0);
-
-}
-
-.dark:hover .face.face1 {
-    transform: translateY(0);
-
-}
-
-.face.face1 .content {
-    opacity: .2;
-    transition: 0.5s;
-    text-align: center;
-}
-
-.card:hover .face.face1 .content {
-    opacity: 1;
-}
-
-.face.face1 .content i {
-    font-size: 3em;
-    color: white;
-    display: inline-block;
-}
-
-.face.face1 .content h3 {
-    font-size: 1em;
-    color: white;
-    text-align: center;
-}
-
-.face.face1 .content a {
+.face.card-cover .proj-content a {
     transition: .5s;
 }
 
-.face.face2 {
+.face.card-content {
     position: relative;
-    background: whitesmoke;
+    background: #030202;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 1.5rem;
     box-sizing: border-box;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, .8);
-    transform: translateY(-100px);
+    transform: translateY(-200px);
+    box-shadow: rgb(0 0 0 / 40%) 0px 5px 20px;
+
 }
 
-.card:hover .face.face2 {
+.proj-card:hover .face.card-content {
     transform: translateY(0);
 }
 
-.lard:hover .face {
-    transform: translateY(0);
+.proj-card:hover .face.card-content {
+    border-radius: 0px 0px 10px 10px;
 }
 
-.dark:hover .face {
-    transform: translateY(0);
+.proj-card:hover .face.card-cover {
+    border-radius: 10px 10px 0px 0px;
+}
+
+
+
+.proj-content {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.proj-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.proj-links a {
+    text-decoration: none;
+    height: 40px;
+    color: #a3a3a3;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #141414;
+    padding: 0.5rem 1rem;
+    transition: 0.5s;
+}
+
+.proj-links a:hover {
+    color: #e5e5e5;
+}
+
+.proj-details {
+    line-height: 1.2;
+}
+
+
+#todo {
+    background: url(https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/todo-project.jpg?raw=true);
+    background-size: cover;
+    background-position-x: -30px;
+}
+
+
+#mozify {
+    background: url(https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/mozify-preview.jpeg?raw=true);
+    background-size: cover;
+    background-position: center;
+}
+
+#next {
+    background-color: #030202;
+
 }
