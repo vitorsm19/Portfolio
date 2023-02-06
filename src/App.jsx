@@ -6,6 +6,8 @@ import About from "./components/About.jsx";
 import Skills from "./components/Skills.jsx";
 import Projects from "./components/Projects.jsx";
 import Contact from "./components/Contact.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
       <Header />
       <main className="main">
         <div className="social">
-          <a href="https://www.linkedin.com/in/maykonsousa/">
+          <a
+            href="https://www.linkedin.com/in/vitormesquita19/"
+            target="_blank">
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -25,7 +29,7 @@ function App() {
               <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
             </svg>
           </a>
-          <a href="https://github.com/maykonsousa/">
+          <a href="https://github.com/vitorsm19/" target="_blank">
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -48,10 +52,20 @@ function App() {
           <Contact />
         </div>
         <div className="email">
-          <div></div>
-          <a href="mailto:vitormesquita190902@gmail.com">
-            vitormesquita190902@gmail.com
-          </a>
+          <div className="email-text">
+            <div></div>
+            <a href="mailto:vitormesquita190902@gmail.com">
+              vitormesquita190902@gmail.com
+            </a>
+          </div>
+
+          <button
+            className="scroll-to-top"
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+            }}>
+            <FontAwesomeIcon icon={faArrowUp} />
+          </button>
         </div>
       </main>
     </div>
