@@ -61,7 +61,7 @@ const Projects = () => {
           link="https://mozify.vercel.app/"
           text="Movies catalog app made with HTML, CSS, JavaScript and React Hooks (useState, useEffect, useParams Hooks), API fetch with Axios and  LocalStorage."
         />
-        <Project name="next" repoName="" empty="In progress..." />
+        {/* <Project name="next" repoName="" empty="In progress..." /> */}
       </div>
     </section>
   );

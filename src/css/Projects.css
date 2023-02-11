@@ -11,7 +11,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     max-width: 1200px;
     width: 100%;
     height: auto;
@@ -147,4 +147,65 @@
 #next {
     background-color: #030202;
 
+}
+
+@media(width <=1000px) {
+    .projects {
+        padding: 0;
+        height: auto;
+    }
+
+    .proj-container {
+        max-height: 100%;
+        max-width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .proj-title {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+    }
+
+    .proj-title h1 {
+        font-size: 4rem;
+    }
+
+    .proj-card {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .proj-card .face.card-content {
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .proj-card .face.card-cover {
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .card-content {
+        height: auto;
+    }
+
+    .proj-content {
+        gap: 1rem;
+    }
+
+    .face.card-content {
+        transform: translateY(0);
+
+    }
+
+    .proj-card:hover .face.card-content {
+        transform: translateY(0);
+    }
 }

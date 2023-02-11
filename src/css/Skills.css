@@ -156,3 +156,68 @@
 .skills-text .logos .js svg {
     width: 60px;
 }
+
+
+@media(width <=1000px) {
+    .skills {
+        padding: 0;
+        height: auto;
+    }
+
+    .skills-container {
+        max-height: 100%;
+        max-width: 100%;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .skills-title {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .skills-title h1 {
+        font-size: 4rem;
+    }
+
+    .skills-text {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .skills-text .logos {
+        padding: 0;
+    }
+
+    .skills-text .other-logos {
+        padding: 0;
+    }
+
+    .skills-text .first,
+    .skills-text .second {
+        padding: 0;
+        text-align: center;
+    }
+
+    .skills-text .logos {
+        justify-content: center;
+    }
+
+    .skills-text .logos svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .skills-text .logos .js svg {
+        width: 35px;
+        height: 35px;
+    }
+
+    .js .logo-sub {
+        padding-top: .3rem;
+
+    }
+}

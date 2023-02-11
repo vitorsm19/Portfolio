@@ -38,3 +38,32 @@
   max-width: 45ch;
   word-break: break-word;
 }
+
+@media(width <=1000px) {
+  .about {
+    padding: 0;
+    height: auto;
+  }
+
+  .about-container {
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+
+  }
+
+  .about-title {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-title h1 {
+    font-size: 4rem;
+  }
+
+  .about-text {
+    font-size: 1.5rem;
+    padding: 0 25px;
+  }
+}

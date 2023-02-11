@@ -27,13 +27,19 @@ const Hero = () => {
         <p>Creative dev with a passion for building beautiful and </p>
         <Typewriter
           className="typewriter"
-          words={["responsive", "interactive", "user-friendly", "intuitive"]}
+          words={[
+            "responsive",
+            "interactive",
+            "user-friendly",
+            "intuitive",
+            "pixel-perfect",
+          ]}
           loop={5}
           typeSpeed={100}
           deleteSpeed={60}
           delaySpeed={3000}
         />
-        <p>web applications</p>
+        <p> web applications</p>
       </div>
     </section>
   );
