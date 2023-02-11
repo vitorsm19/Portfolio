@@ -6,7 +6,9 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 export const Project = (props) => {
   return (
     <div className="proj-card">
-      <div className="face card-cover" id={props.name}></div>
+      <div className="face card-cover" id={props.name}>
+        {props.empty}
+      </div>
       <div className="face card-content">
         <div className="proj-content">
           <p className="proj-details">{props.text}</p>
@@ -44,7 +46,7 @@ const Projects = () => {
       <div className="proj-title">
         <h1>PROJECTS</h1>
       </div>
-      <div className="proj-container">
+      <div className="proj-container" id="projects">
         <Project
           title="WhatsOnForToday?"
           name="todo"
@@ -59,7 +61,7 @@ const Projects = () => {
           link="https://mozify.vercel.app/"
           text="Movies catalog app made with HTML, CSS, JavaScript and React Hooks (useState, useEffect, useParams Hooks), API fetch with Axios and  LocalStorage."
         />
-        <Project name="next" repoName="" text="In progress..." />
+        <Project name="next" repoName="" empty="In progress..." />
       </div>
     </section>
   );

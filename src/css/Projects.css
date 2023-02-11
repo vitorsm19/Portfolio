@@ -51,10 +51,12 @@
     align-items: center;
     z-index: 1;
     cursor: pointer;
+
 }
 
 .proj-card:hover .face.card-cover {
     transform: translateY(0);
+    box-shadow: rgb(0 0 0 / 40%) 0px 5px 20px;
 }
 
 .face.card-cover .proj-content a {

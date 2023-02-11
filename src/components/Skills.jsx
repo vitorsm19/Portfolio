@@ -17,7 +17,7 @@ import {
 const Skills = () => {
   return (
     <section className="skills">
-      <div className="skills-container">
+      <div className="skills-container" id="skills">
         <div className="skills-text">
           <p className="first">Focused on</p>
           <div className="logos">

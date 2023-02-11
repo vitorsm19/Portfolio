@@ -122,6 +122,12 @@ ul li:hover .nav-li-title {
 
 }
 
+/* RESET a TAG STYLE */
+
+.menu-header li a {
+  text-decoration: none;
+}
+
 .logo {
   font-size: 3rem;
 }
