@@ -24,8 +24,6 @@
   padding: 0px 2rem;
 }
 
-
-
 ul {
   position: relative;
   display: flex;
@@ -147,4 +145,28 @@ ul li:hover .nav-li-title {
   .header-container {
     height: auto;
   }
+
+  ul li:hover::before {
+    opacity: 0;
+  }
+
+  ul li:hover::after {
+    opacity: 0;
+  }
+
+  ul li:hover {
+    box-shadow: none;
+    width: 60px;
+  }
+
+  ul li .nav-li-title {
+    display: none;
+  }
+
+  ul li:hover svg {
+    transform: scale(1);
+    color: #4a77ff;
+    transition: all 0.5s;
+  }
+
 }

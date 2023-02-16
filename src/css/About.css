@@ -4,6 +4,7 @@
   padding: 2rem 3.5rem;
   background-color: #141414;
   height: 400px;
+  overflow-x: hidden;
 }
 
 .about-container {
@@ -25,6 +26,7 @@
   justify-content: space-around;
   color: #3d3d3d;
   width: 400px;
+
 }
 
 .about-title h1 {
@@ -65,5 +67,10 @@
   .about-text {
     font-size: 1.5rem;
     padding: 0 25px;
+  }
+
+  .about-title,
+  .about-text {
+    transform: translateX(0px) !important;
   }
 }

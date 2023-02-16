@@ -2,6 +2,7 @@ import React from "react";
 import "../css/Projects.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 export const Project = (props) => {
   return (
@@ -21,7 +22,7 @@ export const Project = (props) => {
               <svg
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 496 512"
                 height="24"
                 width="24"
@@ -43,10 +44,23 @@ export const Project = (props) => {
 const Projects = () => {
   return (
     <section className="projects">
-      <div className="proj-title">
+      <motion.div
+        className="proj-title"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1, threshold: 0.35 }}
+        viewport={{ once: false }}
+        delay={{ duration: 0.5 }}
+        transition={{ duration: 1 }}>
         <h1>PROJECTS</h1>
-      </div>
-      <div className="proj-container" id="projects">
+      </motion.div>
+      <motion.div
+        className="proj-container"
+        id="projects"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1, threshold: 0.35 }}
+        viewport={{ once: false }}
+        delay={{ duration: 0.5 }}
+        transition={{ duration: 1 }}>
         <Project
           title="WhatsOnForToday?"
           name="todo"
@@ -61,8 +75,8 @@ const Projects = () => {
           link="https://mozify.vercel.app/"
           text="Movies catalog app made with HTML, CSS, JavaScript and React Hooks (useState, useEffect, useParams Hooks), API fetch with Axios and  LocalStorage."
         />
-        {/* <Project name="next" repoName="" empty="In progress..." /> */}
-      </div>
+        <Project name="next" repoName="" empty="In progress..." />
+      </motion.div>
     </section>
   );
 };

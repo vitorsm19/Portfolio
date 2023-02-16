@@ -28,3 +28,10 @@
     color: #4a77ff;
     cursor: pointer;
 }
+
+@media (width <=1000px) {
+
+    .contact-container {
+        transform: translatey(0px) !important;
+    }
+}

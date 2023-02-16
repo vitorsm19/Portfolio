@@ -3,6 +3,7 @@
     align-items: center;
     padding: 2rem 3.5rem;
     height: 400px;
+    overflow-x: hidden;
 }
 
 .skills-container {
@@ -218,6 +219,10 @@
 
     .js .logo-sub {
         padding-top: .3rem;
+    }
 
+    .skills-title,
+    .skills-text {
+        transform: translateX(0) !important;
     }
 }

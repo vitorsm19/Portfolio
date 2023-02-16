@@ -1,10 +1,23 @@
 import React from "react";
 import "../css/Hero.css";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="hero">
+    <motion.section
+      className="hero"
+      initial={{ opacity: 0 }}
+      whileInView={{
+        threshold: 0.35,
+        opacity: 1,
+        transition: {
+          duration: 1.2,
+          ease: [0, 0.71, 0.2, 1.01],
+        },
+      }}
+      viewport={{ once: false }}
+      delay={{ duration: 0.5 }}>
       <div className="hero-container">
         <div className="hero-title">
           <span className="name">Hey, I'm Vitor Mesquita</span>
@@ -41,7 +54,7 @@ const Hero = () => {
         />
         <p> web applications</p>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
