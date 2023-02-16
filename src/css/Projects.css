@@ -15,7 +15,7 @@
     max-width: 1200px;
     width: 100%;
     height: auto;
-    padding: 0 3rem 3rem 3rem;
+    padding: 0 3rem 2rem 3rem;
     margin: 0 auto;
     gap: 2rem;
 }
@@ -24,12 +24,6 @@
     color: #3d3d3d;
     font-size: 4rem;
     padding: 2rem 0 4rem 0;
-}
-
-.proj-card {
-    position: relative;
-    height: 200px;
-    display: block;
 }
 
 .face {
@@ -49,7 +43,7 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    z-index: 5;
+    z-index: 21;
     cursor: pointer;
 
 }
@@ -72,13 +66,35 @@
     padding: 1.5rem;
     box-sizing: border-box;
     transform: translateY(-200px);
+    /* While I don't fix the hover issue: */
+    opacity: 0;
+    /* ------------------------------- */
     box-shadow: rgb(0 0 0 / 40%) 0px 5px 20px;
-    z-index: 4;
+    z-index: 20;
+}
+
+/* Original hover effect: */
+
+/* .proj-card:hover .face.card-content {
+    transform: translateY(0);
+} */
+
+/*-----------------------------*/
+
+/*  While I don't fix the hover issue: */
+
+.proj-card:hover .face.card-content {
+    opacity: 1;
+    z-index: 22;
+    border-radius: 0px !important;
+    cursor: pointer;
 }
 
 .proj-card:hover .face.card-content {
-    transform: translateY(0);
+    transition: opacity .5s, transform .5s;
 }
+
+/* ------------------------------- */
 
 .proj-card:hover .face.card-content {
     border-radius: 0px 0px 10px 10px;
@@ -128,7 +144,6 @@
     line-height: 1.2;
 }
 
-
 #todo {
     background: url(https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/todo-project.jpg?raw=true);
     background-size: cover;
@@ -144,7 +159,47 @@
 
 #next {
     background-color: #030202;
+}
 
+.glider-contain .glider-prev svg,
+.glider-contain .glider-next svg {
+    color: #e5e5e5;
+}
+
+.glider-contain .glider-prev:hover {
+    transform: scale(1.2);
+}
+
+.glider-contain .glider-prev:hover {
+    transition: transform 0.5s;
+}
+
+.proj-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.glider {
+    height: 250px;
+}
+
+.glider-dots .glider-dot.active {
+    background: #4a77ff;
+}
+
+.glider-dots .glider-dot {
+    background: #3d3d3d;
+}
+
+.glider-track {
+    z-index: 10;
+    position: relative;
 }
 
 @media(width <=1000px) {
@@ -200,10 +255,18 @@
 
     .face.card-content {
         transform: translateY(0);
-
     }
 
     .proj-card:hover .face.card-content {
         transform: translateY(0);
+    }
+
+    .glider {
+        height: auto;
+    }
+
+    .glider .glider-dots {
+        margin-top: 1rem;
+        z-index: -1 !important;
     }
 }

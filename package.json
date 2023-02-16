@@ -16,6 +16,7 @@
     "framer-motion": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-glider": "^4.0.2",
     "react-intersection-observer": "^9.4.2",
     "react-simple-typewriter": "^5.0.1"
   },

@@ -1,8 +1,14 @@
 import React from "react";
 import "../css/Projects.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLink,
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import Glider from "react-glider";
+import "glider-js/glider.min.css";
 
 export const Project = (props) => {
   return (
@@ -61,21 +67,48 @@ const Projects = () => {
         viewport={{ once: false }}
         delay={{ duration: 0.5 }}
         transition={{ duration: 1 }}>
-        <Project
-          title="WhatsOnForToday?"
-          name="todo"
-          repoName="WhatsOnForToday"
-          link="https://woftoday.vercel.app/"
-          text="To-do List made with HTML, CSS, JavaScript and React (useState and useEffect Hooks)"
-        />
-        <Project
-          title="Mozify"
-          name="mozify"
-          repoName="Mozify"
-          link="https://mozify.vercel.app/"
-          text="Movies catalog app made with HTML, CSS, JavaScript and React Hooks (useState, useEffect, useParams Hooks), API fetch with Axios and  LocalStorage."
-        />
-        <Project name="next" repoName="" empty="In progress..." />
+        <Glider
+          hasArrows
+          slidesToShow={1}
+          slidesToScroll={1}
+          scrollLock
+          hasDots
+          iconRight={<FontAwesomeIcon icon={faChevronRight} />}
+          iconLeft={<FontAwesomeIcon icon={faChevronLeft} />}
+          duration={1}
+          responsive={[
+            {
+              breakpoint: 1000,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+              },
+            },
+          ]}>
+          <Project
+            title="WhatsOnForToday?"
+            name="todo"
+            repoName="WhatsOnForToday"
+            link="https://woftoday.vercel.app/"
+            text="To-do List made with HTML, CSS, JavaScript and React (useState and useEffect Hooks)"
+          />
+          <Project
+            title="Mozify"
+            name="mozify"
+            repoName="Mozify"
+            link="https://mozify.vercel.app/"
+            text="Movies catalog app made with HTML, CSS, JavaScript and React Hooks (useState, useEffect, useParams Hooks), API fetch with Axios and  LocalStorage.
+            "
+          />
+          <Project name="next" repoName="" empty="In progress..." />
+        </Glider>
       </motion.div>
     </section>
   );

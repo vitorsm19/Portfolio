@@ -24,13 +24,13 @@
   padding: 0px 2rem;
 }
 
-ul {
+.menu-header {
   position: relative;
   display: flex;
   gap: 25px
 }
 
-ul li {
+.menu-header li {
   position: relative;
   list-style: none;
   width: 60px;
@@ -44,12 +44,12 @@ ul li {
   transition: 0.5s;
 }
 
-ul li:hover {
+.menu-header li:hover {
   width: 180px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
 }
 
-ul li::before {
+.menu-header li::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -60,11 +60,11 @@ ul li::before {
 
 }
 
-ul li:hover::before {
+.menu-header li:hover::before {
   opacity: 1;
 }
 
-ul li::after {
+.menu-header li::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -77,28 +77,28 @@ ul li::after {
   filter: blur(15px);
 }
 
-ul li:hover::after {
+.menu-header li:hover::after {
   opacity: 0.5;
 }
 
-ul li svg {
+.menu-header li svg {
   color: #777;
   font-size: 1.75em !important;
   transition: 0.5s;
   transition-delay: 0.25s;
 }
 
-ul li:hover svg {
+.menu-header li:hover svg {
   transform: scale(0);
   font-size: 1.75em;
   transition-delay: 0.25s;
 }
 
-ul li span {
+.menu-header li span {
   position: absolute;
 }
 
-ul li .nav-li-title {
+.menu-header li .nav-li-title {
   color: #fff;
   font-size: 1.1em !important;
   text-transform: uppercase;
@@ -108,7 +108,7 @@ ul li .nav-li-title {
   transition-delay: 0s;
 }
 
-ul li:hover .nav-li-title {
+.menu-header li:hover .nav-li-title {
   transform: scale(1);
   transition-delay: 0.25s;
 }
@@ -146,24 +146,24 @@ ul li:hover .nav-li-title {
     height: auto;
   }
 
-  ul li:hover::before {
+  .menu-header li:hover::before {
     opacity: 0;
   }
 
-  ul li:hover::after {
+  .menu-header li:hover::after {
     opacity: 0;
   }
 
-  ul li:hover {
+  .menu-header li:hover {
     box-shadow: none;
     width: 60px;
   }
 
-  ul li .nav-li-title {
+  .menu-header li .nav-li-title {
     display: none;
   }
 
-  ul li:hover svg {
+  .menu-header li:hover svg {
     transform: scale(1);
     color: #4a77ff;
     transition: all 0.5s;
