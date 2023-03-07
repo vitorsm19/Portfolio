@@ -108,6 +108,7 @@ const Projects = () => {
             "
           />
           <Project name="next" repoName="" empty="In progress..." />
+          <Project name="next" repoName="" empty="In progress..." />
         </Glider>
       </motion.div>
     </section>

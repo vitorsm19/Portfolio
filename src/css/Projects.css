@@ -65,9 +65,9 @@
     justify-content: center;
     padding: 1.5rem;
     box-sizing: border-box;
-    transform: translateY(-200px);
+    /* transform: translateY(-200px); */
     /* While I don't fix the hover issue: */
-    opacity: 0;
+    /* opacity: 0; */
     /* ------------------------------- */
     box-shadow: rgb(0 0 0 / 40%) 0px 5px 20px;
     z-index: 20;
@@ -75,15 +75,15 @@
 
 /* Original hover effect: */
 
-/* .proj-card:hover .face.card-content {
+.proj-card:hover .face.card-content {
     transform: translateY(0);
-} */
+}
 
 /*-----------------------------*/
 
 /*  While I don't fix the hover issue: */
 
-.proj-card:hover .face.card-content {
+/* .proj-card:hover .face.card-content {
     opacity: 1;
     z-index: 22;
     border-radius: 0px !important;
@@ -92,17 +92,31 @@
 
 .proj-card:hover .face.card-content {
     transition: opacity .5s, transform .5s;
-}
+} */
 
 /* ------------------------------- */
 
-.proj-card:hover .face.card-content {
+.proj-card .face.card-content {
     border-radius: 0px 0px 10px 10px;
 }
 
-.proj-card:hover .face.card-cover {
+.proj-card .face.card-cover {
     border-radius: 10px 10px 0px 0px;
 }
+
+
+
+.proj-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
 
 .proj-content {
     margin: 0;
@@ -174,19 +188,8 @@
     transition: transform 0.5s;
 }
 
-.proj-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    height: 200px;
-    margin: 0 auto;
-    position: relative;
-}
-
 .glider {
-    height: 250px;
+    height: auto;
 }
 
 .glider-dots .glider-dot.active {
@@ -200,6 +203,10 @@
 .glider-track {
     z-index: 10;
     position: relative;
+}
+
+.glider-dots {
+    margin-top: 4rem !important;
 }
 
 @media(width <=1000px) {
@@ -237,13 +244,6 @@
         justify-content: center;
     }
 
-    .proj-card .face.card-content {
-        border-radius: 0px 0px 10px 10px;
-    }
-
-    .proj-card .face.card-cover {
-        border-radius: 10px 10px 0px 0px;
-    }
 
     .card-content {
         height: auto;
@@ -257,16 +257,25 @@
         transform: translateY(0);
     }
 
-    .proj-card:hover .face.card-content {
-        transform: translateY(0);
-    }
-
     .glider {
         height: auto;
     }
 
     .glider .glider-dots {
         margin-top: 1rem;
-        z-index: -1 !important;
+    }
+
+
+}
+
+@media(width <=500px) {
+
+    .glider-track .glider-slide .card-cover,
+    .glider-track .glider-slide .card-content {
+        width: 250px !important;
+    }
+
+    .proj-links a {
+        padding: 0.5rem 0.5rem;
     }
 }
