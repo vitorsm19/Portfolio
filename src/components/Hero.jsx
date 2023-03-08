@@ -47,7 +47,7 @@ const Hero = () => {
             "intuitive",
             "pixel-perfect",
           ]}
-          loop={5}
+          loop
           typeSpeed={100}
           deleteSpeed={60}
           delaySpeed={3000}
