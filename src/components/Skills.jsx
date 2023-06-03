@@ -4,7 +4,9 @@ import {
   Html,
   Css,
   Javascript,
+  Typescript,
   Reactjs,
+  Vuejs,
   Angular,
   Node,
   Tailwind,
@@ -41,9 +43,11 @@ const Skills = () => {
             <Css />
             <Javascript />
             <Reactjs />
+            <Vuejs />
           </div>
           <p className="second">but also knowledgeable in</p>
           <div className="other-logos">
+            <Typescript />
             <Angular />
             <Node />
             <Tailwind />
