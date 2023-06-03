@@ -43,7 +43,7 @@ function App() {
           </a>
           <a
             className="cv"
-            href="https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/CV_%20VitorMesquita.pdf"
+            href="https://github.com/vitorsm19/Portfolio/blob/master/src/assets/CV_VitorMesquita.pdf"
             target="_blank">
             <span>CV</span>
           </a>
