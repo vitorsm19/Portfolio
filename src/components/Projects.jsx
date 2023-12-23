@@ -59,7 +59,6 @@ const Projects = () => {
       .get("https://api.github.com/users/vitorsm19/repos")
       .then((response) => {
         setRepos(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching repos", error);
