@@ -6,7 +6,9 @@ import {
   Javascript,
   Typescript,
   Reactjs,
+  Nextjs,
   Vuejs,
+  Nuxtjs,
   Angular,
   Node,
   Tailwind,
@@ -41,7 +43,9 @@ const Skills = () => {
           <div className="logos">
             <Typescript />
             <Vuejs />
-            <Reactjs />            
+            <Nuxtjs />
+            <Reactjs />
+            <Nextjs />            
           </div>
           <p className="second">but also knowledgeable in</p>
           <div className="other-logos">
