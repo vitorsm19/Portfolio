@@ -24,7 +24,7 @@ const Hero = () => {
           <h1 className="front">FRONTEND</h1>
           <h1 className="dev">DEVELOPER</h1>
           <span className="location">
-            Located in Budapest{" "}
+            EU Citizen. Located in Budapest{" "}
             <img
               src="https://github.com/vitorsm19/frontend-portfolio/blob/master/src/assets/hungary-flag.png?raw=true"
               alt="Hungary flag"
