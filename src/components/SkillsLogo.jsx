@@ -16,7 +16,7 @@ export const Html = () => {
           fill="white"
         />
       </svg>
-      <span className="logo-sub">HTML</span>
+      <span className="other-logo-sub">HTML</span>
     </div>
   );
 };
@@ -37,14 +37,14 @@ export const Css = () => {
           fill="white"
         />
       </svg>
-      <span className="logo-sub">CSS</span>
+      <span className="other-logo-sub">CSS</span>
     </div>
   );
 };
 
 export const Javascript = () => {
   return (
-    <div className="logo-container js">
+    <div className="logo-container">
       <svg
         width="800px"
         height="800px"
@@ -63,7 +63,7 @@ export const Javascript = () => {
             fill="#000000"></path>
         </g>
       </svg>
-      <span className="logo-sub">JavaScript</span>
+      <span className="other-logo-sub">JavaScript</span>
     </div>
   );
 };
@@ -123,7 +123,7 @@ export const Vuejs = () => {
 
 export const Typescript = () => {
   return (
-    <div className="logo-container js">
+    <div className="logo-container">
       <svg
         id="typescript"
         xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ export const Typescript = () => {
         />
       </svg>
 
-      <span className="other-logo-sub">TypeScript</span>
+      <span className="logo-sub">TypeScript</span>
     </div>
   );
 };
