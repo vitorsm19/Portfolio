@@ -39,15 +39,15 @@ const Skills = () => {
           viewport={{ once: false }}>
           <p className="first">Focused on</p>
           <div className="logos">
-            <Html />
-            <Css />
-            <Javascript />
-            <Reactjs />
+            <Typescript />
             <Vuejs />
+            <Reactjs />            
           </div>
           <p className="second">but also knowledgeable in</p>
           <div className="other-logos">
-            <Typescript />
+            <Html />
+            <Css />
+            <Javascript />           
             <Angular />
             <Node />
             <Tailwind />
