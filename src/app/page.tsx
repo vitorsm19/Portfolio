@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, useReducedMotion, useInView } from 'framer-motion'
+import { motion, useReducedMotion, useInView, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import aboutPic from '@/assets/about-pic.png'
 import { siteConfig } from '@/data/site'
@@ -50,15 +50,20 @@ function useCountUp(target: number, duration = 1800) {
 
   useEffect(() => {
     if (!inView) return
-    if (reduced) { setCount(target); return }
+    if (reduced) {
+      setCount(target)
+      return
+    }
     const steps = 36
     const inc = target / steps
     const interval = duration / steps
     let cur = 0
     const id = setInterval(() => {
       cur += inc
-      if (cur >= target) { setCount(target); clearInterval(id) }
-      else setCount(Math.floor(cur))
+      if (cur >= target) {
+        setCount(target)
+        clearInterval(id)
+      } else setCount(Math.floor(cur))
     }, interval)
     return () => clearInterval(id)
   }, [inView, target, duration, reduced])
@@ -90,8 +95,18 @@ function GhostText({
       {parts.map((part, i) => {
         const isAccent = accentWords.some((w) => w.toLowerCase() === part.toLowerCase())
         const isHighlight = highlights.some((h) => h.toLowerCase() === part.toLowerCase())
-        if (isAccent) return <span key={i} className="text-accent opacity-100">{part}</span>
-        if (isHighlight) return <span key={i} className="opacity-100 text-text-primary">{part}</span>
+        if (isAccent)
+          return (
+            <span key={i} className="text-accent opacity-100">
+              {part}
+            </span>
+          )
+        if (isHighlight)
+          return (
+            <span key={i} className="opacity-100 text-text-primary">
+              {part}
+            </span>
+          )
         return <span key={i}>{part}</span>
       })}
     </span>
@@ -128,7 +143,9 @@ function Marquee({
 }) {
   const reduced = useReducedMotion()
   const items = Array.from({ length: 8 }, (_, i) => (
-    <span key={i} className="mx-8 whitespace-nowrap">{text}</span>
+    <span key={i} className="mx-8 whitespace-nowrap">
+      {text}
+    </span>
   ))
   return (
     <div className={`overflow-hidden py-5 ${className}`}>
@@ -141,6 +158,93 @@ function Marquee({
         {items}
       </motion.div>
     </div>
+  )
+}
+
+/* ── scroll-driven project card ── */
+function ProjectCardScrollDriven({
+  project,
+  index,
+}: {
+  project: (typeof projects)[number]
+  index: number
+}) {
+  const cardRef = useRef<HTMLAnchorElement>(null)
+  const reduced = useReducedMotion()
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'end start'],
+  })
+
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0.7, 0.9, 1, 0.9, 0.7])
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0.3, 0.7, 1, 0.7, 0.3])
+
+  return (
+    <a
+      ref={cardRef}
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative z-[5] block w-[90%] sm:w-[80%] lg:w-[60%] mx-auto my-[8vh] sm:my-[12vh] lg:my-[18vh]"
+      style={{ perspective: '2000px' }}
+    >
+      <motion.div className="origin-center" style={reduced ? {} : { scale, opacity }}>
+        {/* Card — screenshot as atmospheric background, content layered on top */}
+        <div className="relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-accent/20 transition-colors duration-500 aspect-[16/9]">
+          {/* Blurred screenshot background */}
+          <Image
+            src={project.snippet}
+            alt={`${project.title} website screenshot`}
+            fill
+            className="object-cover blur-[3px] brightness-[0.3] group-hover:blur-[2px] group-hover:brightness-[0.2] group-hover:scale-105 scale-100 transition-all duration-1000 ease-out"
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 80vw, 60vw"
+          />
+
+          {/* Content layered on the blurred screenshot */}
+          <div className="relative z-10 h-full flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+            {/* Top: logo + number + arrow */}
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3">
+                <Image
+                  src={project.logo}
+                  alt={`${project.title} logo`}
+                  width={200}
+                  height={200}
+                  className="w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36 object-contain drop-shadow-2xl"
+                />
+                <span className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase">
+                  {pad(index + 1)}
+                </span>
+              </div>
+              <span className="text-white/30 text-xl group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500 ease-out">
+                &#8599;
+              </span>
+            </div>
+
+            {/* Bottom: title + description + tech */}
+            <div>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white group-hover:text-accent transition-colors duration-700 ease-out tracking-tight leading-[1.1]">
+                {project.title}
+              </h3>
+              <p className="mt-3 text-white/60 text-sm lg:text-[15px] leading-relaxed max-w-lg line-clamp-2">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5 mt-4">
+                {project.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="font-mono text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full border border-white/10 text-white/40 group-hover:text-accent/70 group-hover:border-accent/20 transition-all duration-700 ease-out"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </a>
   )
 }
 
@@ -193,12 +297,14 @@ export default function Home6() {
     }
     const t1 = setTimeout(() => setLinesReady(true), 100)
     const t2 = setTimeout(() => setContentReady(true), 1350)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
   }, [reduced])
 
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary font-sans overflow-x-hidden selection:bg-accent/30">
-
       {/* blueprint keyframes */}
       <style>{`
         @keyframes drawH { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -247,7 +353,6 @@ export default function Home6() {
 
       {/* ═══════════ 2. HERO — "THE BLUEPRINT" ═══════════ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-primary">
-
         {/* grid lines — drawn from center outward */}
         <div
           className="absolute top-[35%] left-0 w-full h-px bg-text-muted/[0.12]"
@@ -359,7 +464,8 @@ export default function Home6() {
           <p className="text-sm lg:text-base text-text-secondary leading-relaxed">
             I build{' '}
             <span className="text-accent font-medium">
-              {typed}<span className="animate-pulse">|</span>
+              {typed}
+              <span className="animate-pulse">|</span>
             </span>{' '}
             web&nbsp;apps
           </p>
@@ -367,17 +473,27 @@ export default function Home6() {
           {/* stats */}
           <div className="flex items-center justify-end gap-6 mt-5">
             <div className="text-right">
-              <span ref={projectCount.ref} className="text-2xl font-bold text-text-heading tabular-nums">
+              <span
+                ref={projectCount.ref}
+                className="text-2xl font-bold text-text-heading tabular-nums"
+              >
                 {projectCount.count}+
               </span>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted mt-0.5">Projects</p>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted mt-0.5">
+                Projects
+              </p>
             </div>
             <div className="w-px h-8 bg-text-muted/20" />
             <div className="text-right">
-              <span ref={yearCount.ref} className="text-2xl font-bold text-text-heading tabular-nums">
+              <span
+                ref={yearCount.ref}
+                className="text-2xl font-bold text-text-heading tabular-nums"
+              >
                 {yearCount.count}+
               </span>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted mt-0.5">Years</p>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted mt-0.5">
+                Years
+              </p>
             </div>
           </div>
         </div>
@@ -390,7 +506,9 @@ export default function Home6() {
             transition: 'opacity 1s ease 0.8s',
           }}
         >
-          <span className="font-mono text-[10px] tracking-widest uppercase text-text-muted">scroll</span>
+          <span className="font-mono text-[10px] tracking-widest uppercase text-text-muted">
+            scroll
+          </span>
           <div className="w-px h-6 bg-text-muted/30 overflow-hidden">
             <div
               className="w-full h-3 bg-text-muted/60"
@@ -426,7 +544,8 @@ export default function Home6() {
               variants={fadeUp}
               className="mt-5 text-4xl sm:text-5xl lg:text-[5.5rem] font-bold text-text-heading leading-[0.92] tracking-tight"
             >
-              A developer who cares<br className="hidden lg:block" /> about craft.
+              A developer who cares
+              <br className="hidden lg:block" /> about craft.
             </motion.h2>
 
             <motion.div variants={stagger} className="mt-14 space-y-8 max-w-3xl">
@@ -464,90 +583,43 @@ export default function Home6() {
         </div>
       </section>
 
-      {/* ═══════════ 5. PROJECTS — stacking cards ═══════════ */}
-      <section ref={workRef} className="py-28 lg:py-36 px-6 lg:px-16">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={initial}
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={stagger}
-          >
-            <motion.div variants={fadeUp}>
-              <GradientLabel tracking="0.28em">Selected Work</GradientLabel>
-            </motion.div>
+      {/* ═══════════ 5. PROJECTS — cinematic scroll gallery ═══════════ */}
+      <section ref={workRef} className="relative overflow-hidden" style={{ perspective: '2000px' }}>
+        {/* Background "WORKS" watermark */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-[10%] z-[1] select-none px-[3%] text-center"
+          style={{ fontSize: 'clamp(4rem, 15vw, 14rem)', letterSpacing: '0.3em' }}
+        >
+          <span className="font-bold uppercase text-white/[0.03]">WORKS</span>
+        </div>
 
-            <motion.h2
-              variants={fadeUp}
-              className="mt-5 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] tracking-tight"
+        {/* Section heading */}
+        <div className="relative z-[2] pt-28 lg:pt-40 px-6 lg:px-16">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={initial}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={stagger}
             >
-              Projects
-            </motion.h2>
-          </motion.div>
-
-          <div className="mt-14 flex flex-col gap-6">
-            {projects.map((project, i) => (
-              <motion.a
-                key={project.name}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={reduced ? false : { opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.06,
-                  ease: [0.22, 1, 0.36, 1] as const,
-                }}
-                className="group relative bg-bg-secondary rounded-2xl border border-white/[0.05] hover:border-accent/30 transition-colors duration-500 flex flex-col justify-between"
-                style={{
-                  position: 'sticky',
-                  top: `${100 + i * 24}px`,
-                  minHeight: i === 0 ? '48vh' : '40vh',
-                  padding: i === 0 ? 'clamp(2rem, 4vw, 3.5rem)' : 'clamp(1.75rem, 3.5vw, 3rem)',
-                }}
+              <motion.div variants={fadeUp}>
+                <GradientLabel tracking="0.28em">Featured Work I've been a part of</GradientLabel>
+              </motion.div>
+              <motion.h2
+                variants={fadeUp}
+                className="mt-5 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] tracking-tight"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="flex items-center gap-5">
-                      <span className="font-mono text-xs text-text-muted tracking-[0.2em]">
-                        {pad(i + 1)}
-                      </span>
-                      <Image
-                        src={project.logo}
-                        alt={`${project.title} logo`}
-                        width={120}
-                        height={120}
-                        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain drop-shadow-lg"
-                      />
-                    </div>
-                    <span className="text-text-muted group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 text-xl">
-                      &#8599;
-                    </span>
-                  </div>
-
-                  <h3 className={`font-bold text-text-heading group-hover:text-accent transition-colors duration-500 ${i === 0 ? 'text-3xl lg:text-5xl' : 'text-2xl lg:text-4xl'}`}>
-                    {project.title}
-                  </h3>
-                  <p className={`mt-4 text-text-secondary leading-relaxed max-w-2xl ${i === 0 ? 'text-base lg:text-lg' : 'text-sm lg:text-base'}`}>
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center gap-2">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="font-mono text-[10px] tracking-wider uppercase px-3 py-1 rounded-full border border-white/[0.08] text-text-muted"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </motion.a>
-            ))}
+                Projects
+              </motion.h2>
+            </motion.div>
           </div>
+        </div>
+
+        {/* Project cards — cinematic scroll-driven */}
+        <div className="relative z-[5] mt-10 pb-20 lg:pb-32">
+          {projects.map((project, i) => (
+            <ProjectCardScrollDriven key={project.name} project={project} index={i} />
+          ))}
         </div>
       </section>
 
@@ -571,10 +643,7 @@ export default function Home6() {
               Services
             </motion.h2>
 
-            <motion.div
-              variants={stagger}
-              className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5"
-            >
+            <motion.div variants={stagger} className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
               {services.map((service, i) => {
                 const isFeatured = service.featured
                 return (
@@ -609,7 +678,10 @@ export default function Home6() {
 
                     <ul className="space-y-2 mb-6 flex-1">
                       {service.features.slice(0, 4).map((f) => (
-                        <li key={f} className="flex items-center gap-2.5 text-sm text-text-secondary">
+                        <li
+                          key={f}
+                          className="flex items-center gap-2.5 text-sm text-text-secondary"
+                        >
                           <span className="w-1.5 h-1.5 rounded-full bg-accent/50 shrink-0" />
                           {f}
                         </li>
@@ -682,7 +754,10 @@ export default function Home6() {
               </p>
               <div className="flex flex-wrap gap-7 lg:gap-10">
                 {secondarySkills.map((skill) => (
-                  <div key={skill.name} className="grayscale hover:grayscale-0 transition-all duration-500">
+                  <div
+                    key={skill.name}
+                    className="grayscale hover:grayscale-0 transition-all duration-500"
+                  >
                     <SkillIcon skill={skill} size="secondary" />
                   </div>
                 ))}
@@ -715,7 +790,10 @@ export default function Home6() {
               </span>
             </motion.h2>
 
-            <motion.p variants={fadeUp} className="mt-8 text-lg lg:text-xl text-text-secondary max-w-xl leading-relaxed">
+            <motion.p
+              variants={fadeUp}
+              className="mt-8 text-lg lg:text-xl text-text-secondary max-w-xl leading-relaxed"
+            >
               {siteConfig.contact.body}
             </motion.p>
 

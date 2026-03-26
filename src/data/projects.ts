@@ -6,6 +6,12 @@ import livGolfLogo from '@/assets/liv-golf-logo.svg'
 import veluxLogo from '@/assets/velux-logo.svg'
 import growincoLogo from '@/assets/growinco-logo.svg'
 
+import premierLeagueSnippet from '@/assets/premier-league-snippet.png'
+import tottenhamSnippet from '@/assets/tottenham-snippet.png'
+import livGolfSnippet from '@/assets/liv-golf-snippet.png'
+import veluxSnippet from '@/assets/velux-snippet.png'
+import growincoSnippet from '@/assets/growinco-snippet.png'
+
 export interface Project {
   name: string
   title: string
@@ -13,6 +19,7 @@ export interface Project {
   url: string
   tech: string[]
   logo: StaticImageData | string
+  snippet: StaticImageData
 }
 
 export const projects: Project[] = [
@@ -24,6 +31,7 @@ export const projects: Project[] = [
     url: 'https://www.premierleague.com',
     tech: ['JavaScript', 'Firebase', 'Optimizely'],
     logo: premierLeagueLogo,
+    snippet: premierLeagueSnippet,
   },
   {
     name: 'tottenham-hotspur',
@@ -33,6 +41,7 @@ export const projects: Project[] = [
     url: 'https://www.tottenhamhotspur.com',
     tech: ['React', 'SSR', 'Dynamic Yield'],
     logo: tottenhamLogo,
+    snippet: tottenhamSnippet,
   },
   {
     name: 'liv-golf-fantasy',
@@ -42,6 +51,7 @@ export const projects: Project[] = [
     url: 'https://fantasy.livgolf.com',
     tech: ['Next.js', 'Vercel', 'Contentful'],
     logo: livGolfLogo,
+    snippet: livGolfSnippet,
   },
   {
     name: 'velux',
@@ -51,6 +61,7 @@ export const projects: Project[] = [
     url: 'https://www.velux.com',
     tech: ['React', 'Sitecore', 'Algolia'],
     logo: veluxLogo,
+    snippet: veluxSnippet,
   },
   {
     name: 'growinco',
@@ -60,5 +71,6 @@ export const projects: Project[] = [
     url: 'https://growinco.com',
     tech: ['WordPress', 'Elementor', 'HubSpot'],
     logo: growincoLogo,
+    snippet: growincoSnippet,
   },
 ]
