@@ -70,18 +70,7 @@ body {
   background-color: var(--color-bg-primary);
 }
 
-/* ===== Noise Overlay (CSS pseudo-element — zero DOM footprint) ===== */
-body::before {
-  content: '';
-  position: fixed;
-  inset: -10rem;
-  width: calc(100% + 20rem);
-  height: calc(100% + 20rem);
-  background-image: url('/noise.png');
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 9999;
-}
+/* Noise overlay is rendered via <canvas> in NoiseOverlay component */
 
 /* ===== Custom Scrollbar ===== */
 :root::-webkit-scrollbar-track {

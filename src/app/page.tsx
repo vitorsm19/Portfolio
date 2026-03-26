@@ -1,7 +1,14 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, useReducedMotion, useInView, useScroll, useTransform } from 'framer-motion'
+import {
+  motion,
+  useReducedMotion,
+  useInView,
+  useScroll,
+  useTransform,
+  useSpring,
+} from 'framer-motion'
 import Image from 'next/image'
 import aboutPic from '@/assets/about-pic.png'
 import { siteConfig } from '@/data/site'
@@ -32,6 +39,26 @@ const stagger = {
 } as const
 
 /* ── helpers ── */
+function smoothScrollTo(targetY: number, duration = 1000) {
+  const start = window.scrollY
+  const diff = targetY - start
+  let startTime: number | null = null
+
+  function easeOutExpo(t: number) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+  }
+
+  function step(timestamp: number) {
+    if (!startTime) startTime = timestamp
+    const elapsed = timestamp - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    window.scrollTo(0, start + diff * easeOutExpo(progress))
+    if (progress < 1) requestAnimationFrame(step)
+  }
+
+  requestAnimationFrame(step)
+}
+
 function pad(n: number) {
   return String(n).padStart(2, '0')
 }
@@ -177,8 +204,24 @@ function ProjectCardScrollDriven({
     offset: ['start end', 'end start'],
   })
 
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0.7, 0.9, 1, 0.9, 0.7])
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0.3, 0.7, 1, 0.7, 0.3])
+  // Wider, more gradual animation range
+  const rawScale = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.45, 0.55, 0.8, 1],
+    [0.82, 0.9, 1, 1, 0.9, 0.82],
+  )
+  const rawOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.4, 0.6, 0.8, 1],
+    [0.2, 0.6, 1, 1, 0.6, 0.2],
+  )
+  const rawY = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [40, 0, 0, 0, -40])
+
+  // Spring smoothing — makes scroll-driven values feel buttery
+  const springConfig = { stiffness: 100, damping: 30, mass: 0.5 }
+  const scale = useSpring(rawScale, springConfig)
+  const opacity = useSpring(rawOpacity, springConfig)
+  const y = useSpring(rawY, springConfig)
 
   return (
     <a
@@ -186,12 +229,15 @@ function ProjectCardScrollDriven({
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative z-[5] block w-[90%] sm:w-[80%] lg:w-[60%] mx-auto my-[8vh] sm:my-[12vh] lg:my-[18vh]"
+      className="group relative z-[5] block w-[92%] sm:w-[80%] lg:w-[60%] mx-auto my-[5vh] sm:my-[12vh] lg:my-[18vh]"
       style={{ perspective: '2000px' }}
     >
-      <motion.div className="origin-center" style={reduced ? {} : { scale, opacity }}>
+      <motion.div
+        className="origin-center will-change-transform"
+        style={reduced ? {} : { scale, opacity, y }}
+      >
         {/* Card — screenshot as atmospheric background, content layered on top */}
-        <div className="relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-accent/20 transition-colors duration-500 aspect-[16/9]">
+        <div className="relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-accent/20 transition-colors duration-500 aspect-[3/4] sm:aspect-[4/3] lg:aspect-[16/9]">
           {/* Blurred screenshot background */}
           <Image
             src={project.snippet}
@@ -202,7 +248,7 @@ function ProjectCardScrollDriven({
           />
 
           {/* Content layered on the blurred screenshot */}
-          <div className="relative z-10 h-full flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+          <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-8 lg:p-10">
             {/* Top: logo + number + arrow */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
@@ -211,7 +257,7 @@ function ProjectCardScrollDriven({
                   alt={`${project.title} logo`}
                   width={200}
                   height={200}
-                  className="w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36 object-contain drop-shadow-2xl"
+                  className="w-14 h-14 sm:w-28 sm:h-28 lg:w-36 lg:h-36 object-contain drop-shadow-2xl"
                 />
                 <span className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase">
                   {pad(index + 1)}
@@ -224,13 +270,13 @@ function ProjectCardScrollDriven({
 
             {/* Bottom: title + description + tech */}
             <div>
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white group-hover:text-accent transition-colors duration-700 ease-out tracking-tight leading-[1.1]">
+              <h3 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white group-hover:text-accent transition-colors duration-700 ease-out tracking-tight leading-[1.1]">
                 {project.title}
               </h3>
-              <p className="mt-3 text-white/60 text-sm lg:text-[15px] leading-relaxed max-w-lg line-clamp-2">
+              <p className="mt-2 sm:mt-3 text-white/60 text-xs sm:text-sm lg:text-[15px] leading-relaxed max-w-lg line-clamp-3 sm:line-clamp-2">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-1.5 mt-4">
+              <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-3 sm:mt-4">
                 {project.tech.map((t) => (
                   <span
                     key={t}
@@ -270,7 +316,10 @@ export default function Home6() {
   }
 
   function scrollTo(section: string) {
-    refs[section]?.current?.scrollIntoView({ behavior: 'smooth' })
+    const el = refs[section]?.current
+    if (!el) return
+    const target = el.getBoundingClientRect().top + window.scrollY - 80
+    smoothScrollTo(target, 1200)
   }
 
   /* typewriter for hero */
@@ -544,29 +593,42 @@ export default function Home6() {
               variants={fadeUp}
               className="mt-5 text-4xl sm:text-5xl lg:text-[5.5rem] font-bold text-text-heading leading-[0.92] tracking-tight"
             >
-              A developer who cares
-              <br className="hidden lg:block" /> about craft.
+              Your next project,
+              <br className="hidden lg:block" /> delivered.
             </motion.h2>
 
             <motion.div variants={stagger} className="mt-14 space-y-8 max-w-3xl">
-              {siteConfig.about.paragraphs.map((p, i) => (
-                <motion.p
-                  key={i}
-                  variants={fadeUp}
-                  className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
-                >
-                  <GhostText
-                    text={p}
-                    highlights={[
-                      'detail-oriented developer',
-                      'unique perspective',
-                      'Self-starter',
-                      'fast learner',
-                      'continue to grow',
-                    ]}
-                  />
-                </motion.p>
-              ))}
+              <motion.p
+                variants={fadeUp}
+                className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
+              >
+                <GhostText
+                  text="I've spent 6+ years shipping production code for some of the biggest brands in sports, retail, and tech. Now I bring that same caliber of work directly to you — polished, high-performance web products delivered on time, on budget, and built to scale."
+                  highlights={[
+                    '6+ years',
+                    'biggest brands',
+                    'directly to you',
+                    'on time',
+                    'on budget',
+                    'built to scale',
+                  ]}
+                />
+              </motion.p>
+
+              <motion.p
+                variants={fadeUp}
+                className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
+              >
+                <GhostText
+                  text="No agency overhead, no bloated timelines. One senior developer, full ownership, zero fluff."
+                  highlights={[
+                    'No agency overhead',
+                    'One senior developer',
+                    'full ownership',
+                    'zero fluff',
+                  ]}
+                />
+              </motion.p>
 
               <motion.p
                 variants={fadeUp}
@@ -603,7 +665,7 @@ export default function Home6() {
               variants={stagger}
             >
               <motion.div variants={fadeUp}>
-                <GradientLabel tracking="0.28em">Featured Work I've been a part of</GradientLabel>
+                <GradientLabel tracking="0.28em">Featured Work</GradientLabel>
               </motion.div>
               <motion.h2
                 variants={fadeUp}
@@ -802,7 +864,7 @@ export default function Home6() {
                 href={`mailto:${siteConfig.email}`}
                 className="font-mono text-sm tracking-wider px-7 py-3.5 rounded-full bg-accent text-white hover:brightness-110 transition-all"
               >
-                {siteConfig.email}
+                Send me an email
               </a>
               <a
                 href={siteConfig.linkedin.url}
@@ -841,7 +903,7 @@ export default function Home6() {
                 {siteConfig.name}
               </p>
               <p className="font-mono text-[10px] text-text-muted/50 mt-1 tracking-wider">
-                Fueled by coffee and curiosity
+                Turning wild ideas into polished interfaces
               </p>
             </div>
 

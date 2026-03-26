@@ -2,8 +2,8 @@ export const siteConfig = {
   name: 'Vitor Mesquita',
   title: 'Frontend Developer',
   email: 'vitormesquita190902@gmail.com',
-  phone: '+36 20 598 4775',
-  location: 'Budapest',
+  phone: '+34 614 08 82 64',
+  location: 'Spain',
   citizenship: 'EU Citizen',
   github: {
     username: 'vitorsm19',

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Fira_Sans } from 'next/font/google'
+import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
 import './globals.css'
 
 const firaSans = Fira_Sans({
@@ -39,6 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {children}
+        <NoiseOverlay />
       </body>
     </html>
   )
