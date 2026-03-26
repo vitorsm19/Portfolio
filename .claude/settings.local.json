@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); pkgs=d.get\\(''''packages'''',{}\\).get\\('''''''',{}\\).get\\(''''dependencies'''',{}\\); [print\\(f''''{k}: {v}''''\\) for k,v in sorted\\(pkgs.items\\(\\)\\)]\")",
+      "Bash(node -e \"const d=require\\(''''./package-lock.json''''\\); const deps={...d.packages[''''''''].dependencies,...d.packages[''''''''].devDependencies}; Object.entries\\(deps\\).sort\\(\\).forEach\\(\\([k,v]\\)=>console.log\\(k+'''': ''''+v\\)\\)\")",
+      "Bash(wc -l src/components/*.jsx src/css/*.css src/index.css src/App.jsx src/main.jsx)",
+      "Bash(node -e \"process.stdin.on\\(''''data'''',d=>{try{console.log\\(''''Framer Motion:'''',JSON.parse\\(d\\).version\\)}catch\\(e\\){}}\\)\")",
+      "Bash(echo \"exists: $?\")",
+      "Bash(node:*)",
+      "Bash(du -sk src/assets/*)",
+      "Bash(wc:*)",
+      "Bash(cd /tmp)",
+      "Bash(npx create-next-app@latest portfolio-scaffold --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --yes)",
+      "Bash(ls /tmp/portfolio-scaffold/tailwind.config*)",
+      "Bash(cp /tmp/portfolio-scaffold/next.config.ts /c/Projects/Portfolio/next.config.ts)",
+      "Bash(cp /tmp/portfolio-scaffold/tsconfig.json /c/Projects/Portfolio/tsconfig.json)",
+      "Bash(cp /tmp/portfolio-scaffold/postcss.config.mjs /c/Projects/Portfolio/postcss.config.mjs)",
+      "Bash(cp /tmp/portfolio-scaffold/next-env.d.ts /c/Projects/Portfolio/next-env.d.ts)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next:*)",
+      "Bash(npm ls:*)",
+      "Bash(npx prettier:*)",
+      "WebFetch(domain:www.premierleague.com)",
+      "WebFetch(domain:www.tottenhamhotspur.com)",
+      "WebSearch",
+      "WebFetch(domain:www.velux.com)",
+      "WebFetch(domain:fantasy.livgolf.com)",
+      "WebFetch(domain:growinco.com)",
+      "WebFetch(domain:www.unrvld.com)"
+    ]
+  }
+}
