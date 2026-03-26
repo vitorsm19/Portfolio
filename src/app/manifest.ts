@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Vitor Mesquita — Frontend Developer',
-    short_name: 'VM Dev',
+    short_name: 'VSM Solutions',
     description:
       'Senior frontend developer offering web development, e-commerce, and complex system services.',
     start_url: '/',

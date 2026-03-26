@@ -1,13 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import { Fira_Sans } from 'next/font/google'
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
 import './globals.css'
-
-const firaSans = Fira_Sans({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  display: 'swap',
-})
 
 const SITE_URL = 'https://vitormesquita.com'
 
@@ -91,7 +84,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={firaSans.className}>
+    <html lang="en">
       <head>
         {/* Google Tag Manager */}
         <script

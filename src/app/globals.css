@@ -1,5 +1,58 @@
 @import 'tailwindcss';
 
+/* ===== Thunder — primary display font ===== */
+@font-face {
+  font-family: 'Thunder';
+  src: url('/fonts/Thunder-LightLC.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thunder';
+  src: url('/fonts/Thunder-LC.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thunder';
+  src: url('/fonts/Thunder-MediumLC.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thunder';
+  src: url('/fonts/Thunder-SemiBoldLC.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thunder';
+  src: url('/fonts/Thunder-BoldLC.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== PP Playground — calligraphic accent font ===== */
+@font-face {
+  font-family: 'PP Playground';
+  src: url('/fonts/PPPlayground-Medium.otf') format('opentype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Playground';
+  src: url('/fonts/PPPlayground-Medium.otf') format('opentype');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ===== Design Tokens (Tailwind v4 CSS-first config) ===== */
 @theme {
   --color-accent: #4a77ff;
@@ -12,7 +65,7 @@
   --color-white: #ffffff;
   --color-line: rgb(244, 244, 245);
 
-  --font-sans: 'Fira Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Thunder', ui-sans-serif, system-ui, sans-serif;
 
   --ease-smooth: cubic-bezier(0, 0.71, 0.2, 1.01);
 
@@ -68,6 +121,10 @@ html {
 
 body {
   background-color: var(--color-bg-primary);
+}
+
+*, *::before, *::after {
+  letter-spacing: 0.02em;
 }
 
 /* Noise overlay is rendered via <canvas> in NoiseOverlay component */

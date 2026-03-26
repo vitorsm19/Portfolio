@@ -177,7 +177,7 @@ function Marquee({
   return (
     <div className={`overflow-hidden py-5 ${className}`}>
       <motion.div
-        className="flex whitespace-nowrap"
+        className="flex whitespace-nowrap tracking-[0.5em]!"
         animate={reduced ? {} : { x: ['0%', '-50%'] }}
         transition={{ duration: speed, repeat: Infinity, ease: 'linear' as const }}
       >
@@ -259,7 +259,7 @@ function ProjectCardScrollDriven({
                   height={200}
                   className="w-14 h-14 sm:w-28 sm:h-28 lg:w-36 lg:h-36 object-contain drop-shadow-2xl"
                 />
-                <span className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase">
+                <span className="font-mono text-[10px] text-white/30 tracking-[0.2em]! uppercase">
                   {pad(index + 1)}
                 </span>
               </div>
@@ -270,17 +270,17 @@ function ProjectCardScrollDriven({
 
             {/* Bottom: title + description + tech */}
             <div>
-              <h3 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white group-hover:text-accent transition-colors duration-700 ease-out tracking-tight leading-[1.1]">
+              <h3 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white group-hover:text-accent transition-colors duration-700 ease-out  leading-[1.1]">
                 {project.title}
               </h3>
-              <p className="mt-2 sm:mt-3 text-white/60 text-xs sm:text-sm lg:text-[15px] leading-relaxed max-w-lg line-clamp-3 sm:line-clamp-2">
+              <p className="mt-2 sm:mt-3 text-white/75 text-xs sm:text-sm lg:text-[15px] leading-relaxed max-w-lg font-light! tracking-wider!">
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-3 sm:mt-4">
                 {project.tech.map((t) => (
                   <span
                     key={t}
-                    className="font-mono text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full border border-white/10 text-white/40 group-hover:text-accent/70 group-hover:border-accent/20 transition-all duration-700 ease-out"
+                    className="font-mono text-[10px] tracking-wider! uppercase px-2.5 py-1 rounded-full border border-white/10 text-white/40 group-hover:text-accent/70 group-hover:border-accent/20 transition-all duration-700 ease-out"
                   >
                     {t}
                   </span>
@@ -376,28 +376,32 @@ export default function Home6() {
         initial={reduced ? false : { y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, delay: 1.5, ease: [0.22, 1, 0.36, 1] as const }}
-        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-5 px-5 py-2.5 bg-bg-primary/70 backdrop-blur-xl rounded-full border border-white/[0.06] shadow-2xl"
+        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-7 py-3.5 bg-bg-primary/70 backdrop-blur-xl rounded-full border border-white/[0.06] shadow-2xl"
       >
-        <span className="text-sm font-bold text-text-heading tracking-wide">VM</span>
+        <span className="text-base font-bold text-text-heading tracking-wider! leading-none pt-1">
+          VM
+        </span>
 
-        <div className="hidden sm:flex items-center gap-4">
+        <div className="hidden sm:flex items-center gap-5 pt-1">
           {NAV_LINKS.map((link) => (
             <button
               key={link}
               onClick={() => scrollTo(link)}
-              className="text-[11px] font-medium text-text-secondary hover:text-text-heading transition-colors tracking-wide uppercase cursor-pointer"
+              className="text-sm font-medium text-text-secondary hover:text-text-heading transition-colors uppercase tracking-widest! cursor-pointer leading-none"
             >
               {link}
             </button>
           ))}
         </div>
 
-        <div className="flex items-center gap-2 ml-1 pl-4 border-l border-white/[0.08]">
+        <div className="flex items-center gap-2 ml-1 pl-5 border-l border-white/[0.08]">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
           </span>
-          <span className="text-[11px] font-medium text-text-secondary">Available</span>
+          <span className="text-sm text-text-secondary leading-none pt-1 tracking-wider! font-light!">
+            Available
+          </span>
         </div>
       </motion.nav>
 
@@ -453,10 +457,10 @@ export default function Home6() {
             transition: 'all 0.7s cubic-bezier(0.22,1,0.36,1)',
           }}
         >
-          <p className="font-mono text-[10px] tracking-[0.35em] uppercase text-text-muted">
+          <p className="font-mono text-[10px] tracking-[0.35em]! uppercase text-text-muted">
             Frontend Developer
           </p>
-          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-text-muted/50 mt-1">
+          <p className="font-mono text-[10px] tracking-[0.2em]! uppercase text-text-muted/50 mt-1">
             Available worldwide
           </p>
         </div>
@@ -471,12 +475,12 @@ export default function Home6() {
             }}
           >
             <h1
-              className="font-sans font-bold tracking-[-0.06em] leading-[0.85] select-none"
-              style={{ fontSize: 'clamp(4rem, 15vw, 12rem)' }}
+              className="font-sans font-bold leading-[0.85] select-none pt-8"
+              style={{ fontSize: 'clamp(6rem, 25vw, 12rem)' }}
             >
-              <span className="text-text-heading/90">VITOR</span>
+              <span className="text-text-heading/90 tracking-[0.05em]!">VITOR</span>
               <br />
-              <span className="text-text-muted/[0.35]">MESQUITA</span>
+              <span className="text-text-muted/[0.35] tracking-[0.05em]!">MESQUITA</span>
             </h1>
           </div>
         </div>
@@ -529,7 +533,7 @@ export default function Home6() {
               >
                 {projectCount.count}+
               </span>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted mt-0.5">
+              <p className="text-[10px] font-mono uppercase tracking-widest! text-text-muted mt-0.5">
                 Projects
               </p>
             </div>
@@ -541,7 +545,7 @@ export default function Home6() {
               >
                 {yearCount.count}+
               </span>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted mt-0.5">
+              <p className="text-[10px] font-mono uppercase tracking-widest! text-text-muted mt-0.5">
                 Years
               </p>
             </div>
@@ -556,7 +560,7 @@ export default function Home6() {
             transition: 'opacity 1s ease 0.8s',
           }}
         >
-          <span className="font-mono text-[10px] tracking-widest uppercase text-text-muted">
+          <span className="font-mono text-[10px] tracking-widest! uppercase text-text-muted">
             scroll
           </span>
           <div className="w-px h-6 bg-text-muted/30 overflow-hidden">
@@ -573,7 +577,7 @@ export default function Home6() {
         <Marquee
           text="FRONTEND DEVELOPER  //  AVAILABLE WORLDWIDE  //  LET'S BUILD SOMETHING  //"
           speed={35}
-          className="text-text-muted/40 text-lg sm:text-xl font-bold uppercase tracking-[0.15em]"
+          className="text-text-muted/40 text-lg sm:text-xl font-bold uppercase tracking-[0.15em]!"
         />
       </div>
 
@@ -596,10 +600,19 @@ export default function Home6() {
 
             <motion.h2
               variants={fadeUp}
-              className="mt-5 text-4xl sm:text-5xl lg:text-[5.5rem] font-bold text-text-heading leading-[0.92] tracking-tight"
+              className="mt-5 text-4xl sm:text-5xl lg:text-[5.5rem] font-bold text-text-heading leading-[0.92]"
             >
               Your next project,
-              <br className="hidden lg:block" /> delivered.
+              <br className="hidden lg:block" />{' '}
+              <span
+                style={{
+                  fontFamily: '"PP Playground", cursive',
+                  fontWeight: 500,
+                  fontStyle: 'italic',
+                }}
+              >
+                delivered.
+              </span>
             </motion.h2>
 
             <motion.div variants={stagger} className="mt-14 space-y-8 max-w-3xl">
@@ -608,7 +621,7 @@ export default function Home6() {
                 className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
               >
                 <GhostText
-                  text="I've spent 6+ years shipping production code for some of the biggest brands in sports, retail, and tech. Now I bring that same caliber of work directly to you — polished, high-performance web products delivered on time, on budget, and built to scale."
+                  text="I've spent 6+ years building digital products for some of the biggest brands in sports, retail, and tech. Now I deliver that same quality directly to you. Polished, high-performance web apps delivered on time, on budget, and built to scale."
                   highlights={[
                     '6+ years',
                     'biggest brands',
@@ -625,24 +638,8 @@ export default function Home6() {
                 className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
               >
                 <GhostText
-                  text="No agency overhead, no bloated timelines. One senior developer, full ownership, zero fluff."
-                  highlights={[
-                    'No agency overhead',
-                    'One senior developer',
-                    'full ownership',
-                    'zero fluff',
-                  ]}
-                />
-              </motion.p>
-
-              <motion.p
-                variants={fadeUp}
-                className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
-              >
-                <GhostText
-                  text="Explore my work and services below."
-                  highlights={[]}
-                  accentWords={['work', 'services']}
+                  text="Skip the agency meetings. Get straight to results."
+                  highlights={['Skip the agency meetings.', ' Get straight to results.']}
                 />
               </motion.p>
             </motion.div>
@@ -659,10 +656,10 @@ export default function Home6() {
       >
         {/* Background "WORKS" watermark */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-[10%] z-[1] select-none px-[3%] text-center"
-          style={{ fontSize: 'clamp(4rem, 15vw, 14rem)', letterSpacing: '0.3em' }}
+          className="pointer-events-none absolute inset-x-0 top-[10%] z-1 select-none px-[3%] text-center"
+          style={{ fontSize: 'clamp(4rem, 15vw, 14rem)', letterSpacing: '0.5em' }}
         >
-          <span className="font-bold uppercase text-white/[0.03]">WORKS</span>
+          <span className="font-bold uppercase text-white/3 tracking-[0.6em]! ps-32">WORKS</span>
         </div>
 
         {/* Section heading */}
@@ -679,9 +676,17 @@ export default function Home6() {
               </motion.div>
               <motion.h2
                 variants={fadeUp}
-                className="mt-5 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] tracking-tight"
+                className="mt-5 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] tracking-tight!"
               >
-                Projects
+                <span
+                  style={{
+                    fontFamily: '"PP Playground", cursive',
+                    fontWeight: 500,
+                    fontStyle: 'italic',
+                  }}
+                >
+                  Projects
+                </span>
               </motion.h2>
             </motion.div>
           </div>
@@ -710,9 +715,17 @@ export default function Home6() {
 
             <motion.h2
               variants={fadeUp}
-              className="mt-5 text-5xl sm:text-6xl lg:text-[6rem] font-bold text-text-heading leading-[0.9] tracking-tight"
+              className="mt-5 text-5xl sm:text-6xl lg:text-[6rem] font-bold text-text-heading leading-[0.9] tracking-tight!"
             >
-              Services
+              <span
+                style={{
+                  fontFamily: '"PP Playground", cursive',
+                  fontWeight: 500,
+                  fontStyle: 'italic',
+                }}
+              >
+                Services
+              </span>
             </motion.h2>
 
             <motion.div variants={stagger} className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -729,7 +742,7 @@ export default function Home6() {
                     }`}
                   >
                     {isFeatured && (
-                      <span className="absolute top-5 right-5 text-[10px] font-bold tracking-widest uppercase bg-accent/15 text-accent px-3 py-1 rounded-full">
+                      <span className="absolute top-5 right-5 text-[10px] font-bold tracking-widest! uppercase bg-accent/15 text-accent px-3 py-1 rounded-full">
                         Popular
                       </span>
                     )}
@@ -738,13 +751,13 @@ export default function Home6() {
                       {pad(i + 1)}
                     </span>
 
-                    <h3 className="text-xl lg:text-2xl font-bold text-text-heading mt-4 mb-1 group-hover:text-accent transition-colors duration-500">
+                    <h3 className="text-xl lg:text-3xl font-bold text-text-heading mt-4 mb-1 group-hover:text-accent transition-colors duration-500 tracking-wider!">
                       {service.title}
                     </h3>
-                    <p className="text-[11px] font-mono uppercase tracking-widest text-accent/70 mb-4">
+                    <p className="text-[11px] font-mono uppercase tracking-widest! text-accent/70 mb-4">
                       {service.subtitle}
                     </p>
-                    <p className="text-sm text-text-secondary leading-relaxed mb-5">
+                    <p className="text-base text-text-secondary leading-relaxed mb-5 tracking-wider!">
                       {service.description}
                     </p>
 
@@ -752,7 +765,7 @@ export default function Home6() {
                       {service.features.slice(0, 4).map((f) => (
                         <li
                           key={f}
-                          className="flex items-center gap-2.5 text-sm text-text-secondary"
+                          className="flex items-center gap-2.5 text-text-secondary text-base tracking-wider! "
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-accent/50 shrink-0" />
                           {f}
@@ -761,7 +774,7 @@ export default function Home6() {
                     </ul>
 
                     <div className="pt-5 border-t border-white/[0.06] flex items-center justify-between">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-text-muted">
+                      <span className="text-[12px] font-mono uppercase tracking-widest! text-text-muted">
                         {service.pricing.label}
                       </span>
                       <span className="text-2xl font-bold text-text-heading">
@@ -771,7 +784,7 @@ export default function Home6() {
 
                     <a
                       href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(service.title)}`}
-                      className="mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-sm font-medium rounded-full border border-white/[0.1] text-text-secondary hover:border-accent hover:text-accent transition-all duration-300"
+                      className="mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border border-white/[0.1] text-text-secondary hover:border-accent hover:text-accent transition-all duration-300 tracking-wider!"
                     >
                       Get in touch <span aria-hidden>&#8599;</span>
                     </a>
@@ -801,7 +814,7 @@ export default function Home6() {
 
             <motion.h2
               variants={fadeUp}
-              className="mt-5 text-5xl sm:text-6xl lg:text-[6.5rem] font-bold text-text-heading leading-[0.9] tracking-tight"
+              className="mt-5 text-5xl sm:text-6xl lg:text-[6.5rem] font-bold text-text-heading leading-[0.9] tracking-tight!"
             >
               Tools I work with.
             </motion.h2>
@@ -857,10 +870,17 @@ export default function Home6() {
 
             <motion.h2
               variants={fadeUp}
-              className="mt-6 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] tracking-tight"
+              className="mt-6 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] tracking-tight!"
             >
               Let&apos;s build something{' '}
-              <span className="bg-gradient-to-r from-[#4a77ff] to-[#8b5cf6] bg-clip-text text-transparent">
+              <span
+                className="bg-gradient-to-r from-[#4a77ff] to-[#8b5cf6] bg-clip-text text-transparent"
+                style={{
+                  fontFamily: '"PP Playground", cursive',
+                  fontWeight: 500,
+                  fontStyle: 'italic',
+                }}
+              >
                 great.
               </span>
             </motion.h2>
@@ -875,7 +895,7 @@ export default function Home6() {
             <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="font-mono text-sm tracking-wider px-7 py-3.5 rounded-full bg-accent text-white hover:brightness-110 transition-all"
+                className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full bg-accent text-white hover:brightness-110 transition-all"
               >
                 Send me an email
               </a>
@@ -883,7 +903,7 @@ export default function Home6() {
                 href={siteConfig.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-sm tracking-wider px-7 py-3.5 rounded-full border border-white/[0.1] text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
+                className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/[0.1] text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
               >
                 LinkedIn
               </a>
@@ -891,7 +911,7 @@ export default function Home6() {
                 href={siteConfig.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-sm tracking-wider px-7 py-3.5 rounded-full border border-white/[0.1] text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
+                className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/[0.1] text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
               >
                 GitHub
               </a>
@@ -902,7 +922,7 @@ export default function Home6() {
 
       {/* ═══════════ 9. FOOTER MARQUEE ═══════════ */}
       <div className="border-t border-white/[0.06] pt-6">
-        <div className="text-6xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-text-heading/[0.05] select-none">
+        <div className="text-6xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-tight! text-text-heading/[0.05] select-none">
           <Marquee text="LET'S TALK" speed={22} />
         </div>
       </div>
@@ -912,10 +932,10 @@ export default function Home6() {
         <div className="max-w-6xl mx-auto pt-8 border-t border-white/[0.06]">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
-              <p className="text-sm font-bold text-text-heading tracking-tight">
+              <p className="text-sm font-bold text-text-heading tracking-tight!">
                 {siteConfig.name}
               </p>
-              <p className="font-mono text-[10px] text-text-muted/50 mt-1 tracking-wider">
+              <p className="font-mono text-[10px] text-text-muted/50 mt-1 tracking-wider!">
                 Turning wild ideas into polished interfaces
               </p>
             </div>
