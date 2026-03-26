@@ -372,6 +372,7 @@ export default function Home6() {
 
       {/* ═══════════ 1. FLOATING PILL NAV ═══════════ */}
       <motion.nav
+        aria-label="Main navigation"
         initial={reduced ? false : { y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, delay: 1.5, ease: [0.22, 1, 0.36, 1] as const }}
@@ -577,7 +578,11 @@ export default function Home6() {
       </div>
 
       {/* ═══════════ 4. ABOUT ═══════════ */}
-      <section ref={aboutRef} className="py-28 lg:py-40 px-6 lg:px-16 bg-bg-secondary">
+      <section
+        ref={aboutRef}
+        aria-label="About"
+        className="py-28 lg:py-40 px-6 lg:px-16 bg-bg-secondary"
+      >
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={initial}
@@ -646,7 +651,12 @@ export default function Home6() {
       </section>
 
       {/* ═══════════ 5. PROJECTS — cinematic scroll gallery ═══════════ */}
-      <section ref={workRef} className="relative overflow-hidden" style={{ perspective: '2000px' }}>
+      <section
+        ref={workRef}
+        aria-label="Projects"
+        className="relative overflow-hidden"
+        style={{ perspective: '2000px' }}
+      >
         {/* Background "WORKS" watermark */}
         <div
           className="pointer-events-none absolute inset-x-0 top-[10%] z-[1] select-none px-[3%] text-center"
@@ -686,7 +696,7 @@ export default function Home6() {
       </section>
 
       {/* ═══════════ 7. SERVICES — numbered cards ═══════════ */}
-      <section ref={servicesRef} className="py-24 lg:py-36 px-6 lg:px-16">
+      <section ref={servicesRef} aria-label="Services" className="py-24 lg:py-36 px-6 lg:px-16">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={initial}
@@ -774,7 +784,10 @@ export default function Home6() {
       </section>
 
       {/* ═══════════ 8. SKILLS ═══════════ */}
-      <section className="py-20 lg:py-32 px-6 lg:px-16 bg-bg-secondary">
+      <section
+        aria-label="Technical skills"
+        className="py-20 lg:py-32 px-6 lg:px-16 bg-bg-secondary"
+      >
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={initial}
@@ -830,7 +843,7 @@ export default function Home6() {
       </section>
 
       {/* ═══════════ 9. CONTACT ═══════════ */}
-      <section ref={contactRef} className="py-32 lg:py-44 px-6 lg:px-16">
+      <section ref={contactRef} aria-label="Contact" className="py-32 lg:py-44 px-6 lg:px-16">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={initial}
