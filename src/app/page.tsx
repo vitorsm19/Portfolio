@@ -140,7 +140,7 @@ function GhostText({
   )
 }
 
-/* ── gradient label (varied per-section) ── */
+/* ── section label ── */
 function GradientLabel({
   children,
   tracking = '0.25em',
@@ -150,7 +150,7 @@ function GradientLabel({
 }) {
   return (
     <span
-      className="inline-block font-mono text-[11px] font-bold uppercase bg-gradient-to-r from-[#4a77ff] to-[#8b5cf6] bg-clip-text text-transparent"
+      className="inline-block font-mono text-[11px] font-bold uppercase text-accent"
       style={{ letterSpacing: tracking }}
     >
       {children}

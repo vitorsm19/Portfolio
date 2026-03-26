@@ -21,7 +21,7 @@ export function NoiseOverlay() {
       data[i] = v
       data[i + 1] = v
       data[i + 2] = v
-      data[i + 3] = 2
+      data[i + 3] = 6
     }
 
     ctx.putImageData(imageData, 0, 0)
