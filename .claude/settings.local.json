@@ -27,7 +27,9 @@
       "WebFetch(domain:www.velux.com)",
       "WebFetch(domain:fantasy.livgolf.com)",
       "WebFetch(domain:growinco.com)",
-      "WebFetch(domain:www.unrvld.com)"
+      "WebFetch(domain:www.unrvld.com)",
+      "Bash(ls:*)",
+      "Bash(# Copy home-6 as the new main page\ncp src/app/home-6/page.tsx src/app/page.tsx\n\n# Remove all home-* directories\nrm -rf src/app/home-1 src/app/home-2 src/app/home-3 src/app/home-4 src/app/home-5 src/app/home-6\n\n# Remove old unused components \\(replaced by home-6 inline components\\)\nrm -rf src/components/sections src/components/layout src/components/icons\n\necho \"Done — home-6 is now the main page, all others removed\")"
     ]
   }
 }

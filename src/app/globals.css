@@ -70,12 +70,11 @@ body {
   background-color: var(--color-bg-primary);
 }
 
-/* ===== Noise Overlay ===== */
+/* ===== Noise Overlay (CSS pseudo-element — zero DOM footprint) ===== */
 body::before {
   content: '';
   position: fixed;
-  left: -10rem;
-  top: -10rem;
+  inset: -10rem;
   width: calc(100% + 20rem);
   height: calc(100% + 20rem);
   background-image: url('/noise.png');
