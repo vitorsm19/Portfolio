@@ -10,30 +10,17 @@ export function SkillIcon({ skill, size = 'primary', className }: SkillIconProps
   const isPrimary = size === 'primary'
 
   return (
-    <div
-      className={`flex flex-col items-center justify-end gap-0 ${className ?? ''}`}
-    >
+    <div className={`flex flex-col items-center justify-end gap-0 ${className ?? ''}`}>
       <svg
         viewBox={skill.viewBox}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-label={skill.label}
         className={
-          isPrimary
-            ? 'w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] lg:w-[72px] lg:h-[72px]'
-            : 'w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]'
+          isPrimary ? 'w-12.5 h-12.5 sm:w-15 sm:h-15 lg:w-18 lg:h-18' : 'w-5.5 h-5.5 sm:w-6 sm:h-6'
         }
         dangerouslySetInnerHTML={{ __html: skill.svgContent }}
       />
-      <span
-        className={
-          isPrimary
-            ? 'mt-2 text-xs lg:text-sm text-text-primary/80 font-medium'
-            : 'mt-1 text-[9px] text-text-primary/60'
-        }
-      >
-        {skill.label}
-      </span>
     </div>
   )
 }

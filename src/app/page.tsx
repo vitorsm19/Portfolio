@@ -229,7 +229,7 @@ function ProjectCardScrollDriven({
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative z-[5] block w-[92%] sm:w-[80%] lg:w-[60%] mx-auto my-[5vh] sm:my-[12vh] lg:my-[18vh]"
+      className="group relative z-5 block w-[92%] sm:w-[80%] lg:w-[60%] mx-auto my-[5vh] sm:my-[12vh] lg:my-[18vh]"
       style={{ perspective: '2000px' }}
     >
       <motion.div
@@ -237,7 +237,7 @@ function ProjectCardScrollDriven({
         style={reduced ? {} : { scale, opacity, y }}
       >
         {/* Card — screenshot as atmospheric background, content layered on top */}
-        <div className="relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-accent/20 transition-colors duration-500 aspect-[3/4] sm:aspect-[4/3] lg:aspect-[16/9]">
+        <div className="relative rounded-xl overflow-hidden border border-white/6 group-hover:border-accent/20 transition-colors duration-500 aspect-3/4 sm:aspect-4/3 lg:aspect-video">
           {/* Blurred screenshot background */}
           <Image
             src={project.snippet}
@@ -337,6 +337,7 @@ export default function Home6() {
   /* blueprint line animation state */
   const [linesReady, setLinesReady] = useState(false)
   const [contentReady, setContentReady] = useState(false)
+  const [showScrollTop, setShowScrollTop] = useState(false)
 
   useEffect(() => {
     if (reduced) {
@@ -351,6 +352,12 @@ export default function Home6() {
       clearTimeout(t2)
     }
   }, [reduced])
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > window.innerHeight)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary font-sans overflow-x-hidden selection:bg-accent/30">
@@ -368,6 +375,14 @@ export default function Home6() {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
+        @keyframes skillsMarqueeRight {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-25%); }
+        }
+        @keyframes skillsMarqueeLeft {
+          0% { transform: translateX(-25%); }
+          100% { transform: translateX(0); }
+        }
       `}</style>
 
       {/* ═══════════ 1. FLOATING PILL NAV ═══════════ */}
@@ -376,11 +391,14 @@ export default function Home6() {
         initial={reduced ? false : { y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, delay: 1.5, ease: [0.22, 1, 0.36, 1] as const }}
-        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-7 py-3.5 bg-bg-primary/70 backdrop-blur-xl rounded-full border border-white/[0.06] shadow-2xl"
+        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-7 py-3.5 bg-bg-primary/70 backdrop-blur-xl rounded-full border border-white/6 shadow-2xl"
       >
-        <span className="text-base font-bold text-text-heading tracking-wider! leading-none pt-1">
+        <button
+          onClick={() => smoothScrollTo(0, 1200)}
+          className="text-base font-bold text-text-heading tracking-wider! leading-none pt-1 cursor-pointer hover:text-accent transition-colors"
+        >
           VM
-        </span>
+        </button>
 
         <div className="hidden sm:flex items-center gap-5 pt-1">
           {NAV_LINKS.map((link) => (
@@ -394,7 +412,7 @@ export default function Home6() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 ml-1 pl-5 border-l border-white/[0.08]">
+        <div className="flex items-center gap-2 ml-1 pl-5 border-l border-white/8">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
@@ -409,7 +427,7 @@ export default function Home6() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-primary">
         {/* grid lines — drawn from center outward */}
         <div
-          className="absolute top-[35%] left-0 w-full h-px bg-text-muted/[0.12]"
+          className="absolute top-[35%] left-0 w-full h-px bg-text-muted/12"
           style={{
             transformOrigin: 'center',
             animation: linesReady ? 'drawH 1.2s cubic-bezier(0.22,1,0.36,1) forwards' : 'none',
@@ -417,7 +435,7 @@ export default function Home6() {
           }}
         />
         <div
-          className="absolute top-0 left-[65%] h-full w-px bg-text-muted/[0.12]"
+          className="absolute top-0 left-[65%] h-full w-px bg-text-muted/12"
           style={{
             transformOrigin: 'center',
             animation: linesReady ? 'drawV 1.2s cubic-bezier(0.22,1,0.36,1) forwards' : 'none',
@@ -480,7 +498,7 @@ export default function Home6() {
             >
               <span className="text-text-heading/90 tracking-[0.05em]!">VITOR</span>
               <br />
-              <span className="text-text-muted/[0.35] tracking-[0.05em]!">MESQUITA</span>
+              <span className="text-text-muted/35 tracking-[0.05em]!">MESQUITA</span>
             </h1>
           </div>
         </div>
@@ -573,7 +591,7 @@ export default function Home6() {
       </section>
 
       {/* ═══════════ 3. MARQUEE TICKER ═══════════ */}
-      <div className="border-y border-white/[0.06] bg-bg-secondary">
+      <div className="border-y border-white/6 bg-bg-secondary">
         <Marquee
           text="FRONTEND DEVELOPER  //  AVAILABLE WORLDWIDE  //  LET'S BUILD SOMETHING  //"
           speed={35}
@@ -605,6 +623,7 @@ export default function Home6() {
               Your next project,
               <br className="hidden lg:block" />{' '}
               <span
+                className="text-5xl sm:text-6xl lg:text-8xl"
                 style={{
                   fontFamily: '"PP Playground", cursive',
                   fontWeight: 500,
@@ -615,7 +634,7 @@ export default function Home6() {
               </span>
             </motion.h2>
 
-            <motion.div variants={stagger} className="mt-14 space-y-8 max-w-3xl">
+            <motion.div variants={stagger} className="mt-10 md:mt-14 space-y-8 max-w-3xl">
               <motion.p
                 variants={fadeUp}
                 className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
@@ -663,7 +682,7 @@ export default function Home6() {
         </div>
 
         {/* Section heading */}
-        <div className="relative z-[2] pt-28 lg:pt-40 px-6 lg:px-16">
+        <div className="relative z-2 pt-28 lg:pt-40 px-6 lg:px-16">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={initial}
@@ -693,7 +712,7 @@ export default function Home6() {
         </div>
 
         {/* Project cards — cinematic scroll-driven */}
-        <div className="relative z-[5] mt-10 pb-20 lg:pb-32">
+        <div className="relative z-5 mt-10 pb-20 lg:pb-32">
           {projects.map((project, i) => (
             <ProjectCardScrollDriven key={project.name} project={project} index={i} />
           ))}
@@ -738,16 +757,16 @@ export default function Home6() {
                     className={`group relative bg-bg-primary rounded-2xl p-7 lg:p-9 border transition-colors duration-500 flex flex-col ${
                       isFeatured
                         ? 'border-accent/30 hover:border-accent/50'
-                        : 'border-white/[0.05] hover:border-white/[0.12]'
+                        : 'border-white/5 hover:border-white/12'
                     }`}
                   >
                     {isFeatured && (
-                      <span className="absolute top-5 right-5 text-[10px] font-bold tracking-widest! uppercase bg-accent/15 text-accent px-3 py-1 rounded-full">
+                      <span className="absolute top-5 right-5 text-[12px] font-medium pt-1.5 tracking-[0.2em]! uppercase bg-accent/15 text-accent px-3 py-1 rounded-full">
                         Popular
                       </span>
                     )}
 
-                    <span className="text-5xl lg:text-6xl font-bold text-accent/[0.2] leading-none select-none">
+                    <span className="text-5xl lg:text-6xl font-bold text-accent/20 leading-none select-none">
                       {pad(i + 1)}
                     </span>
 
@@ -773,18 +792,18 @@ export default function Home6() {
                       ))}
                     </ul>
 
-                    <div className="pt-5 border-t border-white/[0.06] flex items-center justify-between">
+                    <div className="pt-5 border-t border-white/6 flex items-center justify-between">
                       <span className="text-[12px] font-mono uppercase tracking-widest! text-text-muted">
                         {service.pricing.label}
                       </span>
-                      <span className="text-2xl font-bold text-text-heading">
+                      <span className="text-2xl font-bold text-text-heading tracking-wider!">
                         {formatPrice(service)}
                       </span>
                     </div>
 
                     <a
                       href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(service.title)}`}
-                      className="mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border border-white/[0.1] text-text-secondary hover:border-accent hover:text-accent transition-all duration-300 tracking-wider!"
+                      className="mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border border-white/10 text-text-secondary hover:border-accent hover:text-accent transition-all duration-300 tracking-wider!"
                     >
                       Get in touch <span aria-hidden>&#8599;</span>
                     </a>
@@ -796,63 +815,80 @@ export default function Home6() {
         </div>
       </section>
 
-      {/* ═══════════ 8. SKILLS ═══════════ */}
+      {/* ═══════════ 8. SKILLS — infinite marquee ribbons ═══════════ */}
       <section
         aria-label="Technical skills"
-        className="py-20 lg:py-32 px-6 lg:px-16 bg-bg-secondary"
+        className="relative py-24 lg:py-36 bg-bg-secondary overflow-hidden"
       >
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={initial}
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={stagger}
-          >
-            <motion.div variants={fadeUp}>
-              <GradientLabel tracking="0.22em">Tech Stack</GradientLabel>
-            </motion.div>
+        {/* Background ghost text */}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+          aria-hidden="true"
+        >
+          <span className="text-[20vw] font-bold uppercase text-white/2 tracking-tight! leading-none">
+            STACK
+          </span>
+        </div>
 
-            <motion.h2
-              variants={fadeUp}
-              className="mt-5 text-5xl sm:text-6xl lg:text-[6.5rem] font-bold text-text-heading leading-[0.9] tracking-tight!"
-            >
-              Tools I work with.
-            </motion.h2>
+        {/* Heading — centered */}
+        <motion.div
+          className="relative z-10 text-center px-6 mb-16 lg:mb-24"
+          initial={reduced ? false : { opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+        >
+          <GradientLabel tracking="0.22em">Tech Stack</GradientLabel>
+          <h2 className="mt-5 text-5xl sm:text-6xl lg:text-[6.5rem] font-bold text-text-heading leading-[0.9] tracking-tight!">
+            Tools I work with.
+          </h2>
+        </motion.div>
 
-            {/* primary */}
-            <motion.div
-              variants={stagger}
-              className="mt-16 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-12"
-            >
-              {primarySkills.map((skill) => (
-                <motion.div
-                  key={skill.name}
-                  variants={fadeUp}
-                  className="grayscale hover:grayscale-0 transition-all duration-500"
+        {/* Primary skills — marquee scrolling RIGHT */}
+        <div className="relative z-10 mb-8">
+          <div className="flex" style={{ animation: 'skillsMarqueeRight 35s linear infinite' }}>
+            {[...primarySkills, ...primarySkills, ...primarySkills, ...primarySkills].map(
+              (skill, i) => (
+                <div
+                  key={`${skill.name}-${i}`}
+                  className="group shrink-0 flex items-center gap-4 lg:gap-5 mx-4 lg:mx-6 px-5 lg:px-7 py-4 lg:py-5 rounded-2xl border border-white/4 hover:border-accent/20 bg-bg-primary/40 hover:bg-bg-primary/70 backdrop-blur-sm transition-all duration-500 cursor-default"
                 >
-                  <SkillIcon skill={skill} size="primary" />
-                </motion.div>
-              ))}
-            </motion.div>
+                  <div className="grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                    <SkillIcon skill={skill} size="primary" />
+                  </div>
+                  <span className="text-lg lg:text-xl font-bold text-text-muted group-hover:text-text-heading transition-colors duration-500 tracking-wider! uppercase whitespace-nowrap">
+                    {skill.label}
+                  </span>
+                </div>
+              ),
+            )}
+          </div>
+        </div>
 
-            {/* secondary */}
-            <motion.div variants={fadeUp} className="mt-14 pt-8 border-t border-white/[0.06]">
-              <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-text-muted mb-7">
-                Also familiar with
-              </p>
-              <div className="flex flex-wrap gap-7 lg:gap-10">
-                {secondarySkills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="grayscale hover:grayscale-0 transition-all duration-500"
-                  >
+        {/* Secondary skills — marquee scrolling LEFT (opposite direction) */}
+        <div className="relative z-10">
+          <div className="flex" style={{ animation: 'skillsMarqueeLeft 45s linear infinite' }}>
+            {[...secondarySkills, ...secondarySkills, ...secondarySkills, ...secondarySkills].map(
+              (skill, i) => (
+                <div
+                  key={`${skill.name}-${i}`}
+                  className="group shrink-0 flex items-center gap-3 mx-3 lg:mx-4 px-4 lg:px-5 py-2.5 lg:py-3 rounded-xl border border-white/3 hover:border-accent/15 bg-bg-primary/30 hover:bg-bg-primary/60 transition-all duration-500 cursor-default"
+                >
+                  <div className="grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
                     <SkillIcon skill={skill} size="secondary" />
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+                  <span className="text-sm font-medium text-text-muted group-hover:text-text-secondary transition-colors duration-500 tracking-wider! whitespace-nowrap">
+                    {skill.label}
+                  </span>
+                </div>
+              ),
+            )}
+          </div>
         </div>
+
+        {/* Edge fades — left and right */}
+        <div className="absolute inset-y-0 left-0 w-24 lg:w-40 bg-linear-to-r from-bg-secondary to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 lg:w-40 bg-linear-to-l from-bg-secondary to-transparent z-20 pointer-events-none" />
       </section>
 
       {/* ═══════════ 9. CONTACT ═══════════ */}
@@ -870,11 +906,11 @@ export default function Home6() {
 
             <motion.h2
               variants={fadeUp}
-              className="mt-6 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] tracking-tight!"
+              className="mt-6 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] "
             >
-              Let&apos;s build something{' '}
+              Let&apos;s build something
               <span
-                className="bg-gradient-to-r from-[#4a77ff] to-[#8b5cf6] bg-clip-text text-transparent"
+                className="bg-linear-to-r from-accent to-[#8b5cf6] bg-clip-text text-transparent pl-7 pb-1 text-[8rem]"
                 style={{
                   fontFamily: '"PP Playground", cursive',
                   fontWeight: 500,
@@ -903,7 +939,7 @@ export default function Home6() {
                 href={siteConfig.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/[0.1] text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
+                className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/10 text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
               >
                 LinkedIn
               </a>
@@ -911,7 +947,7 @@ export default function Home6() {
                 href={siteConfig.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/[0.1] text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
+                className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/10 text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
               >
                 GitHub
               </a>
@@ -921,15 +957,15 @@ export default function Home6() {
       </section>
 
       {/* ═══════════ 9. FOOTER MARQUEE ═══════════ */}
-      <div className="border-t border-white/[0.06] pt-6">
-        <div className="text-6xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-tight! text-text-heading/[0.05] select-none">
+      <div className="border-t border-white/6 pt-6">
+        <div className="text-6xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-tight! text-text-heading/5 select-none">
           <Marquee text="LET'S TALK" speed={22} />
         </div>
       </div>
 
       {/* ═══════════ 10. FOOTER ═══════════ */}
       <footer className="px-6 lg:px-16 pb-10">
-        <div className="max-w-6xl mx-auto pt-8 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto pt-8 border-t border-white/6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
               <p className="text-sm font-bold text-text-heading tracking-tight!">
@@ -942,8 +978,8 @@ export default function Home6() {
 
             <div className="flex items-center gap-3">
               {[
-                { label: 'GitHub', href: siteConfig.github.url, external: true },
                 { label: 'LinkedIn', href: siteConfig.linkedin.url, external: true },
+                { label: 'GitHub', href: siteConfig.github.url, external: true },
                 { label: 'Email', href: `mailto:${siteConfig.email}`, external: false },
               ].map((link) => (
                 <a
@@ -951,7 +987,7 @@ export default function Home6() {
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="px-4 py-2 text-[11px] font-medium text-text-muted border border-white/[0.07] rounded-full hover:text-text-heading hover:border-white/20 transition-all"
+                  className="py-2 text-[14px] pt-3 px-5 font-medium text-text-muted border border-white/[0.07] rounded-full hover:text-text-heading hover:border-white/20 transition-all"
                 >
                   {link.label}
                 </a>
@@ -964,6 +1000,28 @@ export default function Home6() {
           </p>
         </div>
       </footer>
+
+      {/* Scroll to top — appears after hero is gone */}
+      {showScrollTop && (
+        <button
+          onClick={() => smoothScrollTo(0, 1200)}
+          className="fixed bottom-6 right-6 z-40 w-9 h-9 rounded-full border border-white/8 bg-bg-primary/60 backdrop-blur-md flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all duration-300 cursor-pointer animate-[fadeIn_0.3s_ease-out]"
+          aria-label="Back to top"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }

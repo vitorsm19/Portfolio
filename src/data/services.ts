@@ -57,9 +57,9 @@ export const services: Service[] = [
     title: 'Complex Systems',
     subtitle: 'AI, integrations & beyond',
     description:
-      'Enterprise-grade applications with AI capabilities, third-party integrations, and custom architectures for problems that don\'t have off-the-shelf solutions.',
+      "Enterprise-grade applications with AI capabilities, third-party integrations, and custom architectures for problems that don't have off-the-shelf solutions.",
     features: [
-      'AI & machine learning integration',
+      'AI workflows integration',
       'Custom API development',
       'Third-party system integration',
       'Real-time data processing',
@@ -73,7 +73,7 @@ export const services: Service[] = [
   },
   {
     id: 'full-time',
-    title: 'Full-Time Engagement',
+    title: 'Full-Time',
     subtitle: 'Your dedicated developer',
     description:
       'Embed me directly into your team for ongoing development, code reviews, architecture decisions, and continuous delivery.',
