@@ -85,13 +85,13 @@ export function Services() {
                     {pad(i + 1)}
                   </span>
 
-                  <h3 className="text-xl lg:text-3xl font-bold text-text-heading mt-4 mb-1 group-hover:text-accent transition-colors duration-500 tracking-wider!">
+                  <h3 className="text-xl lg:text-4xl font-bold text-text-heading mt-4 mb-1 group-hover:text-accent transition-colors duration-500 tracking-wider!">
                     {service.title}
                   </h3>
                   <p className="text-[11px] font-mono uppercase tracking-widest! text-accent/70 mb-4">
                     {service.subtitle}
                   </p>
-                  <p className="text-base text-text-secondary leading-relaxed mb-5 tracking-wider!">
+                  <p className="text-base text-text-secondary leading-relaxed mb-5 tracking-wider! font-body">
                     {service.description}
                   </p>
 
@@ -99,7 +99,7 @@ export function Services() {
                     {service.features.slice(0, 4).map((f) => (
                       <li
                         key={f}
-                        className="flex items-center gap-2.5 text-text-secondary text-base tracking-wider! "
+                        className="flex items-center gap-2.5 text-text-secondary text-base tracking-wider! font-body"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-accent/50 shrink-0" />
                         {f}

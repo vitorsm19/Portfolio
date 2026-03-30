@@ -48,7 +48,7 @@ export const services: Service[] = [
     ],
     pricing: {
       type: 'fixed',
-      amount: 1500,
+      amount: 2500,
       label: 'Starting from',
     },
   },

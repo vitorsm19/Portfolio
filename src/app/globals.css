@@ -55,7 +55,7 @@
 
 /* ===== Design Tokens (Tailwind v4 CSS-first config) ===== */
 @theme {
-  --color-accent: #4a77ff;
+  --color-accent: #10b981;
   --color-bg-primary: #030202;
   --color-bg-secondary: #141414;
   --color-text-primary: #e5e5e5;
@@ -66,6 +66,7 @@
   --color-line: rgb(244, 244, 245);
 
   --font-sans: 'Thunder', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 
   --ease-smooth: cubic-bezier(0, 0.71, 0.2, 1.01);
 

@@ -1,6 +1,14 @@
 import type { Metadata, Viewport } from 'next'
+import { Manrope } from 'next/font/google'
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
 import './globals.css'
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 const SITE_URL = 'https://vitormesquita.com'
 
@@ -84,7 +92,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={manrope.variable}>
       <head>
         {/* Google Tag Manager */}
         <script
@@ -202,9 +210,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         },
                         priceSpecification: {
                           '@type': 'PriceSpecification',
-                          price: '1500',
+                          price: '2500',
                           priceCurrency: 'EUR',
-                          minPrice: '1500',
+                          minPrice: '2500',
                         },
                       },
                       {

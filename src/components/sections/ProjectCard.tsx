@@ -85,7 +85,7 @@ export function ProjectCard({
               <h3 className="text-4xl lg:text-5xl font-bold text-white group-hover:text-accent transition-colors duration-700 ease-out leading-[1.1]">
                 {project.title}
               </h3>
-              <p className="mt-3 text-white/75 text-base lg:text-[15px] leading-relaxed max-w-lg font-light! tracking-wider!">
+              <p className="mt-3 text-white/75 text-base lg:text-[15px] leading-relaxed max-w-lg font-light! tracking-wider! font-body">
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-1.5 mt-4">
@@ -151,7 +151,7 @@ export function ProjectCard({
               </h3>
 
               {/* Description */}
-              <p className="mt-2.5 text-white/50 text-[14px] leading-normal tracking-wider! font-light!">
+              <p className="mt-2.5 text-white/50 text-[14px] leading-normal tracking-wider! font-light! font-body">
                 {project.description}
               </p>
 

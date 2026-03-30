@@ -29,6 +29,6 @@ export const siteConfig = {
   },
   contact: {
     heading: 'Are you hiring?',
-    body: "I'm ready to join the team! Let's chat about how I can bring my skills to the table!",
+    body: 'Available for new projects starting now. Drop me a line.',
   },
 } as const

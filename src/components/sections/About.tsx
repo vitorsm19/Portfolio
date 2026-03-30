@@ -56,7 +56,7 @@ export function About() {
         <motion.div variants={stagger} className="mt-10 md:mt-14 space-y-8 max-w-3xl">
           <motion.p
             variants={fadeUp}
-            className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
+            className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80 font-body"
           >
             <GhostText
               text="I've spent 6+ years building digital products for some of the biggest brands in sports, retail, and tech. Now I deliver that same quality directly to you. Polished, high-performance web apps delivered on time, on budget, and built to scale."
@@ -73,7 +73,7 @@ export function About() {
 
           <motion.p
             variants={fadeUp}
-            className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80"
+            className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80 font-body"
           >
             <GhostText
               text="Skip the agency meetings. Get straight to results."

@@ -40,7 +40,7 @@ export function Contact() {
         >
           Let&apos;s build something
           <span
-            className="bg-linear-to-r from-accent to-[#8b5cf6] bg-clip-text text-transparent pl-7 pb-1 text-[4rem] sm:text-[8rem]"
+            className="bg-linear-to-r from-accent to-[#6ee7b7] bg-clip-text text-transparent pl-7 pb-1 text-[4rem] sm:text-[8rem]"
             style={{
               fontFamily: '"PP Playground", cursive',
               fontWeight: 500,
@@ -53,7 +53,7 @@ export function Contact() {
 
         <motion.p
           variants={fadeUp}
-          className="mt-8 text-lg lg:text-xl text-text-secondary max-w-xl leading-relaxed"
+          className="mt-8 text-lg lg:text-xl text-text-secondary max-w-xl leading-relaxed font-body"
         >
           {siteConfig.contact.body}
         </motion.p>

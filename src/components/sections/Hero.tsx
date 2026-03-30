@@ -163,7 +163,7 @@ export function Hero() {
         }}
       >
         {/* typewriter tagline */}
-        <p className="text-sm lg:text-base text-text-secondary leading-relaxed">
+        <p className="text-sm lg:text-base text-text-secondary leading-relaxed font-body">
           I build{' '}
           <span className="text-accent font-medium">
             {typed}
@@ -187,10 +187,7 @@ export function Hero() {
           </div>
           <div className="w-px h-8 bg-text-muted/20" />
           <div className="text-right">
-            <span
-              ref={yearCount.ref}
-              className="text-2xl font-bold text-text-heading tabular-nums"
-            >
+            <span ref={yearCount.ref} className="text-2xl font-bold text-text-heading tabular-nums">
               {yearCount.count}+
             </span>
             <p className="text-[10px] font-mono uppercase tracking-widest! text-text-muted mt-0.5">
