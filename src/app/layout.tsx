@@ -67,12 +67,22 @@ export const metadata: Metadata = {
     title: 'Vitor Mesquita — Frontend Developer | Web Development Services',
     description:
       'Senior frontend developer building high-performance websites and web applications. 6+ years shipping production code for top brands in sports, retail, and tech. Available for freelance projects.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Vitor Mesquita — Frontend Developer',
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Vitor Mesquita — Frontend Developer',
     description:
       'Senior frontend developer building high-performance websites and web applications. Available for freelance projects.',
+    images: ['/og-image.png'],
     creator: '@vitorsm19',
   },
   alternates: {
