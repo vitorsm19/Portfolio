@@ -42,7 +42,7 @@ export function Hero() {
   }, [reduced])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-primary">
+    <section className="relative flex items-center justify-center overflow-hidden bg-bg-primary" style={{ minHeight: '100dvh' }}>
       {/* blueprint keyframes */}
       <style>{`
         @keyframes drawH { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -141,7 +141,7 @@ export function Hero() {
         >
           <h1
             className="font-sans font-bold leading-[0.85] select-none pt-8"
-            style={{ fontSize: 'clamp(6rem, 25vw, 12rem)' }}
+            style={{ fontSize: 'clamp(3rem, min(25vw, 20vh), 12rem)' }}
           >
             <span className="text-text-heading/90 tracking-[0.05em]!">VITOR</span>
             <br />

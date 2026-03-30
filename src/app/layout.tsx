@@ -16,6 +16,7 @@ export const viewport: Viewport = {
   themeColor: '#030202',
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
 }
 
 export const metadata: Metadata = {
@@ -94,6 +95,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={manrope.variable}>
       <head>
+        <meta name="theme-color" content="#030202" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#030202" media="(prefers-color-scheme: light)" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
