@@ -19,10 +19,10 @@ export function Skills() {
       <style>{`
         @keyframes skillsMarqueeRight {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-25%); }
+          100% { transform: translateX(-10%); }
         }
         @keyframes skillsMarqueeLeft {
-          0% { transform: translateX(-25%); }
+          0% { transform: translateX(-10%); }
           100% { transform: translateX(0); }
         }
         .skills-row-primary { animation: skillsMarqueeRight 35s linear infinite; }
@@ -35,10 +35,10 @@ export function Skills() {
 
       {/* Background ghost text */}
       <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none pt-24 lg:pt-42"
         aria-hidden="true"
       >
-        <span className="text-[30vw] md:text-[20vw] font-bold uppercase text-white/2 tracking-tight! leading-none">
+        <span className="text-[50vw] md:text-[20vw] font-bold uppercase text-white/2 tracking-tight! leading-none">
           STACK
         </span>
       </div>
@@ -60,7 +60,7 @@ export function Skills() {
       {/* Primary skills — marquee scrolling RIGHT */}
       <div className="relative z-10 mb-8">
         <div className="flex skills-row-primary">
-          {[...primarySkills, ...primarySkills, ...primarySkills, ...primarySkills].map(
+          {Array(10).fill(primarySkills).flat().map(
             (skill, i) => (
               <div
                 key={`${skill.name}-${i}`}
@@ -81,7 +81,7 @@ export function Skills() {
       {/* Secondary skills — marquee scrolling LEFT (opposite direction) */}
       <div className="relative z-10">
         <div className="flex skills-row-secondary">
-          {[...secondarySkills, ...secondarySkills, ...secondarySkills, ...secondarySkills].map(
+          {Array(10).fill(secondarySkills).flat().map(
             (skill, i) => (
               <div
                 key={`${skill.name}-${i}`}
