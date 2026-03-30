@@ -69,10 +69,10 @@ export function Services() {
                 <motion.div
                   key={service.id}
                   variants={fadeUp}
-                  className={`group relative bg-bg-primary rounded-2xl p-7 lg:p-9 border transition-colors duration-500 flex flex-col ${
+                  className={`group relative bg-bg-primary rounded-2xl p-7 lg:p-9 border transition-all duration-500 flex flex-col cursor-pointer ${
                     isFeatured
-                      ? 'border-accent/30 hover:border-accent/50'
-                      : 'border-white/5 hover:border-white/12'
+                      ? 'border-accent/30 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.08)]'
+                      : 'border-white/5 hover:border-white/12 hover:shadow-[0_0_30px_rgba(255,255,255,0.03)]'
                   }`}
                 >
                   {isFeatured && (

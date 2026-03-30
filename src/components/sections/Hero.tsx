@@ -34,7 +34,7 @@ export function Hero() {
       return
     }
     const t1 = setTimeout(() => setLinesReady(true), 100)
-    const t2 = setTimeout(() => setContentReady(true), 1350)
+    const t2 = setTimeout(() => setContentReady(true), 700)
     return () => {
       clearTimeout(t1)
       clearTimeout(t2)
@@ -54,6 +54,21 @@ export function Hero() {
           100% { transform: translateY(20px); opacity: 0; }
         }
       `}</style>
+
+      {/* ambient glow at grid intersection */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: '35%',
+          left: '65%',
+          transform: 'translate(-50%, -50%)',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%)',
+          opacity: contentReady ? 1 : 0,
+          transition: 'opacity 1.5s ease 0.5s',
+        }}
+      />
 
       {/* grid lines — drawn from center outward */}
       <div
@@ -101,8 +116,9 @@ export function Hero() {
         className="absolute top-[18%] left-6 lg:left-16"
         style={{
           opacity: contentReady ? 1 : 0,
+          filter: contentReady ? 'blur(0px)' : 'blur(8px)',
           transform: contentReady ? 'translateY(0)' : 'translateY(12px)',
-          transition: 'all 0.7s cubic-bezier(0.22,1,0.36,1)',
+          transition: 'all 0.8s cubic-bezier(0.22,1,0.36,1)',
         }}
       >
         <p className="font-mono text-[10px] tracking-[0.35em]! uppercase text-text-muted">
@@ -118,8 +134,9 @@ export function Hero() {
         <div
           style={{
             opacity: contentReady ? 1 : 0,
+            filter: contentReady ? 'blur(0px)' : 'blur(12px)',
             transform: contentReady ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s',
+            transition: 'all 1s cubic-bezier(0.22,1,0.36,1) 0.1s',
           }}
         >
           <h1
@@ -158,8 +175,9 @@ export function Hero() {
         className="absolute bottom-[12%] right-6 lg:right-16 max-w-xs text-right"
         style={{
           opacity: contentReady ? 1 : 0,
+          filter: contentReady ? 'blur(0px)' : 'blur(8px)',
           transform: contentReady ? 'translateY(0)' : 'translateY(16px)',
-          transition: 'all 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s',
+          transition: 'all 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s',
         }}
       >
         {/* typewriter tagline */}

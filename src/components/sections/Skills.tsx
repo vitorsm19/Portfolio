@@ -64,7 +64,7 @@ export function Skills() {
             (skill, i) => (
               <div
                 key={`${skill.name}-${i}`}
-                className="group shrink-0 flex items-center gap-4 lg:gap-5 mx-4 lg:mx-6 px-5 lg:px-7 py-4 lg:py-5 rounded-2xl border border-white/4 hover:border-accent/20 bg-bg-primary/40 hover:bg-bg-primary/70 backdrop-blur-sm transition-all duration-500 cursor-default"
+                className="group shrink-0 flex items-center gap-4 lg:gap-5 mx-4 lg:mx-6 px-5 lg:px-7 py-4 lg:py-5 rounded-2xl border border-white/4 hover:border-accent/20 bg-bg-primary/40 hover:bg-bg-primary/70 backdrop-blur-sm transition-all duration-500 cursor-pointer"
               >
                 <div className="grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
                   <SkillIcon skill={skill} size="primary" />
@@ -85,7 +85,7 @@ export function Skills() {
             (skill, i) => (
               <div
                 key={`${skill.name}-${i}`}
-                className="group shrink-0 flex items-center gap-3 mx-3 lg:mx-4 px-4 lg:px-5 py-2.5 lg:py-3 rounded-xl border border-white/3 hover:border-accent/15 bg-bg-primary/30 hover:bg-bg-primary/60 transition-all duration-500 cursor-default"
+                className="group shrink-0 flex items-center gap-3 mx-3 lg:mx-4 px-4 lg:px-5 py-2.5 lg:py-3 rounded-xl border border-white/3 hover:border-accent/15 bg-bg-primary/30 hover:bg-bg-primary/60 transition-all duration-500 cursor-pointer"
               >
                 <div className="grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
                   <SkillIcon skill={skill} size="secondary" />

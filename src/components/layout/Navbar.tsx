@@ -20,7 +20,7 @@ export function Navbar() {
       aria-label="Main navigation"
       initial={reduced ? false : { y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, delay: 1.5, ease: [0.22, 1, 0.36, 1] as const }}
+      transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-7 py-3.5 bg-bg-primary/70 backdrop-blur-xl rounded-full border border-white/6 shadow-2xl"
     >
       <button
