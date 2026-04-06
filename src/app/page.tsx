@@ -1,7 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
-import { Hero } from '@/components/sections/Hero'
+import { HeroSwitcher } from '@/components/sections/HeroSwitcher'
 import { About } from '@/components/sections/About'
 import { Projects } from '@/components/sections/Projects'
 import { Services } from '@/components/sections/Services'
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary font-sans overflow-x-hidden selection:bg-accent/30">
       <Navbar />
-      <Hero />
+      <HeroSwitcher />
 
       {/* Marquee ticker */}
       <div className="border-y border-white/6 bg-bg-secondary">
