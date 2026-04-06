@@ -41,12 +41,33 @@ export function HeroSwitcher() {
   const [expanded, setExpanded] = useState(false)
 
   const ActiveHero = HEROES[active].component
+  const goPrev = () => setActive((prev) => (prev - 1 + HEROES.length) % HEROES.length)
+  const goNext = () => setActive((prev) => (prev + 1) % HEROES.length)
 
   return (
     <div className="relative">
       <ActiveHero key={HEROES[active].id} />
 
-      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-3">
+      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2">
+        <button
+          onClick={goPrev}
+          aria-label="Previous hero variant"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-bg-primary/80 text-text-heading shadow-lg backdrop-blur hover:bg-white/10 transition-all cursor-pointer"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m18 15-6-6-6 6" />
+          </svg>
+        </button>
+
         <AnimatePresence>
           {expanded && (
             <motion.div
@@ -114,6 +135,25 @@ export function HeroSwitcher() {
             <rect x="14" y="14" width="7" height="7" />
           </svg>
           {HEROES[active].sublabel}
+        </button>
+
+        <button
+          onClick={goNext}
+          aria-label="Next hero variant"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-bg-primary/80 text-text-heading shadow-lg backdrop-blur hover:bg-white/10 transition-all cursor-pointer"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
         </button>
       </div>
     </div>
