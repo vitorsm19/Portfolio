@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Hero } from './Hero'
+import { Hero } from '../Hero'
 import { HeroAurora } from './HeroAurora'
-import { HeroParallax } from './HeroParallax'
+import { HeroParallax } from '../HeroParallax'
 import { HeroMinimal } from './HeroMinimal'
 import { HeroMarquee } from './HeroMarquee'
 import { HeroDiagonal } from './HeroDiagonal'

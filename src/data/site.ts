@@ -23,7 +23,7 @@ export const siteConfig = {
     greeting: "Hey, I'm Vitor Mesquita",
     headingTop: 'FRONTEND',
     headingBottom: 'DEVELOPER',
-    typewriterWords: ['responsive', 'interactive', 'user-friendly', 'intuitive', 'pixel-perfect'],
+    typewriterWords: ['production-ready', 'scalable', 'pixel-perfect', 'AI-integrated', 'performant', 'accessible', 'interactive'],
     tagline: 'Creative dev with a passion for building beautiful and',
     taglineSuffix: 'web applications',
   },

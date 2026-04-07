@@ -153,12 +153,14 @@ export function HeroParallax() {
               animate="visible"
               className="mt-6 text-base lg:text-lg text-text-secondary leading-relaxed font-body"
             >
-              I build{' '}
+              Shipping{' '}
               <span className="text-accent font-medium">
                 {typed}
                 <span className="animate-pulse">|</span>
               </span>{' '}
-              web applications for brands that care about craft.
+              web apps.
+              <br />
+              On time, on budget, no excuses.
             </motion.p>
 
             <motion.div
