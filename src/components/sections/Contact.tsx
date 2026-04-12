@@ -74,14 +74,6 @@ export function Contact() {
           >
             LinkedIn
           </a>
-          <a
-            href={siteConfig.github.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/10 text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
-          >
-            GitHub
-          </a>
         </motion.div>
       </motion.div>
     </div>

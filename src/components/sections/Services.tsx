@@ -1,9 +1,18 @@
+'use client'
+
 import { GradientLabel } from '@/components/ui/GradientLabel'
 import { services } from '@/data/services'
-import { siteConfig } from '@/data/site'
+import { smoothScrollTo } from '@/lib/smooth-scroll'
 
 function pad(n: number) {
   return String(n).padStart(2, '0')
+}
+
+function scrollToContact() {
+  const el = document.getElementById('contact')
+  if (!el) return
+  const target = el.getBoundingClientRect().top + window.scrollY - 80
+  smoothScrollTo(target, 1200)
 }
 
 function formatPrice(s: (typeof services)[number]) {
@@ -86,12 +95,12 @@ export function Services() {
                   </span>
                 </div>
 
-                <a
-                  href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(service.title)}`}
-                  className="mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border border-white/10 text-text-secondary hover:border-accent hover:text-accent transition-all duration-300 tracking-wider!"
+                <button
+                  onClick={scrollToContact}
+                  className="mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border border-white/10 text-text-secondary hover:border-accent hover:text-accent transition-all duration-300 tracking-wider! cursor-pointer"
                 >
                   Get in touch <span aria-hidden>&#8599;</span>
-                </a>
+                </button>
               </div>
             )
           })}
