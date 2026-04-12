@@ -82,7 +82,7 @@ export function ProjectCard({
               </span>
             </div>
             <div>
-              <h3 className="text-4xl lg:text-5xl font-bold text-white group-hover:text-accent transition-colors duration-700 ease-out leading-[1.1]">
+              <h3 className="relative inline-block text-4xl lg:text-5xl font-bold text-white leading-[1.1] after:absolute after:left-0 after:-bottom-2 after:h-px after:w-full after:bg-accent after:origin-left after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-500 after:ease-out">
                 {project.title}
               </h3>
               <p className="mt-3 text-white/75 text-base lg:text-[15px] leading-relaxed max-w-lg font-light! tracking-wider! font-body">
