@@ -3,7 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 import { HeroParallax } from '@/components/sections/HeroParallax'
 import { About } from '@/components/sections/About'
-import { ProjectsSwitcher } from '@/components/sections/project-variants/ProjectsSwitcher'
+import { ProjectsElasticGrid } from '@/components/sections/project-variants/ProjectsElasticGrid'
 import { Services } from '@/components/sections/Services'
 import { Skills } from '@/components/sections/Skills'
 import { Contact } from '@/components/sections/Contact'
@@ -33,7 +33,7 @@ export default function Home() {
       </section>
 
       <section id="work" aria-label="Projects">
-        <ProjectsSwitcher />
+        <ProjectsElasticGrid />
       </section>
 
       <section id="services" aria-label="Services" className="py-24 lg:py-36 px-6 lg:px-16 pt-0">
