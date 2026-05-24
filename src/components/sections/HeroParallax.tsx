@@ -91,7 +91,7 @@ export function HeroParallax() {
           className="absolute top-[30%] left-0 w-full h-px"
           style={{
             background:
-              'linear-gradient(to right, transparent 5%, rgba(16,185,129,0.08) 30%, rgba(16,185,129,0.08) 70%, transparent 95%)',
+              'linear-gradient(to right, transparent 5%, rgb(var(--color-accent-rgb) / 0.08) 30%, rgb(var(--color-accent-rgb) / 0.08) 70%, transparent 95%)',
           }}
         />
         <div
@@ -106,7 +106,7 @@ export function HeroParallax() {
           className="absolute left-[12%] top-0 h-full w-px hidden lg:block"
           style={{
             background:
-              'linear-gradient(to bottom, transparent, rgba(16,185,129,0.06), transparent)',
+              'linear-gradient(to bottom, transparent, rgb(var(--color-accent-rgb) / 0.06), transparent)',
           }}
         />
       </motion.div>
