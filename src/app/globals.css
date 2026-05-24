@@ -53,23 +53,50 @@
   font-display: swap;
 }
 
-/* ===== Design Tokens (Tailwind v4 CSS-first config) ===== */
+/* ===== Design Tokens (Tailwind v4 CSS-first config) =====
+ * Theme architecture:
+ *   - `@theme` declares Tailwind-utility tokens; values dereference to
+ *     CSS vars on :root, so utilities like `bg-bg-primary` / `text-overlay/60`
+ *     follow whatever the theme sets.
+ *   - `:root` holds the DARK palette (default — no class needed).
+ *   - `:root[data-theme="light"]` overrides for the light palette.
+ *   - The triplet vars (`--accent-rgb`, `--overlay-rgb`, `--accent-soft-rgb`)
+ *     enable `rgb(var(--color-overlay-rgb) / <alpha>)` for inline styles +
+ *     `text-overlay/N` / `border-overlay/N` Tailwind utilities (via color-mix).
+ */
 @theme {
-  /* Accent — single source of truth is the rgb triplet.
-     Use rgb(var(--color-accent-rgb) / <alpha>) for opacity variants
-     (replaces previously-hardcoded rgba(16,185,129,…) literals). */
-  --color-accent-rgb: 16 185 129;
+  /* Brand */
+  --color-accent-rgb: var(--accent-rgb);
   --color-accent: rgb(var(--color-accent-rgb));
-  --color-accent-soft-rgb: 110 231 183;
+  --color-accent-soft-rgb: var(--accent-soft-rgb);
   --color-accent-soft: rgb(var(--color-accent-soft-rgb));
-  --color-bg-primary: #030202;
-  --color-bg-secondary: #141414;
-  --color-text-primary: #e5e5e5;
-  --color-text-secondary: #a3a3a3;
-  --color-text-muted: #6b6b6b;
-  --color-text-heading: #e0e0e0;
-  --color-white: #ffffff;
-  --color-line: rgb(244, 244, 245);
+
+  /* Surfaces — three-tier rhythm:
+     - bg-primary: main page tone
+     - bg-secondary: alternating band (in light: recess; in dark: lift)
+     - bg-elevated: lifted card surface (used by Services cards, Navbar pill, etc.) */
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-elevated: var(--bg-elevated);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-heading: var(--text-heading);
+
+  /* Overlay — semantic color used at low opacity for borders/scrims.
+     White-on-dark in dark theme; warm-umber-on-light in light theme. */
+  --color-overlay-rgb: var(--overlay-rgb);
+  --color-overlay: rgb(var(--color-overlay-rgb));
+
+  /* Status — decoupled from brand so the "Available" dot always
+     reads as signal-vibrant, regardless of how dark the accent goes. */
+  --color-status-online-rgb: var(--status-online-rgb);
+  --color-status-online: rgb(var(--color-status-online-rgb));
+
+  /* Misc */
+  --color-line: var(--line);
 
   --font-sans: 'Thunder', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
@@ -79,6 +106,100 @@
   --animate-fade-up: fade-up 0.6s var(--ease-smooth) both;
   --animate-fade-in-left: fade-in-left 0.6s var(--ease-smooth) both;
   --animate-fade-in-right: fade-in-right 0.6s var(--ease-smooth) both;
+}
+
+/* ===== Theme palettes =====
+ * Dark is the baseline brand experience. Light is NOT a mechanical inversion —
+ * it's its own aesthetic: warm paper-cream surfaces, softened warm-dark text
+ * (no pure ink black on near-white), and a slightly refined accent so the
+ * brand emerald sits comfortably on paper instead of fighting it.
+ *
+ * Per-theme `--ghost-*-opacity` exists because the same alpha on white vs
+ * black bg reads very differently — watermark text needs more opacity in
+ * light theme to remain visible without becoming heavy.
+ */
+:root {
+  /* DARK (default, brand baseline — bit-perfect to today) */
+  --bg-primary: #030202;
+  --bg-secondary: #141414;
+  --bg-elevated: #030202;          /* same as primary in dark — no lift needed */
+  --text-primary: #e5e5e5;
+  --text-secondary: #a3a3a3;
+  --text-muted: #6b6b6b;
+  --text-heading: #e0e0e0;
+  --accent-rgb: 16 185 129;        /* emerald-500 */
+  --accent-soft-rgb: 110 231 183;  /* emerald-300 */
+  --overlay-rgb: 255 255 255;      /* white — borders/scrims fade out of dark bg */
+  --status-online-rgb: 74 222 128; /* green-400 — vibrant status, decoupled from brand */
+  --line: rgb(244, 244, 245);
+
+  /* Per-section opacity tokens (mirror in light to address perceptual asymmetry).
+     These dark values preserve the current behavior exactly. */
+  --ghost-hero-opacity: 0.015;
+  --ghost-stack-opacity: 0.02;
+  --ghost-talk-opacity: 0.05;
+  --marquee-text-opacity: 0.40;
+  --footer-subtitle-opacity: 0.50;
+  --footer-copyright-opacity: 0.40;
+  --pill-border-opacity: 0.07;
+  --pill-border-hover-opacity: 0.20;
+  --noise-opacity: 0.5;
+
+  /* Shadow tokens. Dark keeps its deep black halo. */
+  --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-card: none;
+  --shadow-card-hover: none;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  /* LIGHT v4 — "clean neutral whites"
+     No paper, no cream, no beige. Neutral white-gray surfaces with
+     zinc-charcoal text and botanical emerald. Modern editorial.
+     Three-tier rhythm: subtle off-white page → gray-white band → pure-white lifted card. */
+
+  /* Surfaces — neutral white-gray */
+  --bg-primary: #fafafa;           /* neutral-50 — subtle off-white page */
+  --bg-secondary: #f1f1f3;         /* gray-white — the "darker white" for narrative bands */
+  --bg-elevated: #ffffff;          /* pure white — lifted cards / navbar pill */
+
+  /* Text — neutral charcoal hierarchy (zinc family) */
+  --text-heading: #18181b;         /* zinc-900 — near-black but soft, not pure ink */
+  --text-primary: #27272a;         /* zinc-800 */
+  --text-secondary: #52525b;       /* zinc-600 — paragraph copy */
+  --text-muted: #71717a;           /* zinc-500 — meta/labels (darker than v3 = more legible) */
+
+  /* Brand — emerald-700: deep enough to read confidently on near-white, brand-recognizable */
+  --accent-rgb: 4 120 87;          /* emerald-700 #047857 */
+  --accent-soft-rgb: 16 185 129;   /* emerald-500 — brighter stop for gradients + card-snap */
+
+  /* Overlay — neutral charcoal, cohesive with heading. Borders feel clean, not warm */
+  --overlay-rgb: 24 24 27;         /* zinc-900 */
+  --status-online-rgb: 34 197 94;  /* green-500 — signal-vibrant, decoupled from brand */
+  --line: rgb(228, 228, 231);      /* zinc-200 */
+
+  /* Per-section opacities — tuned for charcoal-on-near-white (less alpha needed than
+     warm-umber-on-cream because zinc-900 has more luminance contrast against #fafafa). */
+  --ghost-hero-opacity: 0.035;
+  --ghost-stack-opacity: 0.05;
+  --ghost-talk-opacity: 0.06;
+  --marquee-text-opacity: 0.45;
+  --footer-subtitle-opacity: 0.70;
+  --footer-copyright-opacity: 0.55;
+  --pill-border-opacity: 0.10;
+  --pill-border-hover-opacity: 0.24;
+  --noise-opacity: 0.10;           /* very subtle hint of grain; clean aesthetic */
+
+  /* Shadows — cool neutral, soft. Slate-tinted instead of warm umber */
+  --shadow-floating: 0 10px 30px -12px rgba(15, 23, 42, 0.12),
+                     0 4px 12px -6px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04),
+                 0 12px 28px -10px rgba(15, 23, 42, 0.10);
+  --shadow-card-hover: 0 1px 2px rgba(15, 23, 42, 0.06),
+                       0 18px 40px -12px rgba(5, 120, 90, 0.18);
+
+  color-scheme: light;
 }
 
 @keyframes fade-up {
@@ -117,17 +238,19 @@
 /* ===== Global Reset & Base ===== */
 html {
   font-family: var(--font-sans);
-  color: rgba(255, 255, 255, 0.87);
+  color: rgb(var(--color-overlay-rgb) / 0.87);
   background-color: var(--color-bg-primary);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 body {
   background-color: var(--color-bg-primary);
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 *, *::before, *::after {
@@ -138,7 +261,7 @@ body {
   line-height: unset !important;
 }
 
-/* ===== Custom Scrollbar ===== */
+/* ===== Custom Scrollbar — follows theme via overlay var ===== */
 :root::-webkit-scrollbar-track {
   border-radius: 8px;
   background-color: transparent;
@@ -151,9 +274,421 @@ body {
 
 :root::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgb(var(--color-overlay-rgb) / 0.5);
 }
 
+/* ===== Noise overlay — blends differently per theme so grain stays visible.
+   Opacity comes from --noise-opacity (0.5 dark, 0.22 light). */
+.noise-overlay {
+  mix-blend-mode: overlay;
+  opacity: var(--noise-opacity);
+}
+:root[data-theme="light"] .noise-overlay {
+  mix-blend-mode: multiply;
+}
+
+/* ===== Theme toggle icons — CSS-driven swap, no React state flash.
+   Both <svg>s are rendered; data-theme attribute on <html> chooses which
+   is opaque/scaled. Combines a fade + small rotate for a satisfying click. */
+.theme-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.theme-icon-moon {
+  opacity: 0;
+  transform: scale(0.55) rotate(-45deg);
+}
+.theme-icon-sun {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+:root[data-theme="light"] .theme-icon-moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+:root[data-theme="light"] .theme-icon-sun {
+  opacity: 0;
+  transform: scale(0.55) rotate(45deg);
+}
+
+
+/* ============================================================
+ * Per-section / per-component utility classes.
+ * These exist where Tailwind tokens can't capture per-theme nuance —
+ * shadows, brightness filters, theme-specific opacities, or where
+ * a property needs a different value in light vs dark beyond what
+ * `--color-*` tokens already provide.
+ *
+ * Pattern: declare the dark/default behavior, then `:root[data-theme="light"]`
+ * scoped override. Dark theme stays bit-perfect.
+ * ============================================================ */
+
+/* ----- Floating UI (Navbar pill + ScrollToTop pill) ----- */
+.navbar-pill {
+  background-color: color-mix(in oklab, var(--color-bg-primary) 70%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 6%, transparent);
+  box-shadow: var(--shadow-floating);
+}
+:root[data-theme="light"] .navbar-pill {
+  background-color: color-mix(in oklab, var(--color-bg-elevated) 78%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 14%, transparent);
+}
+
+.navbar-divider {
+  border-color: color-mix(in oklab, var(--color-overlay) 8%, transparent);
+}
+:root[data-theme="light"] .navbar-divider {
+  border-color: color-mix(in oklab, var(--color-overlay) 16%, transparent);
+}
+
+.scrolltop-pill {
+  background-color: color-mix(in oklab, var(--color-bg-primary) 60%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 8%, transparent);
+}
+:root[data-theme="light"] .scrolltop-pill {
+  background-color: color-mix(in oklab, var(--color-bg-elevated) 75%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 16%, transparent);
+  box-shadow: var(--shadow-floating);
+}
+
+.theme-toggle-btn {
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+:root[data-theme="light"] .theme-toggle-btn {
+  color: var(--color-text-secondary);
+}
+.theme-toggle-btn:hover {
+  color: var(--color-text-heading);
+}
+
+/* ----- Hero ----- */
+.hero-avatar-ring {
+  --tw-ring-color: color-mix(in oklab, var(--color-overlay) 10%, transparent);
+}
+:root[data-theme="light"] .hero-avatar-ring {
+  --tw-ring-color: color-mix(in oklab, var(--color-overlay) 18%, transparent);
+}
+
+/* Hero avatar — per-theme image. Both are mounted; CSS shows the right one
+   based on data-theme. Avoids React state flash on hydration. */
+.hero-avatar-img-dark {
+  display: block;
+}
+.hero-avatar-img-light {
+  display: none;
+}
+:root[data-theme="light"] .hero-avatar-img-dark {
+  display: none;
+}
+:root[data-theme="light"] .hero-avatar-img-light {
+  display: block;
+}
+
+/* MESQUITA ghost — dark uses faded muted; light needs warm umber for an embossed-paper feel */
+.hero-name-ghost {
+  color: color-mix(in oklab, var(--color-text-muted) 30%, transparent);
+}
+:root[data-theme="light"] .hero-name-ghost {
+  color: color-mix(in oklab, var(--color-overlay) 18%, transparent);
+}
+
+/* Decorative parallax lines — accent-tinted strokes. Light gets lower alpha
+   because the warmer overlay/accent carries more visual weight per percent. */
+.hero-line-accent-h {
+  background: linear-gradient(to right,
+    transparent 5%,
+    rgb(var(--color-accent-rgb) / 0.08) 30%,
+    rgb(var(--color-accent-rgb) / 0.08) 70%,
+    transparent 95%);
+}
+:root[data-theme="light"] .hero-line-accent-h {
+  background: linear-gradient(to right,
+    transparent 5%,
+    rgb(var(--color-accent-rgb) / 0.05) 30%,
+    rgb(var(--color-accent-rgb) / 0.05) 70%,
+    transparent 95%);
+}
+
+.hero-line-overlay-h {
+  background: linear-gradient(to right,
+    transparent 5%,
+    rgb(var(--color-overlay-rgb) / 0.05) 30%,
+    rgb(var(--color-overlay-rgb) / 0.05) 70%,
+    transparent 95%);
+}
+:root[data-theme="light"] .hero-line-overlay-h {
+  background: linear-gradient(to right,
+    transparent 5%,
+    rgb(var(--color-overlay-rgb) / 0.04) 30%,
+    rgb(var(--color-overlay-rgb) / 0.04) 70%,
+    transparent 95%);
+}
+
+.hero-line-accent-v {
+  background: linear-gradient(to bottom,
+    transparent,
+    rgb(var(--color-accent-rgb) / 0.06),
+    transparent);
+}
+:root[data-theme="light"] .hero-line-accent-v {
+  background: linear-gradient(to bottom,
+    transparent,
+    rgb(var(--color-accent-rgb) / 0.04),
+    transparent);
+}
+
+/* ----- About ----- */
+/* "delivered." italic gets a slightly lighter ink shade in light — gives the
+   calligraphic word its own register against the bold heading. In dark it
+   inherits heading. */
+.about-italic-accent {
+  color: inherit;
+}
+:root[data-theme="light"] .about-italic-accent {
+  color: var(--color-text-secondary); /* zinc-600 — distinct from heading, modern */
+}
+
+/* ----- Projects ----- */
+.project-card {
+  border-color: color-mix(in oklab, var(--color-overlay) 6%, transparent);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.5s, box-shadow 0.5s;
+}
+.project-card:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 30%, transparent);
+  box-shadow: var(--shadow-card-hover);
+}
+:root[data-theme="light"] .project-card {
+  border-color: color-mix(in oklab, var(--color-overlay) 14%, transparent);
+}
+:root[data-theme="light"] .project-card:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+}
+
+.project-thumb {
+  filter: brightness(0.4);
+  transition: filter 0.7s, transform 0.7s;
+}
+.project-card:hover .project-thumb {
+  filter: brightness(0.25);
+}
+:root[data-theme="light"] .project-thumb {
+  filter: brightness(0.5);
+}
+:root[data-theme="light"] .project-card:hover .project-thumb {
+  filter: brightness(0.32);
+}
+
+/* In-card animated underline — uses accent on dark, accent-soft (brighter) in
+   light so the snap reads against the dark image scrim. */
+.project-card-title {
+  position: relative;
+}
+.project-card-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.375rem;
+  height: 1px;
+  width: 100%;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-out;
+}
+.project-card:hover .project-card-title::after {
+  transform: scaleX(1);
+}
+:root[data-theme="light"] .project-card-title::after {
+  background-color: var(--color-accent-soft);
+}
+
+.project-arrow {
+  color: rgb(255 255 255 / 0.20);
+  transition: color 0.5s;
+}
+.project-card:hover .project-arrow {
+  color: var(--color-accent);
+}
+:root[data-theme="light"] .project-card:hover .project-arrow {
+  color: var(--color-accent-soft);
+}
+
+/* ----- Services ----- */
+.service-card {
+  background-color: var(--color-bg-primary);
+  border-color: color-mix(in oklab, var(--color-overlay) 5%, transparent);
+  transition: border-color 0.5s, box-shadow 0.5s, background-color 0.5s;
+}
+.service-card:hover {
+  border-color: color-mix(in oklab, var(--color-overlay) 12%, transparent);
+  box-shadow: 0 0 30px color-mix(in oklab, var(--color-overlay) 3%, transparent);
+}
+:root[data-theme="light"] .service-card {
+  background-color: var(--color-bg-elevated);
+  border-color: color-mix(in oklab, var(--color-overlay) 10%, transparent);
+  box-shadow: var(--shadow-card);
+}
+:root[data-theme="light"] .service-card:hover {
+  border-color: color-mix(in oklab, var(--color-overlay) 18%, transparent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.service-card-featured {
+  background-color: var(--color-bg-primary);
+  border-color: color-mix(in oklab, var(--color-accent) 30%, transparent);
+  transition: border-color 0.5s, box-shadow 0.5s, background-color 0.5s;
+}
+.service-card-featured:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 50%, transparent);
+  box-shadow: 0 0 30px color-mix(in oklab, var(--color-accent) 8%, transparent);
+}
+:root[data-theme="light"] .service-card-featured {
+  background-color: var(--color-bg-elevated); /* pure white, same as non-featured — accent border + shadow does the hierarchy */
+  border-color: color-mix(in oklab, var(--color-accent) 22%, transparent);
+  box-shadow: var(--shadow-card);
+}
+:root[data-theme="light"] .service-card-featured:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 38%, transparent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* "Popular" badge — bg uses accent in dark, accent-soft (brighter) in light
+   to avoid the muddy emerald-on-emerald look. */
+.service-card-badge {
+  background-color: color-mix(in oklab, var(--color-accent) 15%, transparent);
+  color: var(--color-accent);
+}
+:root[data-theme="light"] .service-card-badge {
+  background-color: color-mix(in oklab, var(--color-accent-soft) 22%, transparent);
+  color: var(--color-accent);
+}
+
+/* Big "01"–"04" watermark — accent on dark, warm overlay on light
+   (stop oversaturating the section with emerald washes). */
+.service-card-number {
+  color: color-mix(in oklab, var(--color-accent) 20%, transparent);
+}
+:root[data-theme="light"] .service-card-number {
+  color: color-mix(in oklab, var(--color-overlay) 10%, transparent);
+}
+
+.service-card-subtitle {
+  color: color-mix(in oklab, var(--color-accent) 70%, transparent);
+}
+:root[data-theme="light"] .service-card-subtitle {
+  color: color-mix(in oklab, var(--color-accent) 60%, transparent);
+}
+
+.service-card-divider {
+  border-color: color-mix(in oklab, var(--color-overlay) 6%, transparent);
+}
+:root[data-theme="light"] .service-card-divider {
+  border-color: color-mix(in oklab, var(--color-overlay) 14%, transparent);
+}
+
+/* ----- Skills ----- */
+.skill-pill {
+  background-color: color-mix(in oklab, var(--color-bg-primary) 40%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 4%, transparent);
+  transition: background-color 0.5s, border-color 0.5s;
+}
+.skill-pill:hover {
+  background-color: color-mix(in oklab, var(--color-bg-primary) 70%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 20%, transparent);
+}
+:root[data-theme="light"] .skill-pill {
+  background-color: color-mix(in oklab, var(--color-overlay) 2.5%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 9%, transparent);
+}
+:root[data-theme="light"] .skill-pill:hover {
+  background-color: color-mix(in oklab, var(--color-overlay) 5.5%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 32%, transparent);
+}
+
+.skill-pill-secondary {
+  background-color: color-mix(in oklab, var(--color-bg-primary) 30%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 3%, transparent);
+  transition: background-color 0.5s, border-color 0.5s;
+}
+.skill-pill-secondary:hover {
+  background-color: color-mix(in oklab, var(--color-bg-primary) 60%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 15%, transparent);
+}
+:root[data-theme="light"] .skill-pill-secondary {
+  background-color: color-mix(in oklab, var(--color-overlay) 2%, transparent);
+  border-color: color-mix(in oklab, var(--color-overlay) 7%, transparent);
+}
+:root[data-theme="light"] .skill-pill-secondary:hover {
+  background-color: color-mix(in oklab, var(--color-overlay) 4.5%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 25%, transparent);
+}
+
+/* Tech-brand SVGs render as grayscale at rest, recolor on hover.
+   Light needs extra contrast/brightness adjust so silhouettes hold against cream. */
+.skill-icon-wrapper {
+  filter: grayscale(1);
+  transition: filter 0.5s, transform 0.5s;
+}
+.skill-pill:hover .skill-icon-wrapper,
+.skill-pill-secondary:hover .skill-icon-wrapper {
+  filter: grayscale(0);
+  transform: scale(1.1);
+}
+:root[data-theme="light"] .skill-icon-wrapper {
+  filter: grayscale(1) contrast(1.15) brightness(0.88);
+}
+
+/* STACK ghost watermark — warm-overlay in dark, accent-tinted (letterpress echo) in light */
+.skill-stack-ghost {
+  color: rgb(var(--color-overlay-rgb) / var(--ghost-stack-opacity));
+}
+:root[data-theme="light"] .skill-stack-ghost {
+  color: rgb(var(--color-accent-rgb) / var(--ghost-stack-opacity));
+}
+
+/* ----- Contact ----- */
+.contact-secondary-cta {
+  border-color: color-mix(in oklab, var(--color-overlay) 10%, transparent);
+  transition: border-color 0.3s, color 0.3s;
+}
+.contact-secondary-cta:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 40%, transparent);
+}
+:root[data-theme="light"] .contact-secondary-cta {
+  border-color: color-mix(in oklab, var(--color-overlay) 20%, transparent);
+}
+:root[data-theme="light"] .contact-secondary-cta:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 50%, transparent);
+}
+
+/* ----- Footer + marquee strips ----- */
+.marquee-strip-text {
+  color: color-mix(in oklab, var(--color-text-muted) calc(var(--marquee-text-opacity) * 100%), transparent);
+}
+
+.footer-ghost {
+  color: color-mix(in oklab, var(--color-text-heading) calc(var(--ghost-talk-opacity) * 100%), transparent);
+}
+
+.footer-subtitle {
+  color: color-mix(in oklab, var(--color-text-muted) calc(var(--footer-subtitle-opacity) * 100%), transparent);
+}
+
+.footer-copyright {
+  color: color-mix(in oklab, var(--color-text-muted) calc(var(--footer-copyright-opacity) * 100%), transparent);
+}
+
+.footer-social-pill {
+  border-color: color-mix(in oklab, var(--color-overlay) calc(var(--pill-border-opacity) * 100%), transparent);
+  transition: border-color 0.3s, color 0.3s;
+}
+.footer-social-pill:hover {
+  border-color: color-mix(in oklab, var(--color-overlay) calc(var(--pill-border-hover-opacity) * 100%), transparent);
+}
 
 /* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {

@@ -17,7 +17,7 @@ export function ScrollToTop() {
   return (
     <button
       onClick={() => smoothScrollTo(0, 1200)}
-      className="fixed bottom-6 right-6 z-40 w-9 h-9 rounded-full border border-white/8 bg-bg-primary/60 backdrop-blur-md flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all duration-300 cursor-pointer animate-[fadeIn_0.3s_ease-out]"
+      className="scrolltop-pill fixed bottom-6 right-6 z-40 w-9 h-9 rounded-full border backdrop-blur-md flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/40 transition-all duration-300 cursor-pointer animate-[fadeIn_0.3s_ease-out]"
       aria-label="Back to top"
     >
       <svg

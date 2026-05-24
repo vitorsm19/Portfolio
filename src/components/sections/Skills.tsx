@@ -38,7 +38,7 @@ export function Skills() {
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none pt-24 lg:pt-42"
         aria-hidden="true"
       >
-        <span className="text-[50vw] md:text-[20vw] font-bold uppercase text-white/2 tracking-tight! leading-none">
+        <span className="skill-stack-ghost text-[50vw] md:text-[20vw] font-bold uppercase tracking-tight! leading-none">
           STACK
         </span>
       </div>
@@ -64,9 +64,9 @@ export function Skills() {
             (skill, i) => (
               <div
                 key={`${skill.name}-${i}`}
-                className="group shrink-0 flex items-center gap-4 lg:gap-5 mx-4 lg:mx-6 px-5 lg:px-7 py-4 lg:py-5 rounded-2xl border border-white/4 hover:border-accent/20 bg-bg-primary/40 hover:bg-bg-primary/70 backdrop-blur-sm transition-all duration-500 cursor-pointer"
+                className="skill-pill group shrink-0 flex items-center gap-4 lg:gap-5 mx-4 lg:mx-6 px-5 lg:px-7 py-4 lg:py-5 rounded-2xl border backdrop-blur-sm cursor-pointer"
               >
-                <div className="grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                <div className="skill-icon-wrapper">
                   <SkillIcon skill={skill} size="primary" />
                 </div>
                 <span className="text-lg lg:text-xl font-bold text-text-muted group-hover:text-text-heading transition-colors duration-500 tracking-wider! uppercase whitespace-nowrap">
@@ -85,9 +85,9 @@ export function Skills() {
             (skill, i) => (
               <div
                 key={`${skill.name}-${i}`}
-                className="group shrink-0 flex items-center gap-3 mx-3 lg:mx-4 px-4 lg:px-5 py-2.5 lg:py-3 rounded-xl border border-white/3 hover:border-accent/15 bg-bg-primary/30 hover:bg-bg-primary/60 transition-all duration-500 cursor-pointer"
+                className="skill-pill-secondary group shrink-0 flex items-center gap-3 mx-3 lg:mx-4 px-4 lg:px-5 py-2.5 lg:py-3 rounded-xl border cursor-pointer"
               >
-                <div className="grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                <div className="skill-icon-wrapper">
                   <SkillIcon skill={skill} size="secondary" />
                 </div>
                 <span className="text-sm font-medium text-text-muted group-hover:text-text-secondary transition-colors duration-500 tracking-wider! whitespace-nowrap">

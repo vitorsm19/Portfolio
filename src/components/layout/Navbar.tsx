@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion'
 import { smoothScrollTo } from '@/lib/smooth-scroll'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 
 const NAV_LINKS = ['About', 'Work', 'Services', 'Contact'] as const
 
@@ -21,7 +22,7 @@ export function Navbar() {
       initial={reduced ? false : { y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-      className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-7 py-3.5 bg-bg-primary/70 backdrop-blur-xl rounded-full border border-white/6 shadow-2xl"
+      className="navbar-pill fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-7 py-3.5 backdrop-blur-xl rounded-full border"
     >
       <button
         onClick={() => smoothScrollTo(0, 1200)}
@@ -42,14 +43,18 @@ export function Navbar() {
         ))}
       </div>
 
-      <div className="flex items-center gap-2 ml-1 pl-5 border-l border-white/8">
+      <div className="navbar-divider flex items-center gap-2 ml-1 pl-5 border-l">
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+          <span className="absolute inline-flex h-full w-full rounded-full bg-status-online opacity-75 animate-ping" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-status-online" />
         </span>
         <span className="text-sm text-text-secondary leading-none tracking-wider! font-light! font-body">
           Available
         </span>
+      </div>
+
+      <div className="navbar-divider flex items-center pl-3 ml-0 border-l">
+        <ThemeToggle />
       </div>
     </motion.nav>
   )

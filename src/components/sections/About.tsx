@@ -42,7 +42,7 @@ export function About() {
           Your next project,
           <br className="hidden lg:block" />{' '}
           <span
-            className="text-7xl sm:text-6xl lg:text-8xl tracking-tight!"
+            className="about-italic-accent text-7xl sm:text-6xl lg:text-8xl tracking-tight!"
             style={{
               fontFamily: '"PP Playground", cursive',
               fontWeight: 500,

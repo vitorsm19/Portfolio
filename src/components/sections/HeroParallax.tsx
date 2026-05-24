@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, useMotionValue, useTransform, useSpring, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import aboutPic from '@/assets/about-pic.png'
+import aboutPicLight from '@/assets/about-pic-light.jpg'
 import { siteConfig } from '@/data/site'
 import { useTypewriter } from '@/hooks/useTypewriter'
 
@@ -74,8 +75,11 @@ export function HeroParallax() {
         style={{ x: reduced ? 0 : bgX, y: reduced ? 0 : bgY }}
       >
         <span
-          className="font-sans font-bold text-white/[0.015] whitespace-nowrap"
-          style={{ fontSize: 'clamp(8rem, 35vw, 28rem)' }}
+          className="font-sans font-bold whitespace-nowrap"
+          style={{
+            fontSize: 'clamp(8rem, 35vw, 28rem)',
+            color: 'rgb(var(--color-overlay-rgb) / var(--ghost-hero-opacity))',
+          }}
         >
           FRONTEND
         </span>
@@ -87,28 +91,10 @@ export function HeroParallax() {
         style={{ x: reduced ? 0 : midX, y: reduced ? 0 : midY }}
       >
         {/* Horizontal rules */}
-        <div
-          className="absolute top-[30%] left-0 w-full h-px"
-          style={{
-            background:
-              'linear-gradient(to right, transparent 5%, rgb(var(--color-accent-rgb) / 0.08) 30%, rgb(var(--color-accent-rgb) / 0.08) 70%, transparent 95%)',
-          }}
-        />
-        <div
-          className="absolute top-[70%] left-0 w-full h-px"
-          style={{
-            background:
-              'linear-gradient(to right, transparent 5%, rgba(255,255,255,0.03) 30%, rgba(255,255,255,0.03) 70%, transparent 95%)',
-          }}
-        />
+        <div className="hero-line-accent-h absolute top-[30%] left-0 w-full h-px" />
+        <div className="hero-line-overlay-h absolute top-[70%] left-0 w-full h-px" />
         {/* Vertical accent */}
-        <div
-          className="absolute left-[12%] top-0 h-full w-px hidden lg:block"
-          style={{
-            background:
-              'linear-gradient(to bottom, transparent, rgb(var(--color-accent-rgb) / 0.06), transparent)',
-          }}
-        />
+        <div className="hero-line-accent-v absolute left-[12%] top-0 h-full w-px hidden lg:block" />
       </motion.div>
 
       {/* Foreground content */}
@@ -137,13 +123,21 @@ export function HeroParallax() {
               animate="visible"
               className="mt-6"
             >
-              <div className="w-24 h-24 rounded-full overflow-hidden ring-1 ring-white/10 ring-offset-2 ring-offset-bg-primary">
+              <div className="hero-avatar-ring w-24 h-24 rounded-full overflow-hidden ring-1 ring-offset-2 ring-offset-bg-primary">
                 <Image
                   src={aboutPic}
                   alt={siteConfig.name}
                   width={96}
                   height={96}
-                  className="object-cover object-top w-full h-full"
+                  className="hero-avatar-img-dark object-cover object-top w-full h-full"
+                  priority
+                />
+                <Image
+                  src={aboutPicLight}
+                  alt={siteConfig.name}
+                  width={96}
+                  height={96}
+                  className="hero-avatar-img-light object-cover object-top w-full h-full"
                   priority
                 />
               </div>
@@ -201,7 +195,7 @@ export function HeroParallax() {
                 style={{ fontSize: 'clamp(4rem, min(18vw, 22vh), 14rem)' }}
               >
                 <span className="block text-text-heading tracking-[0.02em]">VITOR</span>
-                <span className="block text-text-muted/30 tracking-[0.02em]">MESQUITA</span>
+                <span className="hero-name-ghost block tracking-[0.02em]">MESQUITA</span>
               </h1>
             </motion.div>
 

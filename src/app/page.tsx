@@ -16,11 +16,11 @@ export default function Home() {
       <HeroParallax />
 
       {/* Marquee ticker */}
-      <div className="border-y border-white/6 bg-bg-secondary">
+      <div className="border-y border-overlay/6 bg-bg-secondary">
         <Marquee
           text="FRONTEND DEVELOPER  //  AVAILABLE WORLDWIDE  //  LET'S BUILD SOMETHING  //"
           speed={35}
-          className="text-text-muted/40 text-lg sm:text-xl font-bold uppercase tracking-[0.15em]!"
+          className="marquee-strip-text text-lg sm:text-xl font-bold uppercase tracking-[0.15em]!"
         />
       </div>
 

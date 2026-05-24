@@ -48,26 +48,24 @@ export function Services() {
             return (
               <div
                 key={service.id}
-                className={`group relative bg-bg-primary rounded-2xl p-7 lg:p-9 border transition-all duration-500 flex flex-col cursor-pointer ${
-                  isFeatured
-                    ? 'border-accent/30 hover:border-accent/50 hover:shadow-[0_0_30px_rgb(var(--color-accent-rgb)_/_0.08)]'
-                    : 'border-white/5 hover:border-white/12 hover:shadow-[0_0_30px_rgba(255,255,255,0.03)]'
+                className={`group relative rounded-2xl p-7 lg:p-9 border flex flex-col cursor-pointer ${
+                  isFeatured ? 'service-card-featured' : 'service-card'
                 }`}
               >
                 {isFeatured && (
-                  <span className="absolute top-5 right-5 text-[12px] font-medium pt-1.5 tracking-[0.2em]! uppercase bg-accent/15 text-accent px-3 py-1 rounded-full">
+                  <span className="service-card-badge absolute top-5 right-5 text-[12px] font-medium pt-1.5 tracking-[0.2em]! uppercase px-3 py-1 rounded-full">
                     Popular
                   </span>
                 )}
 
-                <span className="text-5xl lg:text-6xl font-bold text-accent/20 leading-none select-none">
+                <span className="service-card-number text-5xl lg:text-6xl font-bold leading-none select-none">
                   {pad(i + 1)}
                 </span>
 
                 <h3 className="text-xl lg:text-4xl font-bold text-text-heading mt-4 mb-1 group-hover:text-accent transition-colors duration-500 tracking-wider!">
                   {service.title}
                 </h3>
-                <p className="text-[11px] font-mono uppercase tracking-widest! text-accent/70 mb-4">
+                <p className="service-card-subtitle text-[11px] font-mono uppercase tracking-widest! mb-4">
                   {service.subtitle}
                 </p>
                 <p className="text-base text-text-secondary leading-relaxed mb-5 tracking-wider! font-[family-name:var(--font-body)]">
@@ -86,7 +84,7 @@ export function Services() {
                   ))}
                 </ul>
 
-                <div className="pt-5 border-t border-white/6 flex items-center justify-between">
+                <div className="service-card-divider pt-5 border-t flex items-center justify-between">
                   <span className="text-[12px] font-mono uppercase tracking-widest! text-text-muted">
                     {service.pricing.label}
                   </span>
@@ -97,7 +95,7 @@ export function Services() {
 
                 <button
                   onClick={scrollToContact}
-                  className="mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border border-white/10 text-text-secondary hover:border-accent hover:text-accent transition-all duration-300 tracking-wider! cursor-pointer"
+                  className="contact-secondary-cta mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border text-text-secondary hover:text-accent tracking-wider! cursor-pointer"
                 >
                   Get in touch <span aria-hidden>&#8599;</span>
                 </button>

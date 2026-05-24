@@ -70,7 +70,7 @@ export function Contact() {
             href={siteConfig.linkedin.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border border-white/10 text-text-secondary hover:border-accent/40 hover:text-text-heading transition-all"
+            className="contact-secondary-cta font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border text-text-secondary hover:text-text-heading"
           >
             LinkedIn
           </a>

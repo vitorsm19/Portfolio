@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Manrope } from 'next/font/google'
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
+import { themeBootstrapScript } from '@/lib/theme'
 import './globals.css'
 
 const manrope = Manrope({
@@ -13,7 +14,10 @@ const manrope = Manrope({
 const SITE_URL = 'https://vitormesquita.com'
 
 export const viewport: Viewport = {
-  themeColor: '#030202',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#030202' },
+    { media: '(prefers-color-scheme: light)', color: '#f7f5f0' },
+  ],
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -93,10 +97,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={manrope.variable}>
+    <html lang="en" className={manrope.variable} suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#030202" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#030202" media="(prefers-color-scheme: light)" />
+        {/* Theme bootstrap — sets data-theme on <html> before paint, no FOUC */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         {/* Google Tag Manager */}
@@ -112,7 +116,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
-      <body className="bg-bg-primary text-white/87">
+      <body className="bg-bg-primary text-overlay/87">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
