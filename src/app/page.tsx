@@ -5,6 +5,8 @@ import { HeroParallax } from '@/components/sections/HeroParallax'
 import { About } from '@/components/sections/About'
 import { Projects } from '@/components/sections/Projects'
 import { Services } from '@/components/sections/Services'
+import { ContractorFit } from '@/components/sections/ContractorFit'
+import { HowIWork } from '@/components/sections/HowIWork'
 import { Skills } from '@/components/sections/Skills'
 import { Contact } from '@/components/sections/Contact'
 import { Marquee } from '@/components/ui/Marquee'
@@ -18,7 +20,7 @@ export default function Home() {
       {/* Marquee ticker */}
       <div className="border-y border-overlay/6 bg-bg-secondary">
         <Marquee
-          text="FRONTEND DEVELOPER  //  AVAILABLE WORLDWIDE  //  LET'S BUILD SOMETHING  //"
+          text="FREELANCE SENIOR FRONTEND DEVELOPER  //  REACT • NEXT.JS • TYPESCRIPT  //  REMOTE EUROPE  //  AVAILABLE FOR CONTRACT PROJECTS  //"
           speed={35}
           className="marquee-strip-text text-lg sm:text-xl font-bold uppercase tracking-[0.15em]!"
         />
@@ -38,6 +40,18 @@ export default function Home() {
 
       <section id="services" aria-label="Services" className="py-24 lg:py-36 px-6 lg:px-16 pt-0">
         <Services />
+      </section>
+
+      <section
+        id="fit"
+        aria-label="Contractor Fit"
+        className="py-24 lg:py-32 px-6 lg:px-16 bg-bg-secondary"
+      >
+        <ContractorFit />
+      </section>
+
+      <section id="process" aria-label="How I Work" className="py-24 lg:py-32 px-6 lg:px-16">
+        <HowIWork />
       </section>
 
       <section aria-label="Technical skills">

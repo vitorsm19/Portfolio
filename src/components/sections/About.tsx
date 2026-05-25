@@ -59,14 +59,12 @@ export function About() {
             className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80 font-body"
           >
             <GhostText
-              text="I've spent 6+ years building digital products for some of the biggest brands in sports, retail, and tech. Now I deliver that same quality directly to you. Polished, high-performance web apps delivered on time, on budget, and built to scale."
+              text="I've spent 6+ years building high-performance frontend products for global brands in sports, e-commerce, SaaS, and tech."
               highlights={[
                 '6+ years',
-                'biggest brands',
-                'directly to you',
-                'on time',
-                'on budget',
-                'built to scale',
+                'high-performance',
+                'global brands',
+                'sports, e-commerce, SaaS, and tech',
               ]}
             />
           </motion.p>
@@ -76,8 +74,29 @@ export function About() {
             className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80 font-body"
           >
             <GhostText
-              text="Skip the agency meetings. Get straight to results."
-              highlights={['Skip the agency meetings.', ' Get straight to results.']}
+              text="I now work as a Freelance Senior Frontend Developer, helping European teams build, maintain, and scale React, Next.js, and TypeScript applications."
+              highlights={[
+                'Freelance Senior Frontend Developer',
+                'European teams',
+                'React, Next.js, and TypeScript',
+              ]}
+            />
+          </motion.p>
+
+          <motion.p
+            variants={fadeUp}
+            className="text-xl lg:text-2xl leading-relaxed text-text-secondary/80 font-body"
+          >
+            <GhostText
+              text="I can join an existing product team, take ownership of frontend delivery, translate Figma into production-ready interfaces, improve performance, build design systems, and help teams ship faster with clean, maintainable code."
+              highlights={[
+                'join an existing product team',
+                'frontend delivery',
+                'production-ready interfaces',
+                'performance',
+                'design systems',
+                'clean, maintainable code',
+              ]}
             />
           </motion.p>
         </motion.div>

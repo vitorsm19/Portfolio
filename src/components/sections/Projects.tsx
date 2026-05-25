@@ -27,21 +27,27 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
       className="project-card group block rounded-xl overflow-hidden border cursor-pointer"
     >
       <div className="relative aspect-[4/3]">
-        <Image src={project.snippet} alt={`${project.title} screenshot`} fill className="project-thumb object-cover group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 45vw" />
+        <Image src={project.snippet} alt={`${project.title} screenshot`} fill className="project-thumb object-cover group-hover:scale-[1.04]" sizes="(max-width: 1024px) 100vw, 45vw" />
         <div className="absolute top-4 left-4">
-          <Image src={project.logo} alt="" width={60} height={60} className="w-12 h-12 object-contain drop-shadow-xl" />
+          <Image src={project.logo} alt="" width={80} height={80} className="w-16 h-16 lg:w-20 lg:h-20 object-contain drop-shadow-xl" />
         </div>
-        <span className="absolute top-4 right-4 font-mono text-[10px] text-white/20 tracking-[0.2em]">{pad(index + 1)}</span>
-        <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
+        <span className="absolute top-4 right-12 font-mono text-[10px] text-white/45 tracking-[0.2em]">{pad(index + 1)}</span>
+        <div className="absolute bottom-0 left-0 right-0 px-5 pt-14 pb-5 bg-gradient-to-t from-black/90 via-black/65 to-transparent">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent-soft mb-1.5">{project.role}</p>
           <h3 className="project-card-title inline-block text-xl lg:text-2xl font-bold text-white leading-tight">{project.title}</h3>
-          <p className="mt-1 text-white/40 text-sm font-body line-clamp-2">{project.description}</p>
-          <div className="flex flex-wrap gap-1.5 mt-2">
+          <p className="mt-2 text-white/75 text-sm font-body leading-relaxed line-clamp-2">{project.description}</p>
+          <div className="flex flex-wrap gap-1.5 mt-3">
             {project.tech.map((t) => (
-              <span key={t} className="font-mono text-[9px] tracking-wider uppercase text-white/25">{t}</span>
+              <span
+                key={t}
+                className="project-tech-tag font-mono text-[10px] tracking-[0.14em] uppercase text-white/75 border border-white/[0.12] bg-white/[0.04] px-2 py-0.5 rounded-full"
+              >
+                {t}
+              </span>
             ))}
           </div>
         </div>
-        <span className="project-arrow absolute bottom-5 right-5">&#8599;</span>
+        <span className="project-arrow absolute top-4 right-4 text-base leading-none">&#8599;</span>
       </div>
     </motion.a>
   )

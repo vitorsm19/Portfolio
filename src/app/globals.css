@@ -451,39 +451,65 @@ body {
   color: var(--color-text-secondary); /* zinc-600 — distinct from heading, modern */
 }
 
-/* ----- Projects ----- */
+/* ----- Projects -----
+ * Hover timings are intentionally unified: all properties use the project's
+ * standard easing curve so the card transition feels like one motion rather
+ * than several. Duration steps (400/500/600ms) are choreographed so faster
+ * "lighter" properties resolve while the slower "deeper" properties are
+ * still animating — feels cinematic, not staggered. */
 .project-card {
   border-color: color-mix(in oklab, var(--color-overlay) 6%, transparent);
   box-shadow: var(--shadow-card);
-  transition: border-color 0.5s, box-shadow 0.5s;
+  transform: translateY(0);
+  transition:
+    border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project-card:hover {
-  border-color: color-mix(in oklab, var(--color-accent) 30%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 35%, transparent);
   box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 :root[data-theme="light"] .project-card {
   border-color: color-mix(in oklab, var(--color-overlay) 14%, transparent);
 }
 :root[data-theme="light"] .project-card:hover {
-  border-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 50%, transparent);
 }
 
 .project-thumb {
   filter: brightness(0.4);
-  transition: filter 0.7s, transform 0.7s;
+  transform-origin: center;
+  transition:
+    filter 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project-card:hover .project-thumb {
-  filter: brightness(0.25);
+  filter: brightness(0.28);
 }
 :root[data-theme="light"] .project-thumb {
   filter: brightness(0.5);
 }
 :root[data-theme="light"] .project-card:hover .project-thumb {
-  filter: brightness(0.32);
+  filter: brightness(0.35);
 }
 
-/* In-card animated underline — uses accent on dark, accent-soft (brighter) in
-   light so the snap reads against the dark image scrim. */
+/* Tech-stack pills — subtle border + bg, gain a hint of accent on card hover */
+.project-tech-tag {
+  transition:
+    color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-card:hover .project-tech-tag {
+  color: rgb(255 255 255 / 0.9);
+  border-color: rgb(255 255 255 / 0.2);
+  background-color: rgb(255 255 255 / 0.07);
+}
+
+/* In-card animated underline — uses accent on dark, accent-soft (brighter)
+   in light so the snap reads against the dark image scrim. */
 .project-card-title {
   position: relative;
 }
@@ -497,7 +523,7 @@ body {
   background-color: var(--color-accent);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s ease-out;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project-card:hover .project-card-title::after {
   transform: scaleX(1);
@@ -506,12 +532,17 @@ body {
   background-color: var(--color-accent-soft);
 }
 
+/* Top-right arrow — small lift + accent tint on card hover */
 .project-arrow {
-  color: rgb(255 255 255 / 0.20);
-  transition: color 0.5s;
+  color: rgb(255 255 255 / 0.35);
+  transform: translate(0, 0);
+  transition:
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project-card:hover .project-arrow {
   color: var(--color-accent);
+  transform: translate(2px, -2px);
 }
 :root[data-theme="light"] .project-card:hover .project-arrow {
   color: var(--color-accent-soft);

@@ -1,12 +1,20 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, useMotionValue, useTransform, useSpring, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import aboutPic from '@/assets/about-pic.png'
 import aboutPicLight from '@/assets/about-pic-light.jpg'
 import { siteConfig } from '@/data/site'
 import { useTypewriter } from '@/hooks/useTypewriter'
+import { smoothScrollTo } from '@/lib/smooth-scroll'
+
+function scrollToId(id: string) {
+  const el = document.getElementById(id)
+  if (!el) return
+  const target = el.getBoundingClientRect().top + window.scrollY - 80
+  smoothScrollTo(target, 1200)
+}
 
 /**
  * Hero 3 — "Horizontal Parallax"
@@ -112,7 +120,7 @@ export function HeroParallax() {
               animate="visible"
             >
               <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-accent">
-                Portfolio
+                Portfolio{' '}
               </span>
             </motion.div>
 
@@ -165,8 +173,15 @@ export function HeroParallax() {
               variants={fadeUp}
               initial={reduced ? false : 'hidden'}
               animate="visible"
-              className="mt-6 flex items-center gap-6"
+              className="mt-6 flex items-center gap-5"
             >
+              <div>
+                <span className="text-xl font-bold text-text-heading tabular-nums">6+</span>
+                <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted">
+                  Years
+                </p>
+              </div>
+              <div className="w-px h-6 bg-text-muted/15" />
               <div>
                 <span className="text-xl font-bold text-text-heading tabular-nums">20+</span>
                 <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted">
@@ -175,11 +190,34 @@ export function HeroParallax() {
               </div>
               <div className="w-px h-6 bg-text-muted/15" />
               <div>
-                <span className="text-xl font-bold text-text-heading tabular-nums">6+</span>
+                <span className="text-xs font-mono uppercase tracking-widest text-text-heading">
+                  EU
+                </span>
                 <p className="text-[10px] font-mono uppercase tracking-widest text-text-muted">
-                  Years
+                  Remote
                 </p>
               </div>
+            </motion.div>
+
+            <motion.div
+              custom={0.85}
+              variants={fadeUp}
+              initial={reduced ? false : 'hidden'}
+              animate="visible"
+              className="mt-7 flex flex-wrap items-center gap-3"
+            >
+              <button
+                onClick={() => scrollToId('contact')}
+                className="font-mono text-xs tracking-wider! px-5 py-2.5 rounded-full bg-accent text-white hover:brightness-110 transition-all cursor-pointer"
+              >
+                Contact{' '}
+              </button>
+              <button
+                onClick={() => scrollToId('work')}
+                className="contact-secondary-cta font-mono text-xs tracking-wider! px-5 py-2.5 rounded-full border text-text-secondary hover:text-text-heading cursor-pointer"
+              >
+                View my work
+              </button>
             </motion.div>
           </div>
 
@@ -191,7 +229,7 @@ export function HeroParallax() {
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             >
               <h1
-                className="font-sans font-bold leading-[0.82] select-none text-right"
+                className="font-sans font-bold leading-[0.82] select-none text-left lg:text-right"
                 style={{ fontSize: 'clamp(4rem, min(18vw, 22vh), 14rem)' }}
               >
                 <span className="block text-text-heading tracking-[0.02em]">VITOR</span>
@@ -205,14 +243,14 @@ export function HeroParallax() {
               variants={fadeUp}
               initial={reduced ? false : 'hidden'}
               animate="visible"
-              className="mt-6 flex items-center justify-end gap-4"
+              className="mt-6 flex flex-col items-start gap-1.5 lg:flex-row lg:items-center lg:justify-end lg:gap-4"
             >
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-text-muted/50">
-                Spain, EU
+                Barcelona • Remote EU
               </span>
-              <span className="w-6 h-px bg-text-muted/20" />
+              <span className="hidden lg:inline-block w-6 h-px bg-text-muted/20" />
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-text-muted">
-                Frontend Developer
+                Senior Frontend Contractor
               </span>
             </motion.div>
           </div>

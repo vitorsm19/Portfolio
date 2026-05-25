@@ -14,80 +14,84 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: 'web-design',
-    title: 'Website Design & Development',
-    subtitle: 'From concept to launch',
+    id: 'dedicated-contractor',
+    title: 'Dedicated Frontend Contractor',
+    subtitle: 'Embedded in your product team',
     description:
-      'Custom-designed, responsive websites built with modern technologies. Pixel-perfect execution that turns visitors into clients.',
+      'Bring me into your team as a Senior Frontend Contractor for React, Next.js, and TypeScript delivery. Ideal for teams that need senior frontend capacity without a long hiring cycle.',
     features: [
-      'Custom UI/UX design',
-      'Responsive across all devices',
-      'Performance optimized',
-      'SEO-ready architecture',
-      'CMS integration',
-    ],
-    pricing: {
-      type: 'fixed',
-      amount: 600,
-      label: 'Starting from',
-    },
-    featured: true,
-  },
-  {
-    id: 'ecommerce',
-    title: 'E-Commerce',
-    subtitle: 'Sell online, scale fast',
-    description:
-      'Full-featured online stores with seamless checkout, inventory management, and payment integrations that drive revenue from day one.',
-    features: [
-      'Product catalog & management',
-      'Secure payment gateways',
-      'Shopping cart & checkout flow',
-      'Order tracking & analytics',
-      'Multi-currency support',
-    ],
-    pricing: {
-      type: 'fixed',
-      amount: 2500,
-      label: 'Starting from',
-    },
-  },
-  {
-    id: 'complex-systems',
-    title: 'Complex Systems',
-    subtitle: 'AI, integrations & beyond',
-    description:
-      "Enterprise-grade applications with AI capabilities, third-party integrations, and custom architectures for problems that don't have off-the-shelf solutions.",
-    features: [
-      'AI workflows integration',
-      'Custom API development',
-      'Third-party system integration',
-      'Real-time data processing',
-      'Scalable cloud architecture',
-    ],
-    pricing: {
-      type: 'custom',
-      amount: 0,
-      label: 'Depending on project requirements',
-    },
-  },
-  {
-    id: 'full-time',
-    title: 'Full-Time',
-    subtitle: 'Your dedicated developer',
-    description:
-      'Embed me directly into your team for ongoing development, code reviews, architecture decisions, and continuous delivery.',
-    features: [
-      'Dedicated availability',
-      'Daily standups & collaboration',
-      'Code reviews & mentoring',
-      'Architecture consulting',
-      'Flexible commitment',
+      'React / Next.js / TypeScript delivery',
+      'Join existing teams quickly',
+      'Frontend architecture & code reviews',
+      'Reusable components & design systems',
+      'Testing, accessibility, performance',
+      'Remote Europe availability',
     ],
     pricing: {
       type: 'hourly',
       amount: 45,
-      label: 'Per hour',
+      label: 'From',
+    },
+    featured: true,
+  },
+  {
+    id: 'greenfield',
+    title: 'Greenfield Frontend Builds',
+    subtitle: 'Production-ready, from zero',
+    description:
+      'Production-ready frontend applications built from scratch using modern React, Next.js, TypeScript, APIs, and scalable component architecture.',
+    features: [
+      'Frontend architecture from day one',
+      'SSR & API integrations',
+      'Design implementation from Figma',
+      'Scalable component structure',
+      'Testing setup & CI integration',
+      'Performance-focused delivery',
+    ],
+    pricing: {
+      type: 'custom',
+      amount: 0,
+      label: 'Project-based or hourly',
+    },
+  },
+  {
+    id: 'rescue-performance',
+    title: 'Frontend Rescue & Performance',
+    subtitle: 'Stabilize, refactor, ship faster',
+    description:
+      'For teams with slow, messy, or hard-to-maintain frontend codebases that need senior help to stabilize, refactor, and unblock delivery.',
+    features: [
+      'Codebase audit',
+      'Core Web Vitals & performance',
+      'Accessibility fixes (WCAG)',
+      'Testing & reliability improvements',
+      'Refactoring for maintainability',
+      'Developer experience cleanup',
+    ],
+    pricing: {
+      type: 'custom',
+      amount: 0,
+      label: 'Custom',
+    },
+  },
+  {
+    id: 'product-frontends',
+    title: 'E-commerce & Product Frontends',
+    subtitle: 'High-traffic product UI',
+    description:
+      'Frontend delivery for e-commerce, SaaS dashboards, sports platforms, and high-traffic product experiences where performance and UX directly drive revenue.',
+    features: [
+      'E-commerce & checkout flows',
+      'CMS integrations (Sitecore, headless)',
+      'Analytics & GA4 implementation',
+      'Multi-market frontend delivery',
+      'SaaS dashboards & data-heavy UI',
+      'Conversion-aware UX',
+    ],
+    pricing: {
+      type: 'custom',
+      amount: 0,
+      label: 'Custom',
     },
   },
 ]

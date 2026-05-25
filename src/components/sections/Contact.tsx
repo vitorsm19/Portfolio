@@ -31,39 +31,41 @@ export function Contact() {
         variants={stagger}
       >
         <motion.div variants={fadeUp}>
-          <GradientLabel tracking="0.26em">Get In Touch</GradientLabel>
+          <GradientLabel tracking="0.26em">{siteConfig.contact.eyebrow}</GradientLabel>
         </motion.div>
 
         <motion.h2
           variants={fadeUp}
-          className="mt-6 text-5xl sm:text-6xl lg:text-[7rem] font-bold text-text-heading leading-[0.9] "
+          className="mt-6 text-5xl sm:text-6xl lg:text-[6.5rem] font-bold text-text-heading leading-[0.92]"
         >
-          Let&apos;s build something
+          Need a senior frontend{' '}
           <span
-            className="bg-linear-to-r from-accent to-accent-soft bg-clip-text text-transparent pl-7 pb-1 text-[4rem] sm:text-[8rem]"
+            className="bg-linear-to-r from-accent to-accent-soft bg-clip-text text-transparent text-[4rem] sm:text-[7rem]"
             style={{
               fontFamily: '"PP Playground", cursive',
               fontWeight: 500,
               fontStyle: 'italic',
             }}
           >
-            great.
+            contractor?
           </span>
         </motion.h2>
 
         <motion.p
           variants={fadeUp}
-          className="mt-8 text-lg lg:text-xl text-text-secondary max-w-xl leading-relaxed font-body"
+          className="mt-8 text-lg lg:text-xl text-text-secondary max-w-2xl leading-relaxed font-body"
         >
           {siteConfig.contact.body}
         </motion.p>
 
         <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
           <a
-            href={`mailto:${siteConfig.email}`}
+            href={`mailto:${siteConfig.email}?subject=Contract%20opportunity%20—%20${encodeURIComponent(
+              siteConfig.name,
+            )}`}
             className="font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full bg-accent text-white hover:brightness-110 transition-all"
           >
-            Send me an email
+            {siteConfig.contact.primaryCta}
           </a>
           <br className="sm:hidden" />
           <a
@@ -72,9 +74,16 @@ export function Contact() {
             rel="noopener noreferrer"
             className="contact-secondary-cta font-mono text-sm tracking-wider! px-7 py-3.5 rounded-full border text-text-secondary hover:text-text-heading"
           >
-            LinkedIn
+            {siteConfig.contact.secondaryCta}
           </a>
         </motion.div>
+
+        <motion.p
+          variants={fadeUp}
+          className="mt-6 font-mono text-xs tracking-wider uppercase text-text-muted"
+        >
+          {siteConfig.availability}
+        </motion.p>
       </motion.div>
     </div>
   )
