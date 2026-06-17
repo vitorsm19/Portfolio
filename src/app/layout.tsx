@@ -177,7 +177,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       ],
     },
     {
-      '@type': 'ProfilePage',
+      '@type': 'WebPage',
       '@id': `${SITE_URL}/#webpage`,
       url: SITE_URL,
       name: 'Vitor Mesquita, Senior Frontend Developer & React Contractor',
