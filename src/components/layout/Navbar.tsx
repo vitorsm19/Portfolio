@@ -1,17 +1,15 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
-import { smoothScrollTo } from '@/lib/smooth-scroll'
+import { scrollToId, scrollToY } from '@/lib/lenis'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 
-const NAV_LINKS = ['About', 'Work', 'Services', 'Contact'] as const
-
-function scrollTo(section: string) {
-  const el = document.getElementById(section.toLowerCase())
-  if (!el) return
-  const target = el.getBoundingClientRect().top + window.scrollY - 80
-  smoothScrollTo(target, 1200)
-}
+const LINKS = [
+  { label: 'About', id: 'about' },
+  { label: 'Work', id: 'work' },
+  { label: 'Services', id: 'services' },
+  { label: 'Contact', id: 'contact' },
+] as const
 
 export function Navbar() {
   const reduced = useReducedMotion()
@@ -19,41 +17,39 @@ export function Navbar() {
   return (
     <motion.nav
       aria-label="Main navigation"
-      initial={reduced ? false : { y: -60, opacity: 0 }}
+      initial={reduced ? false : { y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-      className="navbar-pill fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-7 py-3.5 backdrop-blur-xl rounded-full border"
+      transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="nav-pill fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 sm:gap-6 rounded-full px-5 sm:px-6 py-2.5"
     >
       <button
-        onClick={() => smoothScrollTo(0, 1200)}
-        className="text-base font-bold text-text-heading tracking-wider! leading-none pt-1 cursor-pointer hover:text-accent transition-colors"
+        onClick={() => scrollToY(0)}
+        className="link-underline text-sm font-semibold text-text-heading cursor-pointer"
       >
-        VM
+        vitor<span className="text-accent">.</span>
       </button>
 
-      <div className="hidden sm:flex items-center gap-5 pt-1">
-        {NAV_LINKS.map((link) => (
+      <div className="hidden sm:flex items-center gap-5">
+        {LINKS.map((l) => (
           <button
-            key={link}
-            onClick={() => scrollTo(link)}
-            className="text-sm font-medium text-text-secondary hover:text-text-heading transition-colors uppercase tracking-widest! cursor-pointer leading-none"
+            key={l.id}
+            onClick={() => scrollToId(l.id)}
+            className="link-underline text-sm text-text-secondary hover:text-text-heading transition-colors cursor-pointer"
           >
-            {link}
+            {l.label}
           </button>
         ))}
       </div>
 
-      <div className="navbar-divider flex items-center gap-2 ml-1 pl-5 border-l">
+      <div className="nav-divider flex items-center gap-2 border-l pl-4 sm:pl-5">
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-status-online opacity-75 animate-ping" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-status-online" />
+          <span className="absolute inline-flex h-full w-full rounded-full bg-status-online opacity-70 animate-ping" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-status-online" />
         </span>
-        <span className="text-sm text-text-secondary leading-none tracking-wider! font-light! font-body">
-          Available
-        </span>
+        <span className="hidden sm:inline text-xs text-text-secondary">Available</span>
       </div>
 
-      <div className="navbar-divider flex items-center pl-3 ml-0 border-l">
+      <div className="nav-divider flex items-center border-l pl-3 sm:pl-4">
         <ThemeToggle />
       </div>
     </motion.nav>

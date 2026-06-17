@@ -1,108 +1,68 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
-import { GradientLabel } from '@/components/ui/GradientLabel'
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
+import { SectionTag } from '@/components/ui/SectionTag'
 
 const steps: { title: string; body: string }[] = [
   {
-    title: 'Quick fit call',
-    body: 'A 20-minute intro to understand the role, your team, the stack, and timeline.',
+    title: 'A short fit call',
+    body: '20 minutes to understand the role, the team, the stack, and the timeline. No pitch, just whether this is a good match.',
   },
   {
     title: 'Scope & availability',
-    body: 'We align on engagement type (hourly, monthly, dedicated), start date, and weekly hours.',
+    body: 'We agree on engagement type, start date, and weekly hours, written down clearly so nobody is guessing.',
   },
   {
     title: 'Contract & kickoff',
-    body: 'Straightforward contract, NDA if needed, and immediate ramp-up inside your tools and codebase.',
+    body: 'Straightforward contract, NDA if needed, then a fast ramp-up inside your tools, repo, and rituals.',
   },
   {
-    title: 'Delivery inside your workflow',
-    body: 'Tickets, PRs, code reviews, standups — embedded in your team the same way an employee would be.',
+    title: 'Embedded delivery',
+    body: 'Tickets, PRs, reviews, standups. I work inside your team the way an employee would, and I over-communicate by default.',
   },
   {
-    title: 'Weekly progress, clean handoff',
-    body: 'Measurable output, regular check-ins, documented work. No surprises at the end of the engagement.',
+    title: 'Weekly visibility, clean handoff',
+    body: 'Regular check-ins, documented work, no surprises. You always know where things stand and what comes next.',
   },
 ]
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
-} as const
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-} as const
-
 export function HowIWork() {
-  const reduced = useReducedMotion()
-  const initial = reduced ? false : ('hidden' as const)
-
   return (
-    <div className="max-w-6xl mx-auto">
-      <motion.div
-        initial={initial}
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={stagger}
-      >
-        <motion.div variants={fadeUp}>
-          <GradientLabel tracking="0.22em">How I Work</GradientLabel>
-        </motion.div>
+    <div className="max-w-5xl mx-auto px-6 lg:px-12">
+      <Reveal className="rule pt-6">
+        <SectionTag>working-together</SectionTag>
+      </Reveal>
 
-        <motion.h2
-          variants={fadeUp}
-          className="mt-5 text-5xl sm:text-6xl lg:text-[6rem] font-bold text-text-heading leading-[0.92] tracking-tight!"
-        >
-          From first call to{' '}
-          <span
-            className="about-italic-accent text-6xl sm:text-6xl lg:text-7xl tracking-tight!"
-            style={{
-              fontFamily: '"PP Playground", cursive',
-              fontWeight: 500,
-              fontStyle: 'italic',
-            }}
-          >
-            shipped.
-          </span>
-        </motion.h2>
+      <Reveal y={28} blur>
+        <h2 className="mt-8 lg:mt-12 font-sans font-bold text-text-heading leading-[0.96] tracking-[-0.02em] text-[clamp(2.4rem,6vw,4.75rem)]">
+          From first call to shipped
+        </h2>
+      </Reveal>
 
-        <motion.p
-          variants={fadeUp}
-          className="mt-6 text-lg lg:text-xl text-text-secondary max-w-2xl leading-relaxed font-body"
-        >
-          Premium contractor delivery without the agency overhead. I work hourly, monthly,
-          part-time, or full-time contract — minimum 3 months preferred.
-        </motion.p>
+      <Reveal delay={0.05}>
+        <p className="mt-5 max-w-2xl text-lg text-text-secondary leading-relaxed">
+          Premium contractor delivery without the agency overhead. Calm,
+          communicative, and predictable, whether hourly, monthly, or dedicated.
+        </p>
+      </Reveal>
 
-        <motion.ol variants={stagger} className="mt-12 space-y-4">
-          {steps.map((step, i) => (
-            <motion.li
-              key={step.title}
-              variants={fadeUp}
-              className="flex items-start gap-5 lg:gap-7 py-5 service-card-divider border-t"
-            >
-              <span className="service-card-number font-mono text-2xl lg:text-3xl font-bold leading-none shrink-0 pt-1 tabular-nums">
+      <Stagger className="mt-12 lg:mt-16" gap={0.1}>
+        {steps.map((step, i) => (
+          <StaggerItem key={step.title}>
+            <div className="rule grid grid-cols-[auto_1fr] gap-5 lg:gap-10 py-6 lg:py-7">
+              <span className="font-sans text-2xl lg:text-3xl font-bold text-accent tabular-nums leading-none pt-1">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <div className="flex-1">
-                <h3 className="text-lg lg:text-2xl font-bold text-text-heading tracking-wider!">
-                  {step.title}
-                </h3>
-                <p className="mt-1.5 text-base lg:text-lg text-text-secondary leading-relaxed font-[family-name:var(--font-body)] tracking-wider!">
+              <div>
+                <h3 className="text-xl lg:text-2xl font-semibold text-text-heading">{step.title}</h3>
+                <p className="mt-2 max-w-2xl text-base lg:text-lg leading-relaxed text-text-secondary">
                   {step.body}
                 </p>
               </div>
-            </motion.li>
-          ))}
-        </motion.ol>
-      </motion.div>
+            </div>
+          </StaggerItem>
+        ))}
+      </Stagger>
     </div>
   )
 }

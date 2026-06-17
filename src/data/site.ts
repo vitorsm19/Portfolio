@@ -5,7 +5,7 @@ export const siteConfig = {
   phone: '+34 614 08 82 64',
   location: 'Barcelona, Spain',
   citizenship: 'EU Citizen',
-  availability: 'Remote Europe • Available for 3+ month contract projects',
+  availability: 'Remote across Europe · Open to new projects',
   github: {
     username: 'vitorsm19',
     url: 'https://github.com/vitorsm19/',
@@ -25,7 +25,7 @@ export const siteConfig = {
     positioning: 'Freelance Senior Frontend Developer',
     stack: 'React • Next.js • TypeScript',
     valueStatement:
-      'Frontend Contractor helping European product teams ship high-performance web apps — from greenfield builds to complex existing platforms.',
+      'Frontend Contractor helping European product teams ship high-performance web apps, from greenfield builds to complex existing platforms.',
     punchline: 'On time. Built to scale. No excuses.',
     typewriterWords: [
       'high-performance',
@@ -41,8 +41,8 @@ export const siteConfig = {
   contact: {
     eyebrow: 'Available for contracts',
     heading: 'Need a senior frontend contractor?',
-    body: 'Available for remote React, Next.js, and TypeScript contract projects across Europe. Minimum 3-month engagements, embedded in your product team.',
-    primaryCta: 'Email',
+    body: 'Tell me about your team and what you’re building. I reply quickly, and I’ll be honest about whether I’m the right fit. Remote across Europe, open to new projects.',
+    primaryCta: 'Email me',
     secondaryCta: 'LinkedIn',
   },
 } as const

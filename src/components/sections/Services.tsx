@@ -1,109 +1,90 @@
 'use client'
 
-import { GradientLabel } from '@/components/ui/GradientLabel'
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
+import { SectionTag } from '@/components/ui/SectionTag'
+import { Magnetic } from '@/components/motion/Magnetic'
 import { services } from '@/data/services'
-import { smoothScrollTo } from '@/lib/smooth-scroll'
-
-function pad(n: number) {
-  return String(n).padStart(2, '0')
-}
-
-function scrollToContact() {
-  const el = document.getElementById('contact')
-  if (!el) return
-  const target = el.getBoundingClientRect().top + window.scrollY - 80
-  smoothScrollTo(target, 1200)
-}
+import { siteConfig } from '@/data/site'
+import { scrollToId } from '@/lib/lenis'
 
 function formatPrice(s: (typeof services)[number]) {
   if (s.pricing.type === 'custom') return 'Custom'
   const suffix = s.pricing.type === 'hourly' ? '/hr' : ''
-  return `\u20AC${s.pricing.amount}${suffix}`
+  return `€${s.pricing.amount}${suffix}`
 }
 
 export function Services() {
   return (
-    <section aria-label="Services">
-      <div className="max-w-6xl mx-auto">
-        <div>
-          <GradientLabel tracking="0.2em">How I Can Help</GradientLabel>
-        </div>
+    <div className="mx-auto max-w-5xl px-6 lg:px-12">
+      <Reveal className="rule pt-6">
+        <SectionTag>services</SectionTag>
+      </Reveal>
 
-        <h2 className="mt-5 text-5xl sm:text-6xl lg:text-[6rem] font-bold text-text-heading leading-[0.9] tracking-tight!">
-          <span
-            className="text-7xl sm:text-6xl lg:text-8xl tracking-tight!"
-            style={{
-              fontFamily: '"PP Playground", cursive',
-              fontWeight: 500,
-              fontStyle: 'italic',
-            }}
-          >
-            Services
-          </span>
+      <Reveal y={28} blur>
+        <h2 className="mt-8 lg:mt-12 font-sans font-bold text-text-heading leading-[0.96] tracking-[-0.02em] text-[clamp(2.4rem,6vw,4.75rem)]">
+          What I can own
         </h2>
+      </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
-          {services.map((service, i) => {
-            const isFeatured = service.featured
-            return (
-              <div
-                key={service.id}
-                className={`group relative rounded-2xl p-7 lg:p-9 border flex flex-col cursor-pointer ${
-                  isFeatured ? 'service-card-featured' : 'service-card'
-                }`}
-              >
-                {isFeatured && (
-                  <span className="service-card-badge absolute top-5 right-5 text-[12px] font-medium pt-1.5 tracking-[0.2em]! uppercase px-3 py-1 rounded-full">
-                    Popular
-                  </span>
-                )}
+      <Reveal delay={0.05}>
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-secondary">
+          Four ways teams bring me in. Pick the one that matches where you are,
+          or tell me what you need and we&apos;ll shape it together.
+        </p>
+      </Reveal>
 
-                <span className="service-card-number text-5xl lg:text-6xl font-bold leading-none select-none">
-                  {pad(i + 1)}
-                </span>
-
-                <h3 className="text-xl lg:text-4xl font-bold text-text-heading mt-4 mb-1 group-hover:text-accent transition-colors duration-500 tracking-wider!">
+      <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16" gap={0.1}>
+        {services.map((service) => (
+          <StaggerItem key={service.id} className="h-full">
+            <div className="surface flex h-full flex-col rounded-2xl p-7 lg:p-8">
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-semibold text-text-heading lg:text-2xl">
                   {service.title}
                 </h3>
-                <p className="service-card-subtitle text-[11px] font-mono uppercase tracking-widest! mb-4">
-                  {service.subtitle}
-                </p>
-                <p className="text-base text-text-secondary leading-relaxed mb-5 tracking-wider! font-[family-name:var(--font-body)]">
-                  {service.description}
-                </p>
-
-                <ul className="space-y-2 mb-6 flex-1">
-                  {service.features.slice(0, 4).map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-center gap-2.5 text-text-secondary text-base tracking-wider! font-[family-name:var(--font-body)]"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent/50 shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="service-card-divider pt-5 border-t flex items-center justify-between">
-                  <span className="text-[12px] font-mono uppercase tracking-widest! text-text-muted">
-                    {service.pricing.label}
+                {service.featured && (
+                  <span className="meta-tag shrink-0 rounded-full border-accent/30 px-2.5 py-0.5 text-[11px] text-accent">
+                    Most common
                   </span>
-                  <span className="text-2xl font-bold text-text-heading tracking-wider!">
-                    {formatPrice(service)}
-                  </span>
-                </div>
-
-                <button
-                  onClick={scrollToContact}
-                  className="contact-secondary-cta mt-5 inline-flex items-center justify-center gap-2 w-full py-3 text-base font-medium rounded-full border text-text-secondary hover:text-accent tracking-wider! cursor-pointer"
-                >
-                  Get in touch <span aria-hidden>&#8599;</span>
-                </button>
+                )}
               </div>
-            )
-          })}
+              <p className="mt-1 text-sm text-accent">{service.subtitle}</p>
+              <p className="mt-4 text-base leading-relaxed text-text-secondary">
+                {service.description}
+              </p>
+
+              <ul className="mt-5 flex-1 space-y-2.5">
+                {service.features.slice(0, 4).map((f) => (
+                  <li key={f} className="flex gap-2.5 text-sm text-text-secondary">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="rule mt-6 flex items-center justify-between pt-5">
+                <span className="text-xs text-text-muted">{service.pricing.label}</span>
+                <span className="text-lg font-semibold text-text-heading">
+                  {formatPrice(service)}
+                </span>
+              </div>
+            </div>
+          </StaggerItem>
+        ))}
+      </Stagger>
+
+      <Reveal delay={0.1}>
+        <div className="mt-12 flex flex-wrap items-center gap-4">
+          <Magnetic>
+            <button
+              onClick={() => scrollToId('contact')}
+              className="btn-primary cursor-pointer rounded-full px-6 py-3 text-sm font-medium"
+            >
+              Start a conversation
+            </button>
+          </Magnetic>
+          <span className="text-sm text-text-muted">{siteConfig.availability}</span>
         </div>
-      </div>
-    </section>
+      </Reveal>
+    </div>
   )
 }

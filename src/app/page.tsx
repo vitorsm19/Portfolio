@@ -1,69 +1,57 @@
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
-import { HeroParallax } from '@/components/sections/HeroParallax'
+import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
 import { Projects } from '@/components/sections/Projects'
 import { Services } from '@/components/sections/Services'
 import { ContractorFit } from '@/components/sections/ContractorFit'
 import { HowIWork } from '@/components/sections/HowIWork'
 import { Skills } from '@/components/sections/Skills'
+import { Faq } from '@/components/sections/Faq'
 import { Contact } from '@/components/sections/Contact'
-import { Marquee } from '@/components/ui/Marquee'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-bg-primary text-text-primary font-sans overflow-x-hidden selection:bg-accent/30">
+    <>
       <Navbar />
-      <HeroParallax />
+      <main className="overflow-x-clip">
+        <Hero />
 
-      {/* Marquee ticker */}
-      <div className="border-y border-overlay/6 bg-bg-secondary">
-        <Marquee
-          text="FREELANCE SENIOR FRONTEND DEVELOPER  //  REACT • NEXT.JS • TYPESCRIPT  //  REMOTE EUROPE  //  AVAILABLE FOR CONTRACT PROJECTS  //"
-          speed={35}
-          className="marquee-strip-text text-lg sm:text-xl font-bold uppercase tracking-[0.15em]!"
-        />
-      </div>
+        <section id="about" aria-label="About" className="py-24 lg:py-36">
+          <About />
+        </section>
 
-      <section
-        id="about"
-        aria-label="About"
-        className="py-28 lg:py-40 px-6 lg:px-16 bg-bg-secondary"
-      >
-        <About />
-      </section>
+        <section id="work" aria-label="Selected work" className="bg-bg-secondary py-24 lg:py-36">
+          <Projects />
+        </section>
 
-      <section id="work" aria-label="Projects">
-        <Projects />
-      </section>
+        <section id="services" aria-label="Services" className="py-24 lg:py-36">
+          <Services />
+        </section>
 
-      <section id="services" aria-label="Services" className="py-24 lg:py-36 px-6 lg:px-16 pt-0">
-        <Services />
-      </section>
+        <section id="approach" aria-label="What you can count on" className="bg-bg-secondary py-24 lg:py-36">
+          <ContractorFit />
+        </section>
 
-      <section
-        id="fit"
-        aria-label="Contractor Fit"
-        className="py-24 lg:py-32 px-6 lg:px-16 bg-bg-secondary"
-      >
-        <ContractorFit />
-      </section>
+        <section id="process" aria-label="Working together" className="py-24 lg:py-36">
+          <HowIWork />
+        </section>
 
-      <section id="process" aria-label="How I Work" className="py-24 lg:py-32 px-6 lg:px-16">
-        <HowIWork />
-      </section>
+        <section id="stack" aria-label="Tech stack" className="bg-bg-secondary py-24 lg:py-36">
+          <Skills />
+        </section>
 
-      <section aria-label="Technical skills">
-        <Skills />
-      </section>
+        <section id="faq" aria-label="Frequently asked questions" className="py-24 lg:py-36">
+          <Faq />
+        </section>
 
-      <section id="contact" aria-label="Contact" className="py-32 lg:py-44 px-6 lg:px-16">
-        <Contact />
-      </section>
-
+        <section id="contact" aria-label="Contact" className="bg-bg-secondary py-24 lg:py-36">
+          <Contact />
+        </section>
+      </main>
       <Footer />
       <ScrollToTop />
-    </div>
+    </>
   )
 }

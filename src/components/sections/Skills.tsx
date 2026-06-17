@@ -1,107 +1,90 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
-import { GradientLabel } from '@/components/ui/GradientLabel'
+import { Reveal } from '@/components/motion/Reveal'
+import { SectionTag } from '@/components/ui/SectionTag'
 import { skills } from '@/data/skills'
 import { SkillIcon } from '@/components/ui/SkillIcon'
 
-const primarySkills = skills.filter((s) => s.tier === 'primary')
-const secondarySkills = skills.filter((s) => s.tier === 'secondary')
+const primary = skills.filter((s) => s.tier === 'primary')
+const secondary = skills.filter((s) => s.tier === 'secondary')
 
 export function Skills() {
-  const reduced = useReducedMotion()
-
   return (
-    <section
-      aria-label="Technical skills"
-      className="relative py-24 lg:py-36 bg-bg-secondary overflow-hidden"
-    >
+    <div className="relative">
+      <div className="mx-auto max-w-5xl px-6 lg:px-12">
+        <Reveal className="rule pt-6">
+          <SectionTag>the-stack</SectionTag>
+        </Reveal>
+        <Reveal y={28} blur>
+          <h2 className="mt-8 lg:mt-12 font-sans font-bold text-text-heading leading-[0.96] tracking-[-0.02em] text-[clamp(2.4rem,6vw,4.75rem)]">
+            Tools I reach for
+          </h2>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-secondary">
+            Deep in the React, Next.js, and TypeScript world, comfortable across the
+            wider frontend stack.
+          </p>
+        </Reveal>
+      </div>
+
       <style>{`
-        @keyframes skillsMarqueeRight {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-10%); }
-        }
-        @keyframes skillsMarqueeLeft {
-          0% { transform: translateX(-10%); }
-          100% { transform: translateX(0); }
-        }
-        .skills-row-primary { animation: skillsMarqueeRight 35s linear infinite; }
-        .skills-row-secondary { animation: skillsMarqueeLeft 45s linear infinite; }
-        @media (max-width: 640px) {
-          .skills-row-primary { animation-duration: 4s; }
-          .skills-row-secondary { animation-duration: 6s; }
+        @keyframes skillsMarqueeRight { 0% { transform: translateX(0); } 100% { transform: translateX(-10%); } }
+        @keyframes skillsMarqueeLeft { 0% { transform: translateX(-10%); } 100% { transform: translateX(0); } }
+        .skills-row-primary { animation: skillsMarqueeRight 10s linear infinite; }
+        .skills-row-secondary { animation: skillsMarqueeLeft 14s linear infinite; }
+        .skills-marquee:hover .skills-row-primary,
+        .skills-marquee:hover .skills-row-secondary { animation-play-state: paused; }
+        @media (prefers-reduced-motion: reduce) {
+          .skills-row-primary, .skills-row-secondary { animation: none; }
         }
       `}</style>
 
-      {/* Background ghost text */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none pt-24 lg:pt-42"
-        aria-hidden="true"
-      >
-        <span className="skill-stack-ghost text-[50vw] md:text-[20vw] font-bold uppercase tracking-tight! leading-none">
-          STACK
-        </span>
-      </div>
-
-      {/* Heading — centered */}
-      <motion.div
-        className="relative z-10 text-center px-6 mb-16 lg:mb-24"
-        initial={reduced ? false : { opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-      >
-        <GradientLabel tracking="0.22em">Tech Stack</GradientLabel>
-        <h2 className="mt-5 text-5xl sm:text-6xl lg:text-[6.5rem] font-bold text-text-heading leading-[0.9] tracking-tight!">
-          Tools I work with.
-        </h2>
-      </motion.div>
-
-      {/* Primary skills — marquee scrolling RIGHT */}
-      <div className="relative z-10 mb-8">
-        <div className="flex skills-row-primary">
-          {Array(10).fill(primarySkills).flat().map(
-            (skill, i) => (
+      <div className="skills-marquee relative mt-12 overflow-hidden lg:mt-16">
+        {/* Primary row — scrolls right */}
+        <div className="mb-4 flex skills-row-primary">
+          {Array(10)
+            .fill(primary)
+            .flat()
+            .map((skill, i) => (
               <div
-                key={`${skill.name}-${i}`}
-                className="skill-pill group shrink-0 flex items-center gap-4 lg:gap-5 mx-4 lg:mx-6 px-5 lg:px-7 py-4 lg:py-5 rounded-2xl border backdrop-blur-sm cursor-pointer"
+                key={`p-${skill.name}-${i}`}
+                className="group mx-3 flex shrink-0 items-center gap-3.5 rounded-2xl border border-line bg-[color-mix(in_oklab,var(--color-overlay)_3%,transparent)] px-5 py-3.5"
               >
-                <div className="skill-icon-wrapper">
+                <span className="grayscale transition duration-500 group-hover:grayscale-0 group-hover:scale-110">
                   <SkillIcon skill={skill} size="primary" />
-                </div>
-                <span className="text-lg lg:text-xl font-bold text-text-muted group-hover:text-text-heading transition-colors duration-500 tracking-wider! uppercase whitespace-nowrap">
+                </span>
+                <span className="whitespace-nowrap text-base font-semibold uppercase text-text-secondary transition-colors duration-300 group-hover:text-text-heading lg:text-lg">
                   {skill.label}
                 </span>
               </div>
-            ),
-          )}
+            ))}
         </div>
-      </div>
 
-      {/* Secondary skills — marquee scrolling LEFT (opposite direction) */}
-      <div className="relative z-10">
+        {/* Secondary row — scrolls left */}
         <div className="flex skills-row-secondary">
-          {Array(10).fill(secondarySkills).flat().map(
-            (skill, i) => (
+          {Array(10)
+            .fill(secondary)
+            .flat()
+            .map((skill, i) => (
               <div
-                key={`${skill.name}-${i}`}
-                className="skill-pill-secondary group shrink-0 flex items-center gap-3 mx-3 lg:mx-4 px-4 lg:px-5 py-2.5 lg:py-3 rounded-xl border cursor-pointer"
+                key={`s-${skill.name}-${i}`}
+                className="group mx-2.5 flex shrink-0 items-center gap-2.5 rounded-xl border border-line bg-[color-mix(in_oklab,var(--color-overlay)_2%,transparent)] px-3.5 py-2.5"
               >
-                <div className="skill-icon-wrapper">
+                <span className="grayscale transition duration-500 group-hover:grayscale-0">
                   <SkillIcon skill={skill} size="secondary" />
-                </div>
-                <span className="text-sm font-medium text-text-muted group-hover:text-text-secondary transition-colors duration-500 tracking-wider! whitespace-nowrap">
+                </span>
+                <span className="whitespace-nowrap text-sm font-medium text-text-muted transition-colors duration-300 group-hover:text-text-secondary">
                   {skill.label}
                 </span>
               </div>
-            ),
-          )}
+            ))}
         </div>
-      </div>
 
-      {/* Edge fades — left and right */}
-      <div className="absolute inset-y-0 left-0 w-24 lg:w-40 bg-linear-to-r from-bg-secondary to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-24 lg:w-40 bg-linear-to-l from-bg-secondary to-transparent z-20 pointer-events-none" />
-    </section>
+        {/* Edge fades — match the section band */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-bg-secondary to-transparent lg:w-32" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-bg-secondary to-transparent lg:w-32" />
+      </div>
+    </div>
   )
 }

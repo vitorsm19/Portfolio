@@ -29,7 +29,7 @@ export const projects: Project[] = [
     title: 'Premier League',
     role: 'Senior Frontend Contractor',
     description:
-      'Contributed to the official high-traffic platform serving millions of football fans worldwide — live scores, fixtures, results, player statistics, and Fantasy Premier League features.',
+      'Contributed to the official platform as part of a large frontend team: live scores, fixtures, results, player statistics, and Fantasy Premier League features.',
     url: 'https://www.premierleague.com',
     tech: ['React', 'TypeScript', 'SSR', 'CMS'],
     logo: premierLeagueLogo,
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     title: 'Tottenham Hotspur',
     role: 'Senior Frontend Contractor',
     description:
-      'Built fan engagement features and responsive interfaces for the official digital platform — match-day flows, fixtures, ticketing journeys, and dynamic content.',
+      'Built fan engagement features and responsive interfaces for the official digital platform: match-day flows, fixtures, ticketing journeys, and dynamic content.',
     url: 'https://www.tottenhamhotspur.com',
     tech: ['React', 'TypeScript', 'SSR'],
     logo: tottenhamLogo,

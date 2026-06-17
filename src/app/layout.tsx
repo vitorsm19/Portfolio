@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from 'next'
 import { Manrope } from 'next/font/google'
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
+import { SmoothScroll } from '@/components/motion/SmoothScroll'
 import { themeBootstrapScript } from '@/lib/theme'
+import { faqs } from '@/data/faq'
 import './globals.css'
 
 const manrope = Manrope({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
-  variable: '--font-body',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-manrope',
   display: 'swap',
 })
 
@@ -15,8 +17,8 @@ const SITE_URL = 'https://vitormesquita.com'
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#030202' },
-    { media: '(prefers-color-scheme: light)', color: '#f7f5f0' },
+    { media: '(prefers-color-scheme: dark)', color: '#08090a' },
+    { media: '(prefers-color-scheme: light)', color: '#e8eae2' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -26,11 +28,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Vitor Mesquita — Freelance Senior Frontend Developer / React Contractor',
+    default: 'Vitor Mesquita, Senior Frontend Developer & React Contractor',
     template: '%s | Vitor Mesquita',
   },
   description:
-    'Freelance Senior Frontend Developer and Frontend Contractor based in Barcelona, available for remote React, Next.js, and TypeScript contract projects across Europe. 6+ years shipping high-performance frontend products for Sony, Premier League, Tottenham Hotspur, LIV Golf, and VELUX.',
+    'Freelance senior frontend developer and React contractor, remote across Europe. 6+ years building high-performance React, Next.js, and TypeScript products for teams like Premier League and VELUX.',
   keywords: [
     'Freelance Senior Frontend Developer',
     'Frontend Contractor',
@@ -74,16 +76,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: SITE_URL,
-    siteName: 'Vitor Mesquita — Freelance Senior Frontend Developer',
+    siteName: 'Vitor Mesquita, Freelance Senior Frontend Developer',
     title: 'Freelance Senior Frontend Developer | React • Next.js • TypeScript',
     description:
-      'Frontend Contractor helping European product teams build high-performance React, Next.js, and TypeScript products. Remote, EU-based, available for 3+ month contracts.',
+      'Frontend Contractor helping European product teams build high-performance React, Next.js, and TypeScript products. Remote, EU-based, available for new contracts.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Vitor Mesquita — Freelance Senior Frontend Developer',
+        alt: 'Vitor Mesquita, Freelance Senior Frontend Developer',
         type: 'image/png',
       },
     ],
@@ -123,7 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
-      <body className="bg-bg-primary text-overlay/87">
+      <body className="bg-bg-primary text-text-primary antialiased">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
@@ -133,6 +135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
+        <SmoothScroll />
         {children}
         <NoiseOverlay />
 
@@ -147,7 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   '@type': 'WebSite',
                   '@id': `${SITE_URL}/#website`,
                   url: SITE_URL,
-                  name: 'Vitor Mesquita — Freelance Senior Frontend Developer',
+                  name: 'Vitor Mesquita, Freelance Senior Frontend Developer',
                   description:
                     'Freelance Senior Frontend Developer and Frontend Contractor available for remote React, Next.js, and TypeScript contract projects across Europe.',
                   publisher: { '@id': `${SITE_URL}/#person` },
@@ -192,7 +195,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 {
                   '@type': 'ProfessionalService',
                   '@id': `${SITE_URL}/#service`,
-                  name: 'Vitor Mesquita — Freelance Frontend Contracting',
+                  name: 'Vitor Mesquita, Freelance Frontend Contracting',
                   provider: { '@id': `${SITE_URL}/#person` },
                   url: SITE_URL,
                   description:
@@ -241,7 +244,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           '@type': 'Service',
                           name: 'Frontend Rescue & Performance',
                           description:
-                            'Senior help for slow, messy, or hard-to-maintain frontend codebases — audits, performance fixes, Core Web Vitals, accessibility, refactoring.',
+                            'Senior help for slow, messy, or hard-to-maintain frontend codebases: audits, performance fixes, Core Web Vitals, accessibility, refactoring.',
                         },
                       },
                       {
@@ -255,6 +258,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       },
                     ],
                   },
+                },
+                {
+                  '@type': 'Organization',
+                  '@id': `${SITE_URL}/#organization`,
+                  name: 'Vitor Mesquita',
+                  url: SITE_URL,
+                  logo: {
+                    '@type': 'ImageObject',
+                    url: `${SITE_URL}/icon-512.png`,
+                    width: 512,
+                    height: 512,
+                  },
+                  sameAs: [
+                    'https://github.com/vitorsm19/',
+                    'https://www.linkedin.com/in/vitormesquita19/',
+                  ],
+                },
+                {
+                  '@type': 'ProfilePage',
+                  '@id': `${SITE_URL}/#webpage`,
+                  url: SITE_URL,
+                  name: 'Vitor Mesquita, Senior Frontend Developer & React Contractor',
+                  description:
+                    'Freelance senior frontend developer and React contractor, remote across Europe.',
+                  inLanguage: 'en',
+                  isPartOf: { '@id': `${SITE_URL}/#website` },
+                  about: { '@id': `${SITE_URL}/#person` },
+                  primaryImageOfPage: {
+                    '@type': 'ImageObject',
+                    url: `${SITE_URL}/og-image.png`,
+                  },
+                },
+                {
+                  '@type': 'FAQPage',
+                  '@id': `${SITE_URL}/#faq`,
+                  mainEntity: faqs.map((f) => ({
+                    '@type': 'Question',
+                    name: f.q,
+                    acceptedAnswer: { '@type': 'Answer', text: f.a },
+                  })),
                 },
               ],
             }),
