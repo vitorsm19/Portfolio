@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="overflow-x-clip">
+      <main id="main" className="overflow-x-clip">
         <Hero />
 
         <section id="about" aria-label="About" className="py-24 lg:py-36">

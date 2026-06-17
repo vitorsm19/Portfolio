@@ -90,14 +90,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Freelance Senior Frontend Developer | React • Next.js • TypeScript',
-    description:
-      'Frontend Contractor helping European product teams build high-performance React, Next.js, and TypeScript products.',
-    images: ['/og-image.png'],
-    creator: '@vitorsm19',
-  },
   alternates: {
     canonical: SITE_URL,
   },
@@ -126,6 +118,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className="bg-bg-primary text-text-primary antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+        >
+          Skip to content
+        </a>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
@@ -159,8 +157,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   '@type': 'Person',
                   '@id': `${SITE_URL}/#person`,
                   name: 'Vitor Mesquita',
-                  jobTitle: 'Freelance Senior Frontend Developer / Frontend Contractor',
+                  jobTitle: 'Senior Frontend Developer & React Contractor',
+                  description:
+                    'Freelance senior frontend developer with 6+ years building high-performance React, Next.js, and TypeScript products for global product teams. Remote across Europe.',
                   url: SITE_URL,
+                  image: `${SITE_URL}/profile.png`,
+                  email: 'vitormesquita190902@gmail.com',
+                  knowsLanguage: ['English'],
                   address: {
                     '@type': 'PostalAddress',
                     addressLocality: 'Barcelona',
@@ -170,6 +173,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     'https://github.com/vitorsm19/',
                     'https://www.linkedin.com/in/vitormesquita19/',
                   ],
+                  hasOccupation: {
+                    '@type': 'Occupation',
+                    name: 'Frontend Developer',
+                    occupationLocation: { '@type': 'Place', name: 'Europe' },
+                    skills:
+                      'React, Next.js, TypeScript, frontend architecture, design systems, performance optimization, accessibility, testing',
+                  },
                   knowsAbout: [
                     'React',
                     'Next.js',
@@ -187,10 +197,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     'Server-Side Rendering',
                     'Core Web Vitals',
                   ],
-                  worksFor: {
-                    '@type': 'Organization',
-                    name: 'Freelance / Independent Contractor',
-                  },
+                  worksFor: { '@id': `${SITE_URL}/#organization` },
                 },
                 {
                   '@type': 'ProfessionalService',
@@ -264,6 +271,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   '@id': `${SITE_URL}/#organization`,
                   name: 'Vitor Mesquita',
                   url: SITE_URL,
+                  description:
+                    'Independent frontend contracting: senior React, Next.js, and TypeScript delivery for European product teams.',
+                  email: 'vitormesquita190902@gmail.com',
+                  founder: { '@id': `${SITE_URL}/#person` },
                   logo: {
                     '@type': 'ImageObject',
                     url: `${SITE_URL}/icon-512.png`,
