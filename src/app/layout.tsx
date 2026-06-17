@@ -97,6 +97,175 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Emitted as separate <script> blocks (one top-level @type each) rather than a
+  // single @graph, so simple schema scanners detect each type. Cross-references
+  // via @id still resolve across blocks for Google.
+  const schemaNodes = [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: 'Vitor Mesquita, Freelance Senior Frontend Developer',
+      description:
+        'Freelance Senior Frontend Developer and Frontend Contractor available for remote React, Next.js, and TypeScript contract projects across Europe.',
+      publisher: { '@id': `${SITE_URL}/#person` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Vitor Mesquita',
+      jobTitle: 'Senior Frontend Developer & React Contractor',
+      description:
+        'Freelance senior frontend developer with 6+ years building high-performance React, Next.js, and TypeScript products for global product teams. Remote across Europe.',
+      url: SITE_URL,
+      image: `${SITE_URL}/profile.png`,
+      email: 'vitormesquita190902@gmail.com',
+      knowsLanguage: ['English'],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Barcelona',
+        addressCountry: 'ES',
+      },
+      sameAs: [
+        'https://github.com/vitorsm19/',
+        'https://www.linkedin.com/in/vitormesquita19/',
+      ],
+      hasOccupation: {
+        '@type': 'Occupation',
+        name: 'Frontend Developer',
+        occupationLocation: { '@type': 'Place', name: 'Europe' },
+        skills:
+          'React, Next.js, TypeScript, frontend architecture, design systems, performance optimization, accessibility, testing',
+      },
+      knowsAbout: [
+        'React',
+        'Next.js',
+        'TypeScript',
+        'Frontend Architecture',
+        'Design Systems',
+        'Performance Optimization',
+        'Accessibility',
+        'Testing',
+        'E-Commerce',
+        'SaaS Dashboards',
+        'Sports Platforms',
+        'Vue.js',
+        'Nuxt',
+        'Server-Side Rendering',
+        'Core Web Vitals',
+      ],
+      worksFor: { '@id': `${SITE_URL}/#organization` },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Vitor Mesquita',
+      url: SITE_URL,
+      description:
+        'Independent frontend contracting: senior React, Next.js, and TypeScript delivery for European product teams.',
+      email: 'vitormesquita190902@gmail.com',
+      founder: { '@id': `${SITE_URL}/#person` },
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/icon-512.png`,
+        width: 512,
+        height: 512,
+      },
+      sameAs: [
+        'https://github.com/vitorsm19/',
+        'https://www.linkedin.com/in/vitormesquita19/',
+      ],
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${SITE_URL}/#webpage`,
+      url: SITE_URL,
+      name: 'Vitor Mesquita, Senior Frontend Developer & React Contractor',
+      description:
+        'Freelance senior frontend developer and React contractor, remote across Europe.',
+      inLanguage: 'en',
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: { '@id': `${SITE_URL}/#person` },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/og-image.png`,
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${SITE_URL}/#faq`,
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${SITE_URL}/#service`,
+      name: 'Vitor Mesquita, Freelance Frontend Contracting',
+      provider: { '@id': `${SITE_URL}/#person` },
+      url: SITE_URL,
+      description:
+        'Senior frontend contracting services for European product teams: React, Next.js, and TypeScript delivery, frontend architecture, design systems, performance optimization, and rescue engagements.',
+      serviceType: [
+        'Dedicated Frontend Contractor',
+        'Greenfield Frontend Builds',
+        'Frontend Rescue & Performance',
+        'E-commerce & Product Frontends',
+      ],
+      areaServed: { '@type': 'Place', name: 'Europe' },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Frontend Contracting Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Dedicated Frontend Contractor',
+              description:
+                'Senior React, Next.js, and TypeScript contractor embedded in your product team. Frontend architecture, design systems, testing, accessibility, and performance.',
+            },
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: '45',
+              priceCurrency: 'EUR',
+              unitText: 'HOUR',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Greenfield Frontend Builds',
+              description:
+                'Production-ready frontend applications built from scratch using React, Next.js, and TypeScript with scalable component architecture.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Frontend Rescue & Performance',
+              description:
+                'Senior help for slow, messy, or hard-to-maintain frontend codebases: audits, performance fixes, Core Web Vitals, accessibility, refactoring.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'E-commerce & Product Frontends',
+              description:
+                'Frontend delivery for e-commerce, SaaS dashboards, sports platforms, and high-traffic product experiences.',
+            },
+          },
+        ],
+      },
+    },
+  ]
+
   return (
     <html lang="en" className={manrope.variable} suppressHydrationWarning>
       <head>
@@ -137,183 +306,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {children}
         <NoiseOverlay />
 
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@graph': [
-                {
-                  '@type': 'WebSite',
-                  '@id': `${SITE_URL}/#website`,
-                  url: SITE_URL,
-                  name: 'Vitor Mesquita, Freelance Senior Frontend Developer',
-                  description:
-                    'Freelance Senior Frontend Developer and Frontend Contractor available for remote React, Next.js, and TypeScript contract projects across Europe.',
-                  publisher: { '@id': `${SITE_URL}/#person` },
-                },
-                {
-                  '@type': 'Person',
-                  '@id': `${SITE_URL}/#person`,
-                  name: 'Vitor Mesquita',
-                  jobTitle: 'Senior Frontend Developer & React Contractor',
-                  description:
-                    'Freelance senior frontend developer with 6+ years building high-performance React, Next.js, and TypeScript products for global product teams. Remote across Europe.',
-                  url: SITE_URL,
-                  image: `${SITE_URL}/profile.png`,
-                  email: 'vitormesquita190902@gmail.com',
-                  knowsLanguage: ['English'],
-                  address: {
-                    '@type': 'PostalAddress',
-                    addressLocality: 'Barcelona',
-                    addressCountry: 'ES',
-                  },
-                  sameAs: [
-                    'https://github.com/vitorsm19/',
-                    'https://www.linkedin.com/in/vitormesquita19/',
-                  ],
-                  hasOccupation: {
-                    '@type': 'Occupation',
-                    name: 'Frontend Developer',
-                    occupationLocation: { '@type': 'Place', name: 'Europe' },
-                    skills:
-                      'React, Next.js, TypeScript, frontend architecture, design systems, performance optimization, accessibility, testing',
-                  },
-                  knowsAbout: [
-                    'React',
-                    'Next.js',
-                    'TypeScript',
-                    'Frontend Architecture',
-                    'Design Systems',
-                    'Performance Optimization',
-                    'Accessibility',
-                    'Testing',
-                    'E-Commerce',
-                    'SaaS Dashboards',
-                    'Sports Platforms',
-                    'Vue.js',
-                    'Nuxt',
-                    'Server-Side Rendering',
-                    'Core Web Vitals',
-                  ],
-                  worksFor: { '@id': `${SITE_URL}/#organization` },
-                },
-                {
-                  '@type': 'ProfessionalService',
-                  '@id': `${SITE_URL}/#service`,
-                  name: 'Vitor Mesquita, Freelance Frontend Contracting',
-                  provider: { '@id': `${SITE_URL}/#person` },
-                  url: SITE_URL,
-                  description:
-                    'Senior frontend contracting services for European product teams: React, Next.js, and TypeScript delivery, frontend architecture, design systems, performance optimization, and rescue engagements.',
-                  serviceType: [
-                    'Dedicated Frontend Contractor',
-                    'Greenfield Frontend Builds',
-                    'Frontend Rescue & Performance',
-                    'E-commerce & Product Frontends',
-                  ],
-                  areaServed: {
-                    '@type': 'Place',
-                    name: 'Europe',
-                  },
-                  hasOfferCatalog: {
-                    '@type': 'OfferCatalog',
-                    name: 'Frontend Contracting Services',
-                    itemListElement: [
-                      {
-                        '@type': 'Offer',
-                        itemOffered: {
-                          '@type': 'Service',
-                          name: 'Dedicated Frontend Contractor',
-                          description:
-                            'Senior React, Next.js, and TypeScript contractor embedded in your product team. Frontend architecture, design systems, testing, accessibility, and performance.',
-                        },
-                        priceSpecification: {
-                          '@type': 'UnitPriceSpecification',
-                          price: '45',
-                          priceCurrency: 'EUR',
-                          unitText: 'HOUR',
-                        },
-                      },
-                      {
-                        '@type': 'Offer',
-                        itemOffered: {
-                          '@type': 'Service',
-                          name: 'Greenfield Frontend Builds',
-                          description:
-                            'Production-ready frontend applications built from scratch using React, Next.js, and TypeScript with scalable component architecture.',
-                        },
-                      },
-                      {
-                        '@type': 'Offer',
-                        itemOffered: {
-                          '@type': 'Service',
-                          name: 'Frontend Rescue & Performance',
-                          description:
-                            'Senior help for slow, messy, or hard-to-maintain frontend codebases: audits, performance fixes, Core Web Vitals, accessibility, refactoring.',
-                        },
-                      },
-                      {
-                        '@type': 'Offer',
-                        itemOffered: {
-                          '@type': 'Service',
-                          name: 'E-commerce & Product Frontends',
-                          description:
-                            'Frontend delivery for e-commerce, SaaS dashboards, sports platforms, and high-traffic product experiences.',
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  '@type': 'Organization',
-                  '@id': `${SITE_URL}/#organization`,
-                  name: 'Vitor Mesquita',
-                  url: SITE_URL,
-                  description:
-                    'Independent frontend contracting: senior React, Next.js, and TypeScript delivery for European product teams.',
-                  email: 'vitormesquita190902@gmail.com',
-                  founder: { '@id': `${SITE_URL}/#person` },
-                  logo: {
-                    '@type': 'ImageObject',
-                    url: `${SITE_URL}/icon-512.png`,
-                    width: 512,
-                    height: 512,
-                  },
-                  sameAs: [
-                    'https://github.com/vitorsm19/',
-                    'https://www.linkedin.com/in/vitormesquita19/',
-                  ],
-                },
-                {
-                  '@type': 'ProfilePage',
-                  '@id': `${SITE_URL}/#webpage`,
-                  url: SITE_URL,
-                  name: 'Vitor Mesquita, Senior Frontend Developer & React Contractor',
-                  description:
-                    'Freelance senior frontend developer and React contractor, remote across Europe.',
-                  inLanguage: 'en',
-                  isPartOf: { '@id': `${SITE_URL}/#website` },
-                  about: { '@id': `${SITE_URL}/#person` },
-                  primaryImageOfPage: {
-                    '@type': 'ImageObject',
-                    url: `${SITE_URL}/og-image.png`,
-                  },
-                },
-                {
-                  '@type': 'FAQPage',
-                  '@id': `${SITE_URL}/#faq`,
-                  mainEntity: faqs.map((f) => ({
-                    '@type': 'Question',
-                    name: f.q,
-                    acceptedAnswer: { '@type': 'Answer', text: f.a },
-                  })),
-                },
-              ],
-            }),
-          }}
-        />
+        {/* JSON-LD Structured Data — one script per type for broad detection */}
+        {schemaNodes.map((node) => (
+          <script
+            key={node['@id']}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({ '@context': 'https://schema.org', ...node }),
+            }}
+          />
+        ))}
       </body>
     </html>
   )
