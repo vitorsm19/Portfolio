@@ -17,7 +17,7 @@ export const siteConfig = {
   about: {
     paragraphs: [
       "I've spent 6+ years building high-performance frontend products for global brands in sports, e-commerce, SaaS, and tech.",
-      'I now work as a Freelance Senior Frontend Developer, helping European teams build, maintain, and scale React, Next.js, and TypeScript applications.',
+      'I work as a Freelance Senior Frontend Developer, helping European teams build, maintain, and scale React, Next.js, and TypeScript applications.',
       'I can join an existing product team, take ownership of frontend delivery, translate Figma into production-ready interfaces, improve performance, and help teams ship faster with clean, maintainable code.',
     ],
   },
