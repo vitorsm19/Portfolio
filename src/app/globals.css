@@ -344,20 +344,6 @@ a:hover > .logo-mark,
   color: var(--color-on-accent-surface);
 }
 
-/* Per-theme portrait swap. Both mounted, CSS picks one, no hydration flash. */
-.img-light {
-  display: block;
-}
-.img-dark {
-  display: none;
-}
-:root[data-theme='dark'] .img-light {
-  display: none;
-}
-:root[data-theme='dark'] .img-dark {
-  display: block;
-}
-
 /* Header goes from transparent to paper once the page has moved. */
 .site-header {
   transition:

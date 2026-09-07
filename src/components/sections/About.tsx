@@ -4,8 +4,7 @@ import Image from 'next/image'
 import { Reveal, Wipe, Stagger, StaggerItem } from '@/components/motion/Reveal'
 import { TextReveal } from '@/components/motion/TextReveal'
 import { siteConfig } from '@/data/site'
-import aboutPicDark from '@/assets/about-pic.png'
-import aboutPicLight from '@/assets/about-pic-light.jpg'
+import aboutPic from '@/assets/about-pic.jpg'
 
 export function About() {
   const { lede, body, facts } = siteConfig.about
@@ -17,23 +16,14 @@ export function About() {
         <Wipe curtain="bg-paper-deep" className="col-span-12 sm:col-span-6 lg:col-span-4">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] border border-line bg-paper-lift">
             <Image
-              src={aboutPicLight}
+              src={aboutPic}
               alt="Vitor Mesquita"
               fill
               sizes="(max-width: 1024px) 50vw, 33vw"
-              className="img-light object-cover object-top"
-            />
-            <Image
-              src={aboutPicDark}
-              alt="Vitor Mesquita"
-              fill
-              sizes="(max-width: 1024px) 50vw, 33vw"
-              className="img-dark object-cover object-top"
+              className="object-cover object-center"
             />
           </div>
-          <p className="meta mt-3">
-            {siteConfig.name}, {siteConfig.location}
-          </p>
+          <p className="meta mt-3">{siteConfig.name}</p>
         </Wipe>
 
         <div className="col-span-12 lg:col-span-7 lg:col-start-6">
