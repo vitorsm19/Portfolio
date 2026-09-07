@@ -5,6 +5,7 @@ export const siteConfig = {
   location: 'Barcelona',
   citizenship: 'EU citizen',
   availability: 'Available for new contracts',
+  rate: { amount: 60, currency: 'EUR', symbol: '€', unit: '/hr' },
   github: {
     username: 'vitorsm19',
     url: 'https://github.com/vitorsm19/',

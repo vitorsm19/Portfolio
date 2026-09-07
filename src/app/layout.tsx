@@ -5,6 +5,7 @@ import { Grain } from '@/components/ui/Grain'
 import { SmoothScroll } from '@/components/motion/SmoothScroll'
 import { themeBootstrapScript } from '@/lib/theme'
 import { faqs } from '@/data/faq'
+import { siteConfig } from '@/data/site'
 import './globals.css'
 
 const instrument = Instrument_Sans({
@@ -245,8 +246,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
             priceSpecification: {
               '@type': 'UnitPriceSpecification',
-              price: '60',
-              priceCurrency: 'EUR',
+              price: String(siteConfig.rate.amount),
+              priceCurrency: siteConfig.rate.currency,
               unitText: 'HOUR',
             },
           },

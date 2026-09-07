@@ -1,3 +1,5 @@
+import { siteConfig } from '@/data/site'
+
 export interface Faq {
   q: string
   a: string
@@ -26,6 +28,6 @@ export const faqs: Faq[] = [
   },
   {
     q: 'What does it cost?',
-    a: 'From EUR 60 per hour, with monthly rates for longer engagements. The exact number depends on scope, duration and how much ownership the role carries.',
+    a: `From ${siteConfig.rate.currency} ${siteConfig.rate.amount} per hour, with monthly rates for longer engagements. The exact number depends on scope, duration and how much ownership the role carries.`,
   },
 ]

@@ -3,6 +3,7 @@
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
 import { TextReveal } from '@/components/motion/TextReveal'
 import { engagements } from '@/data/engagements'
+import { siteConfig } from '@/data/site'
 
 /**
  * Four ways in, on an asymmetric grid so nothing reads as a pricing table.
@@ -31,7 +32,17 @@ export function Engagements() {
       <Stagger className="mt-14 grid grid-cols-12 gap-5 lg:mt-20" gap={0.1}>
         <StaggerItem className="col-span-12 lg:col-span-7">
           <div className="on-accent flex h-full flex-col rounded-[14px] bg-accent-surface p-8 text-on-accent-surface lg:p-10">
-            <h3 className="display display-sm text-on-accent-surface">{lead.title}</h3>
+            <div className="flex items-start justify-between gap-6">
+              <h3 className="display display-sm text-on-accent-surface">{lead.title}</h3>
+              <p className="shrink-0 text-right">
+                <span className="meta block">From</span>
+                <span className="font-display text-xl font-bold leading-none tracking-[-0.012em] opacity-75 lg:text-2xl">
+                  <span className="text-[0.62em] opacity-80">{siteConfig.rate.symbol}</span>
+                  {siteConfig.rate.amount}
+                  <span className="text-[0.55em] opacity-80">{siteConfig.rate.unit}</span>
+                </span>
+              </p>
+            </div>
             <p className="mt-4 max-w-[44ch] text-lg leading-relaxed">{lead.summary}</p>
             <ul className="mt-8 grid gap-2.5 sm:grid-cols-2">
               {lead.points.map((point) => (
