@@ -1,345 +1,365 @@
 @import 'tailwindcss';
 
-/* ===== Thunder — display font ===== */
-@font-face {
-  font-family: 'Thunder';
-  src: url('/fonts/Thunder-LightLC.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Thunder';
-  src: url('/fonts/Thunder-LC.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Thunder';
-  src: url('/fonts/Thunder-MediumLC.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Thunder';
-  src: url('/fonts/Thunder-SemiBoldLC.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Thunder';
-  src: url('/fonts/Thunder-BoldLC.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* ===== PP Playground — calligraphic signature accent ===== */
-@font-face {
-  font-family: 'PP Playground';
-  src: url('/fonts/PPPlayground-Medium.otf') format('opentype');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'PP Playground';
-  src: url('/fonts/PPPlayground-Medium.otf') format('opentype');
-  font-weight: 400 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* ===== Design Tokens (Tailwind v4 CSS-first) =====
- * `@theme` declares utility tokens that dereference to CSS vars on :root,
- * so `bg-bg-primary`, `text-overlay/60`, etc. follow the active theme.
- * :root holds DARK; :root[data-theme="light"] overrides. Both are
- * first-class — neither is an inversion of the other. */
+/* ===== Tokens (Tailwind v4 CSS-first) =====
+ * Light is the baseline. Dark is a designed counterpart, not an inversion.
+ * Ground is cool concrete, never cream; ink is cool near-black, never pure. */
 @theme {
+  --color-paper: var(--paper);
+  --color-paper-lift: var(--paper-lift);
+  --color-paper-deep: var(--paper-deep);
+
+  --color-ink: var(--ink);
+  --color-ink-body: var(--ink-body);
+  --color-ink-mute: var(--ink-mute);
+
   --color-accent-rgb: var(--accent-rgb);
   --color-accent: rgb(var(--color-accent-rgb));
-  --color-accent-soft-rgb: var(--accent-soft-rgb);
-  --color-accent-soft: rgb(var(--color-accent-soft-rgb));
+  --color-accent-deep: var(--accent-deep);
+  --color-on-accent: var(--on-accent);
 
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-bg-elevated: var(--bg-elevated);
+  --color-ink-rgb: var(--ink-rgb);
+  --color-line: rgb(var(--ink-rgb) / 0.14);
+  --color-line-strong: rgb(var(--ink-rgb) / 0.28);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-text-heading: var(--text-heading);
+  --font-display: var(--font-thunder), 'Haettenschweiler', 'Arial Narrow', sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', monospace;
 
-  --color-overlay-rgb: var(--overlay-rgb);
-  --color-overlay: rgb(var(--color-overlay-rgb));
-
-  --color-status-online-rgb: var(--status-online-rgb);
-  --color-status-online: rgb(var(--color-status-online-rgb));
-
-  --color-line: var(--line);
-
-  --font-sans: 'Thunder', ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-manrope), 'DM Sans', ui-sans-serif, system-ui, sans-serif;
-
-  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-sharp: 2px;
 }
 
 :root {
-  /* DARK — brand baseline */
-  --bg-primary: #08090a;           /* near-black, a hair lifted from pure ink — calmer */
-  --bg-secondary: #0f1011;         /* quiet alternating band */
-  --bg-elevated: #131517;          /* lifted card surface */
-  --text-primary: #e7e7e8;
-  --text-secondary: #a8aaae;
-  --text-muted: #8b8e93;          /* lifted for ≥4.5:1 on near-black at small sizes */
-  --text-heading: #f4f4f5;
-  --accent-rgb: 16 185 129;        /* emerald-500 */
-  --accent-soft-rgb: 110 231 183;  /* emerald-300 */
-  --overlay-rgb: 255 255 255;
-  --status-online-rgb: 52 211 153; /* emerald-400 — vibrant available dot */
-  --line: rgb(255 255 255 / 0.1);
+  /* LIGHT — cool concrete. */
+  --paper: #e9eaec;
+  --paper-lift: #f4f5f6;
+  --paper-deep: #dedfe2;
+  --ink: #101113;
+  --ink-body: #34363b;
+  --ink-mute: #5b5e65;
+  --ink-rgb: 16 17 19;
+  --accent-rgb: 226 58 14;
+  --accent-deep: #b02a08;
+  --on-accent: #ffffff;
+  --on-accent-rgb: 255 255 255;
 
-  --noise-opacity: 0.4;
-  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.02), 0 18px 40px -24px rgb(0 0 0 / 0.7);
-  --shadow-card-hover: 0 1px 0 rgb(255 255 255 / 0.04), 0 30px 60px -28px rgb(0 0 0 / 0.85);
-  --shadow-floating: 0 20px 50px -16px rgb(0 0 0 / 0.6);
-
-  color-scheme: dark;
-}
-
-:root[data-theme='light'] {
-  /* LIGHT — a muted "sage daylight", NOT ink-on-white.
-     The canvas is a toned green-stone built from the brand's own emerald hue,
-     never pure white; ink is a deep green-charcoal, never pure black. Lower
-     glare, calm, and clearly its own thing rather than an inverted dark. */
-  --bg-primary: #e8eae2;           /* sage stone canvas (not white) */
-  --bg-secondary: #dfe2d8;         /* deeper sage band (recess) */
-  --bg-elevated: #f1f3ec;          /* lifted lighter sage card */
-  --text-heading: #232a22;         /* deep green-charcoal, not black */
-  --text-primary: #333a31;
-  --text-secondary: #565d52;       /* muted green-gray, ≥4.5:1 */
-  --text-muted: #696f61;           /* ≥4.5:1 at small sizes */
-  --accent-rgb: 4 120 87;          /* emerald-700 — cohesive on sage */
-  --accent-soft-rgb: 16 185 129;   /* emerald-500 */
-  --overlay-rgb: 35 42 33;         /* deep green-gray — borders/scrims/tints */
-  --status-online-rgb: 21 128 61;  /* green-700 */
-  --line: rgb(35 42 33 / 0.14);
-
-  --noise-opacity: 0.06;
-  --shadow-card: 0 1px 2px rgb(40 52 38 / 0.05), 0 14px 32px -16px rgb(40 52 38 / 0.13);
-  --shadow-card-hover: 0 1px 2px rgb(40 52 38 / 0.06), 0 22px 48px -18px rgb(5 120 90 / 0.18);
-  --shadow-floating: 0 14px 40px -16px rgb(40 52 38 / 0.18);
+  --grain: 0.05;
+  --lift: 0 1px 0 rgb(16 17 19 / 0.04), 0 22px 44px -30px rgb(16 17 19 / 0.28);
+  --lift-hover: 0 1px 0 rgb(16 17 19 / 0.06), 0 34px 64px -32px rgb(16 17 19 / 0.34);
 
   color-scheme: light;
 }
 
+:root[data-theme='dark'] {
+  /* DARK — the same concrete at night. Accent brightens to hold contrast. */
+  --paper: #101113;
+  --paper-lift: #191b1e;
+  --paper-deep: #0a0b0c;
+  --ink: #f2f3f5;
+  --ink-body: #c6c9ce;
+  --ink-mute: #8b8f97;
+  --ink-rgb: 242 243 245;
+  --accent-rgb: 255 74 34;
+  --accent-deep: #ff6a45;
+  --on-accent: #100604;
+  --on-accent-rgb: 16 6 4;
+
+  --grain: 0.16;
+  --lift: 0 1px 0 rgb(255 255 255 / 0.03), 0 22px 44px -30px rgb(0 0 0 / 0.8);
+  --lift-hover: 0 1px 0 rgb(255 255 255 / 0.05), 0 34px 64px -32px rgb(0 0 0 / 0.9);
+
+  color-scheme: dark;
+}
+
 /* ===== Base ===== */
 html {
-  background-color: var(--color-bg-primary);
+  background-color: var(--color-paper);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
   font-synthesis: none;
+  scroll-behavior: auto;
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink-body);
   transition:
-    background-color 0.4s ease,
-    color 0.4s ease;
+    background-color 0.35s ease,
+    color 0.35s ease;
 }
 
 h1,
 h2,
-h3,
-h4 {
-  font-family: var(--font-sans);
+h3 {
+  font-family: var(--font-display);
   text-wrap: balance;
 }
+
 p {
   text-wrap: pretty;
 }
 
+/* Anchor targets clear the fixed header. */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
 ::selection {
-  background-color: rgb(var(--color-accent-rgb) / 0.25);
+  background-color: rgb(var(--color-accent-rgb) / 0.22);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* ===== Scrollbar ===== */
 :root::-webkit-scrollbar {
-  width: 9px;
-  background-color: transparent;
+  width: 10px;
+  background-color: var(--color-paper-deep);
 }
 :root::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: rgb(var(--color-overlay-rgb) / 0.18);
+  background: rgb(var(--ink-rgb) / 0.22);
 }
 :root::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--color-overlay-rgb) / 0.3);
+  background: rgb(var(--ink-rgb) / 0.34);
 }
 
-/* ===== Noise overlay ===== */
-.noise-overlay {
-  mix-blend-mode: overlay;
-  opacity: var(--noise-opacity);
-}
-:root[data-theme='light'] .noise-overlay {
-  mix-blend-mode: multiply;
-}
-
-/* ===== Per-theme image swap (avatar) — both mounted, CSS picks one ===== */
-.img-dark {
-  display: block;
-}
-.img-light {
-  display: none;
-}
-:root[data-theme='light'] .img-dark {
-  display: none;
-}
-:root[data-theme='light'] .img-light {
-  display: block;
+@layer components {
+/* ===== Display type =====
+ * Thunder is condensed: it wants tight leading and zero extra tracking. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+  color: var(--color-ink);
+  text-transform: uppercase;
 }
 
-/* ===== Theme-toggle icon swap (CSS-driven, no hydration flash) ===== */
+.display-lg {
+  font-size: clamp(3.4rem, 11.5vw, 10rem);
+}
+.display-md {
+  font-size: clamp(2.9rem, 8vw, 6.5rem);
+}
+.display-sm {
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  line-height: 0.9;
+}
+
+/* Metadata: mono, small, wide enough to read as a label not a sentence. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-mute);
+}
+
+/* ===== Rules =====
+ * Hairlines only ever separate real content groups. */
+.rule-top {
+  border-top: 1px solid var(--color-line);
+}
+
+/* ===== Surfaces ===== */
+.panel {
+  background-color: var(--color-paper-lift);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sharp);
+  box-shadow: var(--lift);
+  transition:
+    border-color 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
+    transform 0.45s var(--ease-out);
+}
+.panel-hover:hover {
+  border-color: var(--color-line-strong);
+  box-shadow: var(--lift-hover);
+  transform: translateY(-2px);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: var(--radius-sharp);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 1.6rem;
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    transform 0.15s var(--ease-out);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-solid {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  border: 1px solid var(--color-accent);
+}
+.btn-solid:hover {
+  background-color: var(--color-accent-deep);
+  border-color: var(--color-accent-deep);
+}
+
+.btn-line {
+  background-color: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line-strong);
+}
+.btn-line:hover {
+  border-color: var(--color-ink);
+  background-color: rgb(var(--ink-rgb) / 0.04);
+}
+
+/* On the inverted contact block the ink flips to the accent's foreground. */
+.on-accent .btn-line {
+  color: var(--color-on-accent);
+  border-color: rgb(var(--on-accent-rgb) / 0.42);
+}
+.on-accent .btn-line:hover {
+  border-color: var(--color-on-accent);
+  background-color: rgb(var(--on-accent-rgb) / 0.1);
+}
+
+/* ===== Link underline that wipes in from the leading edge ===== */
+.link-wipe {
+  position: relative;
+}
+.link-wipe::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out);
+}
+.link-wipe:hover::after,
+.link-wipe[data-active='true']::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ===== Client marks =====
+ * Held in ink until hover, so the wall reads as one palette and the
+ * brand colour is the reward for looking. */
+.client-mark {
+  filter: grayscale(1) brightness(0.5) contrast(1.15);
+  opacity: 0.8;
+  transition:
+    filter 0.5s var(--ease-out),
+    opacity 0.5s var(--ease-out);
+}
+:root[data-theme='dark'] .client-mark {
+  filter: grayscale(1) invert(1) brightness(1.1) contrast(1.1);
+  opacity: 0.75;
+}
+.client-mark:hover {
+  filter: none;
+  opacity: 1;
+}
+
+/* ===== Theme toggle icon swap (CSS-driven, no hydration flash) ===== */
 .theme-icon {
   position: absolute;
   inset: 0;
   margin: auto;
   transition:
     opacity 0.2s ease,
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.theme-icon-moon {
-  opacity: 0;
-  transform: scale(0.55) rotate(-45deg);
+    transform 0.35s var(--ease-out);
 }
 .theme-icon-sun {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-:root[data-theme='light'] .theme-icon-moon {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-:root[data-theme='light'] .theme-icon-sun {
   opacity: 0;
-  transform: scale(0.55) rotate(45deg);
+  transform: scale(0.5) rotate(-40deg);
 }
-.theme-toggle-btn {
-  color: var(--color-text-muted);
-  transition: color 0.2s ease;
+.theme-icon-moon {
+  opacity: 1;
+  transform: none;
 }
-.theme-toggle-btn:hover {
-  color: var(--color-text-heading);
+:root[data-theme='dark'] .theme-icon-sun {
+  opacity: 1;
+  transform: none;
 }
-
-/* ===== Floating navbar + scroll-to-top pills ===== */
-.nav-pill {
-  background-color: color-mix(in oklab, var(--color-bg-primary) 62%, transparent);
-  border: 1px solid var(--color-line);
-  box-shadow: var(--shadow-floating);
-  backdrop-filter: blur(16px) saturate(1.4);
-}
-:root[data-theme='light'] .nav-pill {
-  background-color: color-mix(in oklab, var(--color-bg-elevated) 72%, transparent);
-}
-.nav-divider {
-  border-color: var(--color-line);
+:root[data-theme='dark'] .theme-icon-moon {
+  opacity: 0;
+  transform: scale(0.5) rotate(40deg);
 }
 
-/* ===== Reusable surfaces / controls ===== */
-.surface {
-  background-color: color-mix(in oklab, var(--color-overlay) 3%, var(--color-bg-primary));
-  border: 1px solid var(--color-line);
-  box-shadow: var(--shadow-card);
+/* ===== Grain =====
+ * Fixed, pointer-events-none, never on a scrolling container. */
+.grain {
+  opacity: var(--grain);
+  mix-blend-mode: multiply;
+}
+:root[data-theme='dark'] .grain {
+  mix-blend-mode: screen;
+}
+
+
+/* Solid button for use inside the accent block. */
+.btn-invert {
+  background-color: var(--color-on-accent);
+  color: var(--color-accent);
+  border: 1px solid var(--color-on-accent);
+}
+.btn-invert:hover {
+  background-color: transparent;
+  color: var(--color-on-accent);
+}
+
+/* Per-theme portrait swap. Both mounted, CSS picks one, no hydration flash. */
+.img-light {
+  display: block;
+}
+.img-dark {
+  display: none;
+}
+:root[data-theme='dark'] .img-light {
+  display: none;
+}
+:root[data-theme='dark'] .img-dark {
+  display: block;
+}
+
+/* Header goes from transparent to paper once the page has moved. */
+.site-header {
   transition:
-    border-color 0.5s var(--ease-smooth),
-    box-shadow 0.5s var(--ease-smooth),
-    transform 0.5s var(--ease-smooth),
-    background-color 0.5s var(--ease-smooth);
+    background-color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+  border-bottom: 1px solid transparent;
 }
-:root[data-theme='light'] .surface {
-  background-color: var(--color-bg-elevated);
-}
-.surface:hover {
-  border-color: color-mix(in oklab, var(--color-accent) 32%, transparent);
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-3px);
+.site-header[data-stuck='true'] {
+  background-color: color-mix(in oklab, var(--color-paper) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--color-line);
 }
 
-/* Hairline rule that opens sections */
-.rule {
-  border-top: 1px solid var(--color-line);
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
 }
 
-/* Buttons */
-.btn-primary {
-  background-color: var(--color-accent);
-  color: #fff;
-  transition:
-    filter 0.3s var(--ease-smooth),
-    transform 0.3s var(--ease-smooth);
+/* Metadata inherits the block's foreground when it sits on the accent. */
+.on-accent .meta {
+  color: currentColor;
+  opacity: 0.75;
 }
-.btn-primary:hover {
-  filter: brightness(1.08);
-}
-
-.btn-ghost {
-  border: 1px solid color-mix(in oklab, var(--color-overlay) 18%, transparent);
-  color: var(--color-text-secondary);
-  transition:
-    border-color 0.4s var(--ease-smooth),
-    color 0.4s var(--ease-smooth),
-    background-color 0.4s var(--ease-smooth);
-}
-.btn-ghost:hover {
-  border-color: color-mix(in oklab, var(--color-accent) 55%, transparent);
-  color: var(--color-text-heading);
-  background-color: color-mix(in oklab, var(--color-accent) 6%, transparent);
-}
-
-/* Animated link underline */
-.link-underline {
-  position: relative;
-}
-.link-underline::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  height: 1px;
-  width: 100%;
-  background-color: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.45s var(--ease-smooth);
-}
-.link-underline:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/* Small mono metadata tag */
-.meta-tag {
-  font-family: var(--font-body);
-  border: 1px solid var(--color-line);
-  color: var(--color-text-muted);
-  transition:
-    color 0.4s var(--ease-smooth),
-    border-color 0.4s var(--ease-smooth);
-}
-
-/* PP Playground signature word */
-.signature {
-  font-family: 'PP Playground', cursive;
-  font-style: italic;
-  font-weight: 500;
 }
 
 /* ===== Reduced motion ===== */
@@ -350,6 +370,5 @@ p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

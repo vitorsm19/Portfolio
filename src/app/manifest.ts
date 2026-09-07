@@ -2,14 +2,14 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Vitor Mesquita, Frontend Developer',
-    short_name: 'VSM Solutions',
+    name: 'Vitor Mesquita, Senior Frontend Contractor',
+    short_name: 'Vitor Mesquita',
     description:
-      'Senior frontend developer offering web development, e-commerce, and complex system services.',
+      'Senior React, Next.js and TypeScript contractor for European product teams.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#08090a',
-    theme_color: '#08090a',
+    background_color: '#e9eaec',
+    theme_color: '#e9eaec',
     icons: [
       {
         src: '/favicon.ico',

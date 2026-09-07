@@ -37,6 +37,10 @@ the visitor feels they've found a safe pair of hands with a point of view.
 - Costume "developer" aesthetics: monospace sprayed on everything to signal
   "technical." He is technical; he doesn't need to cosplay it.
 - Cluttered freelancer-marketplace pages (Fiverr/Upwork vibe).
+- **A public hourly price on the page.** A rate card with a "most common" badge
+  is marketplace shape, and a number printed next to a Premier League logo
+  anchors the reader downward before they have read anything else. Rate is a
+  conversation, not a headline.
 
 ## Design Principles
 
@@ -56,3 +60,18 @@ the visitor feels they've found a safe pair of hands with a point of view.
 WCAG 2.1 AA target. Body text ≥ 4.5:1 against its surface in both themes.
 Full `prefers-reduced-motion` support (already wired). Dark + light themes,
 both first-class. Keyboard-reachable nav and controls; semantic landmarks.
+
+## Open decisions
+
+Things the redesign surfaced that are the owner's call, not the design's:
+
+1. **Rate.** Public "from EUR 45/hour" pricing was removed from the page and
+   from the FAQ answer, which now says rate depends on scope and duration.
+   Nothing sets a number any more. Given the Premier League / Tottenham / UEFA
+   track record, the old figure sat well under the EU market for this profile.
+2. **Contact address.** The site still sends enquiries to a personal Gmail
+   with a birthdate in it. A `vitor@` address on the site's own domain is the
+   cheapest credibility gain available.
+3. **UEFA screenshot.** The UEFA Fantasy card currently falls back to a logo
+   plate because there is no shippable screenshot in the repo. Every other case
+   shows the real product.

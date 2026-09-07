@@ -1,61 +1,46 @@
 import { siteConfig } from '@/data/site'
-import { projects } from '@/data/projects'
-import { services } from '@/data/services'
+import { featuredProject, projects } from '@/data/projects'
+import { engagements, process } from '@/data/engagements'
 import { faqs } from '@/data/faq'
 
 const SITE_URL = 'https://vitormesquita.com'
 
 const SUMMARY =
-  'Freelance senior frontend developer specializing in React, Next.js, and TypeScript. 6+ years building high-performance web apps for global product teams. Remote across Europe, available for new contracts.'
+  'Senior frontend contractor specializing in React, Next.js, and TypeScript. 6+ years building high-performance web apps for global product teams. Remote across Europe, available for new contracts of three months and up.'
 
 const ABOUT_SHORT =
-  'Vitor Mesquita is a senior frontend developer with 6+ years building and maintaining high-performance web apps for global brands across sports, e-commerce, SaaS, and tech. He embeds in existing product teams, owns frontend delivery (architecture, design systems, performance, accessibility), and ships clean, maintainable code. He works mainly in React, Next.js, and TypeScript, remotely across Europe.'
-
-const ABOUT_FULL = [
-  "I'm Vitor, a senior frontend developer with 6+ years building and maintaining high-performance products for global brands across sports, e-commerce, SaaS, and tech.",
-  'I work the way a good teammate does: ramp up fast inside your stack and rituals, communicate clearly, and take real ownership of frontend delivery, from architecture and design systems to performance and the small details.',
-  'I work mainly in React, Next.js, and TypeScript. I can drop into an existing team, translate Figma into production-ready interfaces, and help you ship faster with clean, maintainable code. Remote across Europe, in it for the long term.',
-]
-
-function priceLine(s: (typeof services)[number]): string {
-  if (s.pricing.type === 'hourly') return `From €${s.pricing.amount}/hour`
-  if (s.pricing.type === 'custom') return s.pricing.label
-  return `€${s.pricing.amount}`
-}
+  'Vitor Mesquita is a senior frontend contractor with 6+ years inside product teams, including the Premier League, Tottenham Hotspur, LIV Golf, and VELUX platforms. He embeds in existing teams and owns frontend delivery: architecture, design systems, performance, accessibility, and testing. He works mainly in React, Next.js, and TypeScript, remotely across Europe, and is an EU citizen based in Barcelona.'
 
 /** Generate the llms.txt body. `full` adds long-form content (llms-full.txt). */
 export function buildLlms(full: boolean): string {
   const lines: string[] = []
+  const allWork = [featuredProject, ...projects]
 
   lines.push('# Vitor Mesquita, Senior Frontend Contractor', '')
   lines.push(`> ${SUMMARY}`, '')
 
   lines.push('## About', '')
-  if (full) {
-    lines.push(ABOUT_FULL.join('\n\n'))
-  } else {
-    lines.push(ABOUT_SHORT)
-  }
+  lines.push(full ? siteConfig.about.body.join('\n\n') : ABOUT_SHORT)
   lines.push('')
 
-  lines.push('## Services', '')
-  for (const s of services) {
+  lines.push('## Engagements', '')
+  for (const e of engagements) {
     if (full) {
-      lines.push(`### ${s.title}`)
-      lines.push(`${s.subtitle}. ${s.description}`)
-      lines.push(...s.features.map((f) => `- ${f}`))
-      lines.push(`Pricing: ${priceLine(s)}`, '')
+      lines.push(`### ${e.title}`)
+      lines.push(e.summary)
+      lines.push(...e.points.map((p) => `- ${p}`), '')
     } else {
-      lines.push(`- ${s.title}: ${s.subtitle}. ${priceLine(s)}`)
+      lines.push(`- ${e.title}: ${e.summary}`)
     }
   }
   lines.push('')
 
   lines.push('## Selected work', '')
-  for (const p of projects) {
+  for (const p of allWork) {
     if (full) {
       lines.push(`### ${p.title} (${p.role})`)
       lines.push(p.description)
+      lines.push(`Scope: ${p.facts.join(', ')}`)
       lines.push(`Tech: ${p.tech.join(', ')}`)
       lines.push(`Link: ${p.url}`, '')
     } else {
@@ -65,6 +50,12 @@ export function buildLlms(full: boolean): string {
   lines.push('')
 
   if (full) {
+    lines.push('## How an engagement starts', '')
+    process.forEach((step, i) => {
+      lines.push(`${i + 1}. ${step.title}. ${step.body}`)
+    })
+    lines.push('')
+
     lines.push('## FAQ', '')
     for (const f of faqs) {
       lines.push(`### ${f.q}`)
@@ -78,6 +69,7 @@ export function buildLlms(full: boolean): string {
   lines.push(`- GitHub: ${siteConfig.github.url}`)
   lines.push(`- Website: ${SITE_URL}`)
   lines.push(`- Location: ${siteConfig.location}, remote across Europe`)
+  lines.push(`- Availability: ${siteConfig.availability}`)
   lines.push('')
 
   return lines.join('\n')

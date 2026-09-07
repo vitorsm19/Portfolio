@@ -1,72 +1,107 @@
 # Design
 
-Editorial-brutalist developer portfolio. Dark-first; light is a co-equal,
-purpose-designed theme (warm-neutral whites, not an inversion). The look:
-oversized condensed display type, deep negative space, ghost watermark
-typography, emerald accent, restrained motion.
+**Signal.** A light-first editorial system: cool concrete paper, near-black ink,
+one signal vermillion. Oversized condensed display type carries the page, real
+work is shown at full brightness, and every hairline separates real content.
+The reference points are broadsheet and spec sheet, not developer-portfolio.
+
+Dials: `DESIGN_VARIANCE 8` / `MOTION_INTENSITY 6` / `VISUAL_DENSITY 3`.
 
 ## Color
 
-OKLCH-minded tokens, exposed as CSS vars and Tailwind utilities. Dark is the
-brand baseline; `:root[data-theme="light"]` overrides.
+Light is the baseline. Dark is a designed counterpart, not an inversion. Tokens
+live on `:root`, dark overrides under `:root[data-theme="dark"]`, and everything
+resolves through Tailwind v4 `@theme`.
 
-| Role | Dark | Light |
+| Role | Light | Dark |
 |---|---|---|
-| bg-primary | `#030202` | `#fafafa` |
-| bg-secondary | `#141414` | `#f1f1f3` |
-| bg-elevated | `#030202` | `#ffffff` |
-| text-heading | `#e0e0e0` | `#18181b` |
-| text-primary | `#e5e5e5` | `#27272a` |
-| text-secondary | `#a3a3a3` | `#52525b` |
-| text-muted | `#6b6b6b` | `#71717a` |
-| accent | emerald-500 `16 185 129` | emerald-700 `4 120 87` |
-| accent-soft | emerald-300 `110 231 183` | emerald-500 `16 185 129` |
-| status-online | green-400 (decoupled from brand) | green-500 |
-| overlay | white | zinc-900 |
+| paper | `#e9eaec` | `#101113` |
+| paper-lift | `#f4f5f6` | `#191b1e` |
+| paper-deep | `#dedfe2` | `#0a0b0c` |
+| ink | `#101113` | `#f2f3f5` |
+| ink-body | `#34363b` | `#c6c9ce` |
+| ink-mute | `#5b5e65` | `#8b8f97` |
+| accent | `#e23a0e` | `#ff4a22` |
+| accent-deep | `#b02a08` | `#ff6a45` |
+| on-accent | `#ffffff` | `#100604` |
 
-Strategy: **Committed-restrained** — near-black/near-white surface carries the
-page, a single emerald accent does the brand work. Accent is used sparingly
-(CTAs, active states, one signature word), never as section-wide washes.
+Rules of use:
+
+- The ground is **cool concrete**, never cream and never pure white. Beige,
+  brass, clay and oxblood are out: that palette family is the default reach for
+  anything that wants to look premium, and it makes the brand invisible.
+- **One accent, page-wide.** Vermillion appears on roughly 3% of the surface:
+  the primary CTA, the ordinals in Process, the lead engagement block, the
+  Contact section, and the full stop after the name.
+- `accent` clears 3:1 and is only used for large type, fills and rules.
+  `accent-deep` clears 4.5:1 and is the one used for small accent text.
+- Depth comes from three neutral planes, hairlines, tinted shadows and grain.
+  Never from glows, never from pure-black drop shadows.
 
 ## Typography
 
-- **Thunder** (condensed display, weights 300–700) — `--font-sans`. All large
-  headings, the hero name, ghost watermarks. Set tight; condensed wants it.
-- **Manrope** (`--font-body`) + **DM Sans** fallback — body copy, paragraphs,
-  list items, CTAs. Readable, normal tracking.
-- **PP Playground** (calligraphic italic) — the **signature accent**, rationed.
-  Reserve for at most 2–3 emphasis words across the whole page (e.g. About's
-  "delivered.", Contact). Overuse kills it.
-- **Monospace** — reserved for genuine technical *metadata only*: stat labels,
-  location/role tags, tech-stack pills, the project index. Never on CTAs, never
-  as a section eyebrow.
+- **Thunder** (owned, condensed, weights 500 and 700 only) is the display face.
+  Uppercase, `line-height: 0.86`, no added tracking. Loaded through
+  `next/font/local` and preloaded, because it is the brand.
+- **Instrument Sans** is body and UI. Neutral without being Inter.
+- **IBM Plex Mono** is metadata only: labels, spec values, tech lists. Never a
+  CTA, never a section eyebrow.
+- No serif and no script face. Both read as reflex "creative" choices rather
+  than decisions, and neither belongs to an engineer's brand.
 
-Display tracking is tight (condensed). Body copy uses normal tracking — no
-global letter-spacing, no `tracking-wider` on prose.
+Scale: `.display-lg` (hero, contact), `.display-md` (section heads),
+`.display-sm` (card and item heads). All `clamp()`.
+
+## The full stop
+
+A vermillion period is the mark. It appears after the wordmark in the header,
+after the hero headline, and after the name in the footer. Nowhere else.
 
 ## Layout
 
-Single long scroll, centered max-width columns (`max-w-5xl`/`6xl`/`7xl`),
-fluid `clamp()` heading scale, generous vertical rhythm. Asymmetric editorial
-hero (12-col grid: info left, oversized name right). Cards used only where they
-are the right affordance (Projects, Services). No eyebrow-on-every-section; the
-oversized headings + ghost watermarks are the wayfinding.
+`max-w-[1400px]`, 12-column grids, asymmetric by default. Radius is locked at
+**2px** on every surface, image and button. Nothing on this page is a pill.
 
-## Section cadence
+Eight sections, eight different layout families, so no two read alike:
 
-Hero → marquee ticker → About → Projects → Services → Fit (qualify) → Process
-→ Skills (marquee) → Contact → footer. Numbered markers appear **only** in
-Process (a real ordered sequence) — the one deliberate numbered system.
+| Section | Family |
+|---|---|
+| Hero | Asymmetric manifesto with a spec rail in the margin |
+| Clients | Ruled logo wall, marks only, no captions |
+| Work | One full-bleed lead case, then a two-up image index |
+| About | Portrait split with a fact grid, closing on the stack |
+| Engagements | Asymmetric four-cell grid, lead cell filled in accent |
+| Process | Sticky heading against a ruled ordinal sequence |
+| FAQ | Narrow-measure accordion on the page's left edge |
+| Contact | Full-bleed accent block |
+
+`#about` is the page's only recessed band, so the recession carries meaning.
 
 ## Motion
 
-Framer Motion. `fade-up` on scroll-in (staggered within lists), mouse-parallax
-hero, infinite marquee tickers, choreographed multi-property card hovers
-(easing `cubic-bezier(0.22,1,0.36,1)`). Full `prefers-reduced-motion` fallback.
-Ease-out only; no bounce.
+Framer Motion. Every entrance is a **reveal**, never a float: content is masked
+and uncovered, the way ink lands on paper.
 
-## Components
+- `TextReveal` rises words out of a clip mask. Headings only.
+- `Wipe` uncovers images top to bottom.
+- `Reveal` / `Stagger` handle everything else.
+- `Magnetic` is on the primary CTA only.
 
-`Marquee`, `GhostText` (inline word-emphasis), `SkillIcon`, `ThemeToggle`
-(CSS-driven, no hydration flash), `NoiseOverlay`, `ScrollToTop`. Floating
-navbar pill + scroll-to-top pill share a glass treatment via tokens.
+Ease-out only (`cubic-bezier(0.16, 1, 0.3, 1)`), no bounce, no infinite loops,
+no parallax for its own sake. Full `prefers-reduced-motion` collapse. Scroll
+state comes from `useScroll`, never a scroll listener.
+
+## Banned
+
+Things this design deliberately does not do, because every other developer
+portfolio does them:
+
+- Floating blurred pill navbars
+- Pulsing green availability dots
+- Scroll cues at the bottom of the hero
+- An eyebrow above every section heading
+- Emerald as the accent
+- Alternating light and dark section bands
+- Public hourly pricing tables with a "most popular" badge
+- Marquees, anywhere
+- Dimmed screenshots. The work is the proof; it is shown at full brightness.

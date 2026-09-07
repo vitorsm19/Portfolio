@@ -8,37 +8,37 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="px-6 lg:px-12 pb-12 pt-20 lg:pt-28">
-      <div className="max-w-5xl mx-auto">
-        <div className="rule pt-10 flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="font-sans text-4xl lg:text-5xl font-bold text-text-heading tracking-[-0.02em] leading-none">
-              Vitor Mesquita
-            </p>
-            <p className="mt-3 text-sm text-text-muted">
-              Senior frontend contractor building calm, reliable product UIs.
-            </p>
-          </div>
+    <footer className="mx-auto max-w-[1400px] px-5 pb-10 pt-20 sm:px-8 lg:px-12 lg:pt-28">
+      <div className="flex flex-col gap-10 border-t border-line pt-10 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="display display-md">
+            {siteConfig.name}
+            <span className="text-accent">.</span>
+          </p>
+          <p className="mt-3 max-w-[38ch] text-sm text-ink-mute">
+            {siteConfig.role}. {siteConfig.citizenship}, working remotely across Europe.
+          </p>
+        </div>
 
-          <div className="flex flex-wrap gap-3">
-            {links.map((link) => (
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          {links.map((link) => (
+            <li key={link.label}>
               <a
-                key={link.label}
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="btn-ghost rounded-full px-5 py-2 text-sm font-medium"
+                className="link-wipe text-sm text-ink"
               >
                 {link.label}
               </a>
-            ))}
-          </div>
-        </div>
-
-        <p className="mt-10 text-xs text-text-muted">
-          &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-        </p>
+            </li>
+          ))}
+        </ul>
       </div>
+
+      <p className="meta mt-10">
+        &copy; {new Date().getFullYear()} {siteConfig.name}
+      </p>
     </footer>
   )
 }

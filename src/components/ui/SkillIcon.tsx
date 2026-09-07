@@ -10,7 +10,7 @@ export function SkillIcon({ skill, size = 'primary', className }: SkillIconProps
   const isPrimary = size === 'primary'
 
   return (
-    <div className={`flex flex-col items-center justify-end gap-0 ${className ?? ''}`}>
+    <div className={`flex flex-col items-center justify-end gap-0 text-ink ${className ?? ''}`}>
       <svg
         viewBox={skill.viewBox}
         xmlns="http://www.w3.org/2000/svg"

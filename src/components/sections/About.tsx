@@ -1,68 +1,63 @@
 'use client'
 
-import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
-import { SectionTag } from '@/components/ui/SectionTag'
-import { GhostText } from '@/components/ui/GhostText'
-
-const facts: { label: string; value: string }[] = [
-  { label: 'Based', value: 'Barcelona, remote across Europe' },
-  { label: 'Experience', value: '6+ years, product teams' },
-  { label: 'Core stack', value: 'React · Next.js · TypeScript' },
-  { label: 'Availability', value: 'Open to new projects' },
-]
+import Image from 'next/image'
+import { Reveal, Wipe, Stagger, StaggerItem } from '@/components/motion/Reveal'
+import { TextReveal } from '@/components/motion/TextReveal'
+import { siteConfig } from '@/data/site'
+import aboutPicDark from '@/assets/about-pic.png'
+import aboutPicLight from '@/assets/about-pic-light.jpg'
 
 export function About() {
+  const { lede, body, facts } = siteConfig.about
+
   return (
-    <div className="max-w-5xl mx-auto px-6 lg:px-12">
-      <Reveal className="rule pt-6">
-        <SectionTag>about</SectionTag>
-      </Reveal>
+    <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+      <div className="grid grid-cols-12 gap-x-8 gap-y-12">
+        {/* Portrait: the one place a face belongs, at a size worth looking at. */}
+        <Wipe curtain="bg-paper-deep" className="col-span-12 sm:col-span-6 lg:col-span-4">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] border border-line bg-paper-lift">
+            <Image
+              src={aboutPicLight}
+              alt="Vitor Mesquita"
+              fill
+              sizes="(max-width: 1024px) 50vw, 33vw"
+              className="img-light object-cover object-top"
+            />
+            <Image
+              src={aboutPicDark}
+              alt="Vitor Mesquita"
+              fill
+              sizes="(max-width: 1024px) 50vw, 33vw"
+              className="img-dark object-cover object-top"
+            />
+          </div>
+          <p className="meta mt-3">
+            {siteConfig.name}, {siteConfig.location}
+          </p>
+        </Wipe>
 
-      <Reveal y={28} blur>
-        <h2 className="mt-8 lg:mt-12 font-sans font-bold text-text-heading leading-[0.96] tracking-[-0.02em] text-[clamp(2.4rem,6vw,4.75rem)]">
-          Frontend you can hand over and{' '}
-          <span className="signature text-accent">trust</span>.
-        </h2>
-      </Reveal>
+        <div className="col-span-12 lg:col-span-7 lg:col-start-6">
+          <TextReveal as="h2" text={lede} className="display display-md" />
 
-      <div className="mt-10 lg:mt-16 grid lg:grid-cols-3 gap-10 lg:gap-14">
-        <Stagger className="lg:col-span-2 space-y-6" gap={0.12}>
-          <StaggerItem>
-            <p className="text-lg lg:text-xl leading-relaxed text-text-secondary">
-              <GhostText
-                text="I'm Vitor, a senior frontend developer with 6+ years building and maintaining high-performance products for global brands across sports, e-commerce, SaaS, and tech."
-                highlights={['senior frontend developer', '6+ years', 'sports, e-commerce, SaaS, and tech']}
-              />
-            </p>
-          </StaggerItem>
-          <StaggerItem>
-            <p className="text-lg lg:text-xl leading-relaxed text-text-secondary">
-              <GhostText
-                text="I work the way a good teammate does: I ramp up fast inside your stack and rituals, communicate clearly, and take real ownership of frontend delivery, from architecture and design systems to performance and the small details."
-                highlights={['communicate clearly', 'take real ownership of frontend delivery']}
-              />
-            </p>
-          </StaggerItem>
-          <StaggerItem>
-            <p className="text-lg lg:text-xl leading-relaxed text-text-secondary">
-              <GhostText
-                text="I work mainly in React, Next.js, and TypeScript. I can drop into an existing team, translate Figma into production-ready interfaces, and help you ship faster with clean, maintainable code. I work remotely across Europe and I'm in it for the long term."
-                highlights={['React, Next.js, and TypeScript', 'clean, maintainable code']}
-              />
-            </p>
-          </StaggerItem>
-        </Stagger>
+          <Stagger className="mt-8 space-y-5 lg:mt-10" gap={0.1}>
+            {body.map((paragraph) => (
+              <StaggerItem key={paragraph.slice(0, 24)}>
+                <p className="max-w-[58ch] text-lg leading-relaxed text-ink-body">{paragraph}</p>
+              </StaggerItem>
+            ))}
+          </Stagger>
 
-        <Stagger className="space-y-0" gap={0.08}>
-          {facts.map((f) => (
-            <StaggerItem key={f.label}>
-              <div className="rule py-4 flex flex-col gap-0.5">
-                <span className="text-xs text-text-muted">{f.label}</span>
-                <span className="text-base text-text-primary">{f.value}</span>
-              </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
+          <Reveal delay={0.1}>
+            <dl className="mt-10 grid gap-x-8 sm:grid-cols-2 lg:mt-14">
+              {facts.map((fact) => (
+                <div key={fact.label} className="rule-top py-4">
+                  <dt className="meta">{fact.label}</dt>
+                  <dd className="mt-1 text-base text-ink">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+        </div>
       </div>
     </div>
   )

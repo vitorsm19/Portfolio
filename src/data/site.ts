@@ -1,48 +1,51 @@
 export const siteConfig = {
   name: 'Vitor Mesquita',
-  title: 'Freelance Senior Frontend Developer',
+  role: 'Senior Frontend Contractor',
   email: 'vitormesquita190902@gmail.com',
-  phone: '+34 614 08 82 64',
-  location: 'Barcelona, Spain',
-  citizenship: 'EU Citizen',
-  availability: 'Remote across Europe · Open to new projects',
+  location: 'Barcelona',
+  citizenship: 'EU citizen',
+  availability: 'Available for new contracts',
   github: {
     username: 'vitorsm19',
     url: 'https://github.com/vitorsm19/',
-    apiUrl: 'https://api.github.com/users/vitorsm19/repos',
   },
   linkedin: {
     url: 'https://www.linkedin.com/in/vitormesquita19/',
   },
-  about: {
-    paragraphs: [
-      "I've spent 6+ years building high-performance frontend products for global brands in sports, e-commerce, SaaS, and tech.",
-      'I work as a Freelance Senior Frontend Developer, helping European teams build, maintain, and scale React, Next.js, and TypeScript applications.',
-      'I can join an existing product team, take ownership of frontend delivery, translate Figma into production-ready interfaces, improve performance, and help teams ship faster with clean, maintainable code.',
+  hero: {
+    headline: 'Frontend that holds up',
+    lede: 'Senior React, Next.js and TypeScript contractor. Six years on platforms watched by millions on a Saturday afternoon.',
+    // Qualifying facts, not atmosphere. These are the three things a hiring
+    // manager checks before they read anything else.
+    rail: [
+      { label: 'Based', value: 'Barcelona, remote across Europe' },
+      { label: 'Engagements', value: 'Three months and up' },
+      { label: 'Status', value: 'Available for new contracts' },
     ],
   },
-  hero: {
-    positioning: 'Freelance Senior Frontend Developer',
-    stack: 'React • Next.js • TypeScript',
-    valueStatement:
-      'Frontend Contractor helping European product teams ship high-performance web apps, from greenfield builds to complex existing platforms.',
-    punchline: 'On time. Built to scale. No excuses.',
-    typewriterWords: [
-      'high-performance',
-      'production-ready',
-      'scalable',
-      'accessible',
-      'performant',
-      'maintainable',
-      'type-safe',
+  about: {
+    lede: 'I own the frontend so the team moves faster.',
+    body: [
+      'Six years inside product teams, most of it on platforms where a bad deploy is visible to millions of people on a Saturday afternoon. Premier League, Tottenham Hotspur, LIV Golf, VELUX.',
+      'I ramp up inside your stack and your rituals, then own delivery: architecture, design systems, performance, accessibility, and the small details nobody assigns a ticket to.',
+      'Typed, tested, and documented by default. The kind of frontend you stop thinking about once it ships.',
     ],
-    availability: 'Remote Europe • Available for 3+ month contracts',
+    facts: [
+      { label: 'Experience', value: '6+ years in product teams' },
+      { label: 'Engagements', value: '3 months and up' },
+      { label: 'Working hours', value: 'European time zones' },
+      { label: 'Contract', value: 'Direct or through your agency' },
+    ],
   },
   contact: {
-    eyebrow: 'Available for contracts',
-    heading: 'Need a senior frontend contractor?',
-    body: 'Tell me about your team and what you’re building. I reply quickly, and I’ll be honest about whether I’m the right fit. Remote across Europe, open to new projects.',
-    primaryCta: 'Email me',
-    secondaryCta: 'LinkedIn',
+    headline: 'Tell me what you are building.',
+    body: 'I reply within a day, and I will tell you straight if I am not the right fit for the role.',
+    cta: 'Get in touch',
   },
+} as const
+
+/** One label per intent, used everywhere on the page. */
+export const CTA = {
+  contact: 'Get in touch',
+  work: 'See the work',
 } as const

@@ -1,57 +1,62 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
+import { useScroll, useMotionValueEvent } from 'framer-motion'
 import { scrollToId, scrollToY } from '@/lib/lenis'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { CTA } from '@/data/site'
 
 const LINKS = [
-  { label: 'About', id: 'about' },
   { label: 'Work', id: 'work' },
-  { label: 'Services', id: 'services' },
-  { label: 'Contact', id: 'contact' },
+  { label: 'About', id: 'about' },
+  { label: 'Engagements', id: 'engagements' },
 ] as const
 
 export function Navbar() {
-  const reduced = useReducedMotion()
+  const [stuck, setStuck] = useState(false)
+  const { scrollY } = useScroll()
+
+  useMotionValueEvent(scrollY, 'change', (y) => setStuck(y > 24))
 
   return (
-    <motion.nav
-      aria-label="Main navigation"
-      initial={reduced ? false : { y: -24, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="nav-pill fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 sm:gap-6 rounded-full px-5 sm:px-6 py-2.5"
+    <header
+      data-stuck={stuck}
+      className="site-header fixed inset-x-0 top-0 z-50 h-16"
     >
-      <button
-        onClick={() => scrollToY(0)}
-        className="link-underline text-sm font-semibold text-text-heading cursor-pointer"
+      <nav
+        aria-label="Main"
+        className="mx-auto flex h-full max-w-[1400px] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12"
       >
-        vitor<span className="text-accent">.</span>
-      </button>
+        <button
+          onClick={() => scrollToY(0)}
+          className="cursor-pointer font-display text-xl font-bold uppercase leading-none tracking-tight text-ink"
+        >
+          Vitor Mesquita<span className="text-accent">.</span>
+        </button>
 
-      <div className="hidden sm:flex items-center gap-5">
-        {LINKS.map((l) => (
+        <div className="flex items-center gap-5 sm:gap-7">
+          <div className="hidden items-center gap-6 sm:flex">
+            {LINKS.map((l) => (
+              <button
+                key={l.id}
+                onClick={() => scrollToId(l.id)}
+                className="link-wipe cursor-pointer text-sm text-ink-body transition-colors hover:text-ink"
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
+
           <button
-            key={l.id}
-            onClick={() => scrollToId(l.id)}
-            className="link-underline text-sm text-text-secondary hover:text-text-heading transition-colors cursor-pointer"
+            onClick={() => scrollToId('contact')}
+            className="btn btn-solid btn-sm cursor-pointer"
           >
-            {l.label}
+            {CTA.contact}
           </button>
-        ))}
-      </div>
 
-      <div className="nav-divider flex items-center gap-2 border-l pl-4 sm:pl-5">
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-status-online opacity-70 animate-ping" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-status-online" />
-        </span>
-        <span className="hidden sm:inline text-xs text-text-secondary">Available</span>
-      </div>
-
-      <div className="nav-divider flex items-center border-l pl-3 sm:pl-4">
-        <ThemeToggle />
-      </div>
-    </motion.nav>
+          <ThemeToggle />
+        </div>
+      </nav>
+    </header>
   )
 }

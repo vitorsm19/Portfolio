@@ -1,24 +1,44 @@
 import type { Metadata, Viewport } from 'next'
-import { Manrope } from 'next/font/google'
-import { NoiseOverlay } from '@/components/ui/NoiseOverlay'
+import { Instrument_Sans, IBM_Plex_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
+import { Grain } from '@/components/ui/Grain'
 import { SmoothScroll } from '@/components/motion/SmoothScroll'
 import { themeBootstrapScript } from '@/lib/theme'
 import { faqs } from '@/data/faq'
 import './globals.css'
 
-const manrope = Manrope({
+const instrument = Instrument_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-manrope',
+  weight: ['400', '500', '600'],
+  variable: '--font-instrument',
   display: 'swap',
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
+  display: 'swap',
+})
+
+// Thunder is the brand face, so it is preloaded rather than left to FOUT.
+// Only the two weights the page actually sets are shipped.
+const thunder = localFont({
+  src: [
+    { path: '../../public/fonts/Thunder-MediumLC.otf', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/Thunder-BoldLC.otf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-thunder',
+  display: 'swap',
+  preload: true,
 })
 
 const SITE_URL = 'https://vitormesquita.com'
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#08090a' },
-    { media: '(prefers-color-scheme: light)', color: '#e8eae2' },
+    { media: '(prefers-color-scheme: light)', color: '#e9eaec' },
+    { media: '(prefers-color-scheme: dark)', color: '#101113' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -77,7 +97,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE_URL,
     siteName: 'Vitor Mesquita, Freelance Senior Frontend Developer',
-    title: 'Freelance Senior Frontend Developer | React • Next.js • TypeScript',
+    title: 'Freelance Senior Frontend Developer | React, Next.js, TypeScript',
     description:
       'Frontend Contractor helping European product teams build high-performance React, Next.js, and TypeScript products. Remote, EU-based, available for new contracts.',
     images: [
@@ -126,10 +146,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         addressLocality: 'Barcelona',
         addressCountry: 'ES',
       },
-      sameAs: [
-        'https://github.com/vitorsm19/',
-        'https://www.linkedin.com/in/vitormesquita19/',
-      ],
+      sameAs: ['https://github.com/vitorsm19/', 'https://www.linkedin.com/in/vitormesquita19/'],
       hasOccupation: {
         '@type': 'Occupation',
         name: 'Frontend Developer',
@@ -171,10 +188,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         width: 512,
         height: 512,
       },
-      sameAs: [
-        'https://github.com/vitorsm19/',
-        'https://www.linkedin.com/in/vitormesquita19/',
-      ],
+      sameAs: ['https://github.com/vitorsm19/', 'https://www.linkedin.com/in/vitormesquita19/'],
     },
     {
       '@type': 'WebPage',
@@ -209,7 +223,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       description:
         'Senior frontend contracting services for European product teams: React, Next.js, and TypeScript delivery, frontend architecture, design systems, performance optimization, and rescue engagements.',
       serviceType: [
-        'Dedicated Frontend Contractor',
+        'Embedded Frontend Contractor',
         'Greenfield Frontend Builds',
         'Frontend Rescue & Performance',
         'E-commerce & Product Frontends',
@@ -223,15 +237,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Dedicated Frontend Contractor',
+              name: 'Embedded Frontend Contractor',
               description:
                 'Senior React, Next.js, and TypeScript contractor embedded in your product team. Frontend architecture, design systems, testing, accessibility, and performance.',
-            },
-            priceSpecification: {
-              '@type': 'UnitPriceSpecification',
-              price: '45',
-              priceCurrency: 'EUR',
-              unitText: 'HOUR',
             },
           },
           {
@@ -267,7 +275,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   ]
 
   return (
-    <html lang="en" className={manrope.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${instrument.variable} ${plexMono.variable} ${thunder.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Theme bootstrap — sets data-theme on <html> before paint, no FOUC */}
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
@@ -286,10 +298,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
-      <body className="bg-bg-primary text-text-primary antialiased">
+      <body className="bg-paper text-ink-body antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-on-accent"
         >
           Skip to content
         </a>
@@ -304,7 +316,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         <SmoothScroll />
         {children}
-        <NoiseOverlay />
+        <Grain />
 
         {/* JSON-LD Structured Data — one script per type for broad detection */}
         {schemaNodes.map((node) => (

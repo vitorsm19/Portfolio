@@ -1,3 +1,7 @@
 # Portfolio
 
-<h1>https://vitormesquita.vercel.app/</h1>
+https://vitormesquita.com
+
+```bash
+npm run dev
+```
