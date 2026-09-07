@@ -24,7 +24,7 @@ export function Stack() {
           <StaggerItem key={skill.name}>
             <div className="flex items-center gap-3">
               <SkillIcon skill={skill} size="secondary" />
-              <span className="font-display text-2xl font-bold uppercase leading-none text-ink lg:text-3xl">
+              <span className="font-display text-2xl font-bold leading-none tracking-[-0.012em] text-ink lg:text-3xl">
                 {skill.label}
               </span>
             </div>

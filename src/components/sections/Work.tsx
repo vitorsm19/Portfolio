@@ -93,10 +93,16 @@ export function Work() {
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center bg-paper-deep p-12">
-                    <Image
-                      src={p.logo}
-                      alt={`${p.title} logo`}
-                      className="client-mark h-auto w-2/5 max-w-[220px] object-contain transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                    <span
+                      aria-hidden
+                      className="logo-mark w-2/5 max-w-[220px] transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                      style={{
+                        aspectRatio: `${typeof p.logo === 'string' ? 1 : p.logo.width} / ${
+                          typeof p.logo === 'string' ? 1 : p.logo.height
+                        }`,
+                        maskImage: `url(${typeof p.logo === 'string' ? p.logo : p.logo.src})`,
+                        WebkitMaskImage: `url(${typeof p.logo === 'string' ? p.logo : p.logo.src})`,
+                      }}
                     />
                   </div>
                 )}

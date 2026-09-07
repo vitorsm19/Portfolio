@@ -65,13 +65,15 @@ both first-class. Keyboard-reachable nav and controls; semantic landmarks.
 
 Things the redesign surfaced that are the owner's call, not the design's:
 
-1. **Rate.** Public "from EUR 45/hour" pricing was removed from the page and
-   from the FAQ answer, which now says rate depends on scope and duration.
-   Nothing sets a number any more. Given the Premier League / Tottenham / UEFA
-   track record, the old figure sat well under the EU market for this profile.
+1. **Rate. Settled at from EUR 60/hour**, in the FAQ answer and in the
+   `ProfessionalService` schema. The pricing *table* stays gone: a rate card
+   with a "most common" badge is marketplace shape. One honest line in the FAQ
+   is not.
 2. **Contact address.** The site still sends enquiries to a personal Gmail
    with a birthdate in it. A `vitor@` address on the site's own domain is the
    cheapest credibility gain available.
 3. **UEFA screenshot.** The UEFA Fantasy card currently falls back to a logo
    plate because there is no shippable screenshot in the repo. Every other case
    shows the real product.
+4. **Title.** The hero says "Senior Frontend Engineer"; the footer and the
+   schema still say "Senior Frontend Contractor". Worth picking one.

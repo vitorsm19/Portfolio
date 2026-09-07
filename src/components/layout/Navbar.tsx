@@ -29,7 +29,7 @@ export function Navbar() {
       >
         <button
           onClick={() => scrollToY(0)}
-          className="cursor-pointer font-display text-xl font-bold uppercase leading-none tracking-tight text-ink"
+          className="cursor-pointer font-display text-2xl font-bold leading-none tracking-[-0.012em] text-ink"
         >
           Vitor Mesquita<span className="text-accent">.</span>
         </button>

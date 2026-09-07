@@ -9,7 +9,7 @@ import { ease } from '@/lib/motion'
 
 export function Hero() {
   const reduced = useReducedMotion()
-  const { headline, lede, rail } = siteConfig.hero
+  const { headline, roleLine, lede, rail } = siteConfig.hero
 
   const enter = (delay: number) =>
     reduced
@@ -36,6 +36,12 @@ export function Hero() {
               accentSuffix="."
               className="display display-lg"
             />
+            <motion.p
+              {...enter(0.5)}
+              className="mt-6 max-w-[34ch] font-display text-[clamp(1.6rem,3.2vw,2.6rem)] font-bold leading-[1.02] tracking-[-0.012em] text-ink-mute lg:mt-8"
+            >
+              {roleLine}
+            </motion.p>
           </div>
 
           {/* Qualifying facts, in the margin where a spec block belongs. */}

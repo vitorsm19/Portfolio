@@ -29,11 +29,15 @@ export const engagements: Engagement[] = [
     points: ['Frontend architecture from day one', 'Figma to production interfaces', 'SSR and API integration'],
   },
   {
-    id: 'rescue',
-    title: 'Rescue and performance',
+    id: 'ai',
+    title: 'AI product interfaces',
     summary:
-      'For a codebase that has become slow, brittle, or frightening to touch. Audit first, then fix in priority order.',
-    points: ['Core Web Vitals and load performance', 'Accessibility remediation', 'Refactoring for maintainability'],
+      'The frontend for an AI feature is most of the product. Streaming output, tool and agent state, and the failure cases nobody designs for.',
+    points: [
+      'Streaming and token-level UI',
+      'Agent, tool-call and retry state',
+      'Review and evaluation dashboards',
+    ],
   },
   {
     id: 'commerce',

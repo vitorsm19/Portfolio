@@ -13,8 +13,9 @@ export const siteConfig = {
     url: 'https://www.linkedin.com/in/vitormesquita19/',
   },
   hero: {
-    headline: 'Frontend that holds up',
-    lede: 'Senior React, Next.js and TypeScript contractor. Six years on platforms watched by millions on a Saturday afternoon.',
+    headline: 'Vitor Mesquita',
+    roleLine: 'Senior Frontend Engineer',
+    lede: 'Six years inside product teams, building React, Next.js and TypeScript products for large European brands.',
     // Qualifying facts, not atmosphere. These are the three things a hiring
     // manager checks before they read anything else.
     rail: [

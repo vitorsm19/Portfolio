@@ -100,19 +100,19 @@ export const clients = [
     name: 'Premier League',
     logo: premierLeagueLogo,
     url: 'https://www.premierleague.com',
-    size: 'h-9 lg:h-11',
+    size: 'h-10 lg:h-[3.25rem]',
   },
   {
     name: 'Tottenham Hotspur',
     logo: tottenhamLogo,
     url: 'https://www.tottenhamhotspur.com',
-    size: 'h-12 lg:h-16',
+    size: 'h-14 lg:h-[4.75rem]',
   },
   {
     name: 'LIV Golf',
     logo: livGolfLogo,
     url: 'https://fantasy.livgolf.com',
-    size: 'h-6 lg:h-8',
+    size: 'h-5 lg:h-7',
   },
   { name: 'VELUX', logo: veluxLogo, url: 'https://www.velux.com', size: 'h-5 lg:h-6' },
   {

@@ -37,8 +37,8 @@ const SITE_URL = 'https://vitormesquita.com'
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#e9eaec' },
-    { media: '(prefers-color-scheme: dark)', color: '#101113' },
+    { media: '(prefers-color-scheme: light)', color: '#f0f2ee' },
+    { media: '(prefers-color-scheme: dark)', color: '#141916' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -166,6 +166,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         'E-Commerce',
         'SaaS Dashboards',
         'Sports Platforms',
+        'AI Product Interfaces',
+        'Streaming UI',
         'Vue.js',
         'Nuxt',
         'Server-Side Rendering',
@@ -225,7 +227,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       serviceType: [
         'Embedded Frontend Contractor',
         'Greenfield Frontend Builds',
-        'Frontend Rescue & Performance',
+        'AI Product Interfaces',
         'E-commerce & Product Frontends',
       ],
       areaServed: { '@type': 'Place', name: 'Europe' },
@@ -241,6 +243,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description:
                 'Senior React, Next.js, and TypeScript contractor embedded in your product team. Frontend architecture, design systems, testing, accessibility, and performance.',
             },
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: '60',
+              priceCurrency: 'EUR',
+              unitText: 'HOUR',
+            },
           },
           {
             '@type': 'Offer',
@@ -255,9 +263,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Frontend Rescue & Performance',
+              name: 'AI Product Interfaces',
               description:
-                'Senior help for slow, messy, or hard-to-maintain frontend codebases: audits, performance fixes, Core Web Vitals, accessibility, refactoring.',
+                'Frontends for AI features: streaming responses, agent and tool-call state, retry and failure handling, and review or evaluation dashboards.',
             },
           },
           {

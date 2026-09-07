@@ -2,7 +2,7 @@
 
 /* ===== Tokens (Tailwind v4 CSS-first) =====
  * Light is the baseline. Dark is a designed counterpart, not an inversion.
- * Ground is cool concrete, never cream; ink is cool near-black, never pure. */
+ * Ground is a soft green-white; ink is a green-charcoal, never black. */
 @theme {
   --color-paper: var(--paper);
   --color-paper-lift: var(--paper-lift);
@@ -17,6 +17,11 @@
   --color-accent-deep: var(--accent-deep);
   --color-on-accent: var(--on-accent);
 
+  /* A whole section filled with the accent needs a deeper value than a
+     button does, or the dark theme turns into a floodlight. */
+  --color-accent-surface: var(--accent-surface);
+  --color-on-accent-surface: var(--on-accent-surface);
+
   --color-ink-rgb: var(--ink-rgb);
   --color-line: rgb(var(--ink-rgb) / 0.14);
   --color-line-strong: rgb(var(--ink-rgb) / 0.28);
@@ -26,47 +31,56 @@
   --font-mono: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', monospace;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --radius-sharp: 2px;
+  --radius-soft: 14px;
+  --radius-tight: 10px;
 }
 
 :root {
-  /* LIGHT — cool concrete. */
-  --paper: #e9eaec;
-  --paper-lift: #f4f5f6;
-  --paper-deep: #dedfe2;
-  --ink: #101113;
-  --ink-body: #34363b;
-  --ink-mute: #5b5e65;
-  --ink-rgb: 16 17 19;
-  --accent-rgb: 226 58 14;
-  --accent-deep: #b02a08;
+  /* LIGHT is the baseline. Soft green-white ground, green-charcoal ink: the
+     polarity is deliberately short of black-on-white so the page reads calm
+     rather than printed. */
+  --paper: #f0f2ee;
+  --paper-lift: #f7f8f5;
+  --paper-deep: #e4e7e1;
+  --ink: #232e28;
+  --ink-body: #3e4842;
+  --ink-mute: #5f6a63;
+  --ink-rgb: 35 46 40;
+  --accent-rgb: 12 107 84;
+  --accent-deep: #095444;
   --on-accent: #ffffff;
   --on-accent-rgb: 255 255 255;
+  --accent-surface: #0c6b54;
+  --on-accent-surface: #ffffff;
+  --on-accent-surface-rgb: 255 255 255;
 
-  --grain: 0.05;
-  --lift: 0 1px 0 rgb(16 17 19 / 0.04), 0 22px 44px -30px rgb(16 17 19 / 0.28);
-  --lift-hover: 0 1px 0 rgb(16 17 19 / 0.06), 0 34px 64px -32px rgb(16 17 19 / 0.34);
+  --grain: 0.045;
+  --lift: 0 1px 2px rgb(35 46 40 / 0.04), 0 18px 40px -28px rgb(20 60 46 / 0.3);
+  --lift-hover: 0 2px 4px rgb(35 46 40 / 0.05), 0 30px 60px -30px rgb(12 107 84 / 0.34);
 
   color-scheme: light;
 }
 
 :root[data-theme='dark'] {
-  /* DARK — the same concrete at night. Accent brightens to hold contrast. */
-  --paper: #101113;
-  --paper-lift: #191b1e;
-  --paper-deep: #0a0b0c;
-  --ink: #f2f3f5;
-  --ink-body: #c6c9ce;
-  --ink-mute: #8b8f97;
-  --ink-rgb: 242 243 245;
-  --accent-rgb: 255 74 34;
-  --accent-deep: #ff6a45;
-  --on-accent: #100604;
-  --on-accent-rgb: 16 6 4;
+  /* The same green at night. Nothing here is an inversion of the light theme. */
+  --paper: #141916;
+  --paper-lift: #1d231f;
+  --paper-deep: #0e1211;
+  --ink: #eef2ee;
+  --ink-body: #c3ccc6;
+  --ink-mute: #8d968f;
+  --ink-rgb: 238 242 238;
+  --accent-rgb: 56 199 154;
+  --accent-deep: #5fd6b1;
+  --on-accent: #0b1310;
+  --on-accent-rgb: 11 19 16;
+  --accent-surface: #0d5a47;
+  --on-accent-surface: #eaf5f0;
+  --on-accent-surface-rgb: 234 245 240;
 
-  --grain: 0.16;
-  --lift: 0 1px 0 rgb(255 255 255 / 0.03), 0 22px 44px -30px rgb(0 0 0 / 0.8);
-  --lift-hover: 0 1px 0 rgb(255 255 255 / 0.05), 0 34px 64px -32px rgb(0 0 0 / 0.9);
+  --grain: 0.15;
+  --lift: 0 1px 2px rgb(0 0 0 / 0.3), 0 18px 40px -28px rgb(0 0 0 / 0.7);
+  --lift-hover: 0 2px 4px rgb(0 0 0 / 0.35), 0 30px 60px -30px rgb(0 0 0 / 0.8);
 
   color-scheme: dark;
 }
@@ -130,25 +144,26 @@ p {
 
 @layer components {
 /* ===== Display type =====
- * Thunder is condensed: it wants tight leading and zero extra tracking. */
+ * Thunder set in sentence case, not caps. Condensed all-caps is what made the
+ * first pass read as brutalist; the same face in sentence case keeps the scale
+ * and loses the shouting. Leading stays tight because the face is narrow. */
 .display {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 0.86;
-  letter-spacing: -0.005em;
+  line-height: 0.92;
+  letter-spacing: -0.012em;
   color: var(--color-ink);
-  text-transform: uppercase;
 }
 
 .display-lg {
-  font-size: clamp(3.4rem, 11.5vw, 10rem);
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
 }
 .display-md {
-  font-size: clamp(2.9rem, 8vw, 6.5rem);
+  font-size: clamp(2.7rem, 7vw, 5.6rem);
 }
 .display-sm {
-  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
-  line-height: 0.9;
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  line-height: 0.96;
 }
 
 /* Metadata: mono, small, wide enough to read as a label not a sentence. */
@@ -168,9 +183,14 @@ p {
 
 /* ===== Surfaces ===== */
 .panel {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--color-paper-lift) 100%, transparent),
+    color-mix(in oklab, var(--color-paper-lift) 82%, var(--color-paper))
+  );
   background-color: var(--color-paper-lift);
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-sharp);
+  border-radius: var(--radius-soft);
   box-shadow: var(--lift);
   transition:
     border-color 0.45s var(--ease-out),
@@ -189,7 +209,7 @@ p {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  border-radius: var(--radius-sharp);
+  border-radius: var(--radius-tight);
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -224,14 +244,14 @@ p {
   background-color: rgb(var(--ink-rgb) / 0.04);
 }
 
-/* On the inverted contact block the ink flips to the accent's foreground. */
+/* On the accent surface the ink flips to that surface's foreground. */
 .on-accent .btn-line {
-  color: var(--color-on-accent);
-  border-color: rgb(var(--on-accent-rgb) / 0.42);
+  color: var(--color-on-accent-surface);
+  border-color: rgb(var(--on-accent-surface-rgb) / 0.42);
 }
 .on-accent .btn-line:hover {
-  border-color: var(--color-on-accent);
-  background-color: rgb(var(--on-accent-rgb) / 0.1);
+  border-color: var(--color-on-accent-surface);
+  background-color: rgb(var(--on-accent-surface-rgb) / 0.1);
 }
 
 /* ===== Link underline that wipes in from the leading edge ===== */
@@ -257,22 +277,23 @@ p {
 }
 
 /* ===== Client marks =====
- * Held in ink until hover, so the wall reads as one palette and the
- * brand colour is the reward for looking. */
-.client-mark {
-  filter: grayscale(1) brightness(0.5) contrast(1.15);
-  opacity: 0.8;
-  transition:
-    filter 0.5s var(--ease-out),
-    opacity 0.5s var(--ease-out);
+ * Masked to a flat ink silhouette so every logo is exactly the same colour,
+ * whatever the source file is. Filters could not do this: they preserve each
+ * mark's own luminance and the wall came out patchy. */
+.logo-mark {
+  display: block;
+  background-color: var(--color-ink-mute);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  transition: background-color 0.45s var(--ease-out);
 }
-:root[data-theme='dark'] .client-mark {
-  filter: grayscale(1) invert(1) brightness(1.1) contrast(1.1);
-  opacity: 0.75;
-}
-.client-mark:hover {
-  filter: none;
-  opacity: 1;
+a:hover > .logo-mark,
+.group:hover .logo-mark {
+  background-color: var(--color-ink);
 }
 
 /* ===== Theme toggle icon swap (CSS-driven, no hydration flash) ===== */
@@ -312,15 +333,15 @@ p {
 }
 
 
-/* Solid button for use inside the accent block. */
+/* Solid button for use inside the accent surface. */
 .btn-invert {
-  background-color: var(--color-on-accent);
-  color: var(--color-accent);
-  border: 1px solid var(--color-on-accent);
+  background-color: var(--color-on-accent-surface);
+  color: var(--color-accent-surface);
+  border: 1px solid var(--color-on-accent-surface);
 }
 .btn-invert:hover {
   background-color: transparent;
-  color: var(--color-on-accent);
+  color: var(--color-on-accent-surface);
 }
 
 /* Per-theme portrait swap. Both mounted, CSS picks one, no hydration flash. */

@@ -26,6 +26,6 @@ export const faqs: Faq[] = [
   },
   {
     q: 'What does it cost?',
-    a: 'Rates depend on scope, duration and how much ownership the role carries. Tell me about the engagement and I will send a clear number, hourly or monthly.',
+    a: 'From EUR 60 per hour, with monthly rates for longer engagements. The exact number depends on scope, duration and how much ownership the role carries.',
   },
 ]

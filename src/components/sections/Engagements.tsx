@@ -30,8 +30,8 @@ export function Engagements() {
 
       <Stagger className="mt-14 grid grid-cols-12 gap-5 lg:mt-20" gap={0.1}>
         <StaggerItem className="col-span-12 lg:col-span-7">
-          <div className="on-accent flex h-full flex-col rounded-[2px] bg-accent p-8 text-on-accent lg:p-10">
-            <h3 className="display display-sm text-on-accent">{lead.title}</h3>
+          <div className="on-accent flex h-full flex-col rounded-[14px] bg-accent-surface p-8 text-on-accent-surface lg:p-10">
+            <h3 className="display display-sm text-on-accent-surface">{lead.title}</h3>
             <p className="mt-4 max-w-[44ch] text-lg leading-relaxed">{lead.summary}</p>
             <ul className="mt-8 grid gap-2.5 sm:grid-cols-2">
               {lead.points.map((point) => (
@@ -53,7 +53,7 @@ export function Engagements() {
           >
             <div
               className={`panel panel-hover flex h-full flex-col p-8 lg:p-9 ${
-                i === 1 ? 'bg-paper-deep' : ''
+                i === 1 ? 'bg-paper-deep bg-none' : ''
               }`}
             >
               <h3 className="display display-sm">{item.title}</h3>

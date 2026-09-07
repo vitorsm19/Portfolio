@@ -1,12 +1,14 @@
 'use client'
 
-import Image from 'next/image'
 import { Stagger, StaggerItem } from '@/components/motion/Reveal'
 import { clients } from '@/data/projects'
 
 /**
  * The proof, immediately under the hero. Marks only, no captions: the names
  * are the credibility and a category label under each one adds nothing.
+ *
+ * Each mark is an alpha mask filled with a single ink colour, so five logos
+ * from five different source files read as one row rather than five palettes.
  */
 export function Clients() {
   return (
@@ -22,13 +24,16 @@ export function Clients() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={client.name}
-              className="client-mark inline-flex"
+              className="inline-flex"
             >
-              <Image
-                src={client.logo}
-                alt={client.name}
-                height={56}
-                className={`${client.size} w-auto object-contain`}
+              <span
+                aria-hidden
+                className={`logo-mark ${client.size}`}
+                style={{
+                  aspectRatio: `${client.logo.width} / ${client.logo.height}`,
+                  maskImage: `url(${client.logo.src})`,
+                  WebkitMaskImage: `url(${client.logo.src})`,
+                }}
               />
             </a>
           </StaggerItem>

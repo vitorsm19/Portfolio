@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       'Senior React, Next.js and TypeScript contractor for European product teams.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#e9eaec',
-    theme_color: '#e9eaec',
+    background_color: '#f0f2ee',
+    theme_color: '#f0f2ee',
     icons: [
       {
         src: '/favicon.ico',

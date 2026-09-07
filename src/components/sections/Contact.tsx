@@ -16,12 +16,12 @@ export function Contact() {
   )}`
 
   return (
-    <div className="on-accent bg-accent text-on-accent">
+    <div className="on-accent bg-accent-surface text-on-accent-surface">
       <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
         <TextReveal
           as="h2"
           text={siteConfig.contact.headline}
-          className="display display-lg max-w-[14ch] text-on-accent"
+          className="display display-lg max-w-[14ch] text-on-accent-surface"
         />
 
         <div className="mt-12 grid grid-cols-12 items-start gap-x-8 gap-y-10 lg:mt-16">
